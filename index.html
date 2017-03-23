@@ -6,6 +6,16 @@
 </head>
 <body>
 <script>
+    var openStatesURL = "https://openstates.org/api/v1/METHOD/";
+    var ncMetadataURL = "openstates.org/api/v1/metadata/nc/";
+    var ncLegislatorsURL = "https://openstates.org/api/v1/legislators/?state=nc";
+    var ncSenateURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=upper";
+    var ncRepURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=lower";
+    var billLookupURL = "https://openstates.org/api/v1/bills/NCB00010747/";
+    var hbBillURL = "https://openstates.org/api/v1/bills/NCB00009985/"; //Detailed bill example
+
+    var billIds = [];
+
     var width = 1400, height = 600;
 
     var svg = d3.select( "body" )
@@ -26,6 +36,10 @@
             .projection( albersProjection );
 var i = 0;
 
+    var republicanColor = "#E54B0B";
+    var democratColor = "#2590FA";
+    var independentColor = "#AAADAD";
+
     var countyNames = {};
     neighborhoods_json.features.forEach(function(element, n) {
         countyNames[n] = element.properties.name;
@@ -43,9 +57,9 @@ var i = 0;
                 d3.select(this)
 //                    .attr("id", countyNames[i])
                         .attr("id", "c" + i)
-                        .attr("onmouseover", 'd3.select(c' + i + ').attr("fill", "#55ff00")')
-                        .attr("onmouseover", "console.log(countyNames[" + i + "])");
-//                        .attr("onmouseout", d3.select(this).attr("fill", "#00ff00"));
+                        .attr("onmouseover", 'd3.select(c' + i + ').attr("fill", "' + democratColor + '")')
+//                        .attr("onmouseover", "console.log(countyNames[" + i + "])");
+                        .attr("onmouseout", 'd3.select(c' + i + ').attr("fill", "#ffffff")');
 
             })
             .attr( "d", geoPath );
@@ -57,7 +71,8 @@ var i = 0;
 //    console.log(countyNames);
 
 
-    d3.select("path#c0").attr( "fill", "#220099" );
+//    d3.select("path#c0").attr( "fill", "#220099" );
+
 //console.log(neighborhoods_json.features[10]);
 //            neighborhoods_json.features[0].properties.name
 //    );
