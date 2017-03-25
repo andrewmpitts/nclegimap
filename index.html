@@ -2,7 +2,8 @@
 <head>
     <title>A D3 map</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="nc2.js"></script>
+    <!--<script src="nc2.js"></script>-->
+    <script src="ncsgeomin.js"></script>
 </head>
 <body>
 <script>
@@ -16,7 +17,7 @@
 
     var billIds = [];
 
-    var width = 1400, height = 600;
+    var width = 1400, height = 1000;
 
     var svg = d3.select( "body" )
             .append( "svg" )
@@ -27,10 +28,10 @@
 
     var albersProjection = d3.geo.albersUsa()
 //            .scale(8000)
-            .scale(8000)
+            .scale(100)
 //            .rotate( [71.057,0] )
 //            .center( [0, 42.313] )
-            .translate( [-1200,-0] );
+            .translate( [-0,-0] );
 
     var geoPath = d3.geo.path()
             .projection( albersProjection );
@@ -40,28 +41,41 @@ var i = 0;
     var democratColor = "#2590FA";
     var independentColor = "#AAADAD";
 
-    var countyNames = {};
-    neighborhoods_json.features.forEach(function(element, n) {
-        countyNames[n] = element.properties.name;
-//        console.log(element.properties.name);
-//            console.log(n);
-    });
+//    var countyNames = {};
+//    neighborhoods_json.features.forEach(function(element, n) {
+//        countyNames[n] = element.properties.name;
+////        console.log(element.properties.name);
+////            console.log(n);
+//    });
+
+//    d3.json("ncrgeomin.json", function (json) {
+//        console.log(json);
+//        g.selectAll("path")
+//                .data(json)
+//                .enter()
+//                .append("path")
+////                .enter()
+//                .attr("stroke", "#888888")
+//                .attr("d", geoPath);
+//    });
+
 
     g.selectAll( "path" )
             .data( neighborhoods_json.features )
+//            .data( neighborhoods_json.geometries )
             .enter()
             .append( "path" )
             .attr( "fill", "#ffffff" )
             .attr("stroke", "#888888")
-            .each(function(d, i) {
-                d3.select(this)
-//                    .attr("id", countyNames[i])
-                        .attr("id", "c" + i)
-                        .attr("onmouseover", 'd3.select(c' + i + ').attr("fill", "' + democratColor + '")')
-//                        .attr("onmouseover", "console.log(countyNames[" + i + "])");
-                        .attr("onmouseout", 'd3.select(c' + i + ').attr("fill", "#ffffff")');
-
-            })
+//            .each(function(d, i) {
+//                d3.select(this)
+////                    .attr("id", countyNames[i])
+//                        .attr("id", "c" + i)
+//                        .attr("onmouseover", 'd3.select(c' + i + ').attr("fill", "' + democratColor + '")')
+////                        .attr("onmouseover", "console.log(countyNames[" + i + "])");
+//                        .attr("onmouseout", 'd3.select(c' + i + ').attr("fill", "#ffffff")');
+//
+//            })
             .attr( "d", geoPath );
 
 
