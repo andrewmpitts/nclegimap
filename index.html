@@ -3,7 +3,7 @@
     <title>A D3 map</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <!--<script src="nc2.js"></script>-->
-    <script src="ncsgeomin.js"></script>
+    <!--<script src="ncsgeomin.js"></script>-->
 </head>
 <body>
 <script>
@@ -17,21 +17,21 @@
 
     var billIds = [];
 
-    var width = 1400, height = 1000;
-
+    var width = 1000, height = 600;
+//
     var svg = d3.select( "body" )
             .append( "svg" )
             .attr( "width", width )
             .attr( "height", height );
-
+//
     var g = svg.append( "g" );
 
     var albersProjection = d3.geo.albersUsa()
 //            .scale(8000)
-            .scale(100)
+            .scale(7000)
 //            .rotate( [71.057,0] )
 //            .center( [0, 42.313] )
-            .translate( [-0,-0] );
+            .translate( [-1200,0] );
 
     var geoPath = d3.geo.path()
             .projection( albersProjection );
@@ -48,35 +48,130 @@ var i = 0;
 ////            console.log(n);
 //    });
 
-//    d3.json("ncrgeomin.json", function (json) {
-//        console.log(json);
-//        g.selectAll("path")
-//                .data(json)
+    d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
+        console.log(json);
+        g.selectAll("path")
+                .data(json.features)
+                .enter()
+                .append("path")
 //                .enter()
-//                .append("path")
-////                .enter()
-//                .attr("stroke", "#888888")
-//                .attr("d", geoPath);
+                .attr("fill", "#ffffff")
+                .attr("stroke", "#888888")
+                .attr("d", geoPath);
+    });
+
+
+//    features.properties.districts for district numbers
+
+//    g.selectAll( "path" )
+//            .data( neighborhoods_json.features )
+////            .data( neighborhoods_json.geometries )
+//            .enter()
+//            .append( "path" )
+//            .attr( "fill", "#ffffff" )
+//            .attr("stroke", "#888888")
+////            .each(function(d, i) {
+////                d3.select(this)
+//////                    .attr("id", countyNames[i])
+////                        .attr("id", "c" + i)
+////                        .attr("onmouseover", 'd3.select(c' + i + ').attr("fill", "' + democratColor + '")')
+//////                        .attr("onmouseover", "console.log(countyNames[" + i + "])");
+////                        .attr("onmouseout", 'd3.select(c' + i + ').attr("fill", "#ffffff")');
+////
+////            })
+//            .attr( "d", geoPath );
+
+
+
+//    var width  = 1400;
+//    var height = 600;
+//
+//    var vis = d3.select("body").append("svg")
+//            .attr("width", width).attr("height", height)
+//
+//    d3.json("ncsgeo/ncrepdistrictsmin.json", function(json) {
+//        // create a first guess for the projection
+//        var center = d3.geo.centroid(json)
+//        var scale  = 150;
+//        var offset = [width/2, height/2];
+//        var projection = d3.geo.mercator().scale(scale).center(center)
+//                .translate(offset);
+//
+//        // create the path
+//        var path = d3.geo.path().projection(projection);
+//
+//        // using the path determine the bounds of the current map and use
+//        // these to determine better values for the scale and translation
+//        var bounds  = path.bounds(json);
+//        var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
+//        var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
+//        var scale   = (hscale < vscale) ? hscale : vscale;
+//        var offset  = [width - (bounds[0][0] + bounds[1][0])/2,
+//            height - (bounds[0][1] + bounds[1][1])/2];
+//
+//        // new projection
+//        projection = d3.geo.mercator().center(center)
+//                .scale(scale).translate(offset);
+//        path = path.projection(projection);
+//
+//        // add a rectangle to see the bound of the svg
+//        vis.append("rect").attr('width', width).attr('height', height)
+//                .style('stroke', 'black').style('fill', 'none');
+//        console.log(json)
+//        vis.selectAll("path").data(json.features).enter().append("path")
+//                .attr("d", path)
+//                .style("fill", "white")
+//                .style("stroke-width", "1")
+//                .style("stroke", "black")
 //    });
 
 
-    g.selectAll( "path" )
-            .data( neighborhoods_json.features )
-//            .data( neighborhoods_json.geometries )
-            .enter()
-            .append( "path" )
-            .attr( "fill", "#ffffff" )
-            .attr("stroke", "#888888")
-//            .each(function(d, i) {
-//                d3.select(this)
-////                    .attr("id", countyNames[i])
-//                        .attr("id", "c" + i)
-//                        .attr("onmouseover", 'd3.select(c' + i + ').attr("fill", "' + democratColor + '")')
-////                        .attr("onmouseover", "console.log(countyNames[" + i + "])");
-//                        .attr("onmouseout", 'd3.select(c' + i + ').attr("fill", "#ffffff")');
+
+
+
+//    var width  = 1400;
+//    var height = 600;
 //
-//            })
-            .attr( "d", geoPath );
+//    var vis = d3.select("body").append("svg")
+//            .attr("width", width).attr("height", height)
+//
+//    d3.json("ncsgeo/ncrepdistrictsmin.json", function(json) {
+//        // create a first guess for the projection
+//        var center = d3.geo.centroid(json)
+//        var scale  = 150;
+//        var offset = [width/2, height/2];
+//        var projection = d3.geo.mercator().scale(scale).center(center)
+//                .translate(offset);
+//
+//        // create the path
+//        var path = d3.geo.path().projection(projection);
+//
+//        // using the path determine the bounds of the current map and use
+//        // these to determine better values for the scale and translation
+//        var bounds  = path.bounds(json);
+//        var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
+//        var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
+//        var scale   = (hscale < vscale) ? hscale : vscale;
+//        var offset  = [width - (bounds[0][0] + bounds[1][0])/2,
+//            height - (bounds[0][1] + bounds[1][1])/2];
+//
+//        // new projection
+//        projection = d3.geo.mercator().center(center)
+//                .scale(scale).translate(offset);
+//        path = path.projection(projection);
+//
+//        // add a rectangle to see the bound of the svg
+//        vis.append("rect").attr('width', width).attr('height', height)
+//                .style('stroke', 'black').style('fill', 'none');
+//        console.log(json)
+//        vis.selectAll("path").data(json.features).enter().append("path")
+//                .attr("d", path)
+//                .style("fill", "red")
+//                .style("stroke-width", "1")
+//                .style("stroke", "black")
+//    });
+
+
 
 
 
