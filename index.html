@@ -2,7 +2,7 @@
 <head>
     <title>A D3 map</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <!--<script src="nc2.js"></script>-->
+    <script src="representatives/ncCongressReps.js"></script>
     <!--<script src="ncsgeomin.js"></script>-->
     <!--<script type="text/javascript" src="representatives/ncmetadata.json"></script>-->
 </head>
@@ -16,7 +16,7 @@
     var ncRepURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=lower";
     var billLookupURL = "https://openstates.org/api/v1/bills/NCB00010747/";
     var hbBillURL = "https://openstates.org/api/v1/bills/NCB00009985/"; //Detailed bill example
-
+    var ncCongressURL = "http://apitts.com/"
     var billIds = [];
 
     var width = 1000, height = 450;
@@ -51,12 +51,11 @@
 
     var geoPath = d3.geo.path()
             .projection( albersProjection );
-var i = 0;
 
-    var republicanColor = "#D40C00";
-    var democratColor = "#005BD4";
+    var republicanColor = "#DB1F1E";
+    var democratColor = "#1840DE";
     var independentColor = "#AAADAD";
-
+    console.log(ncCongressReps);
 //    d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
 //        console.log(json);
 //        gr.selectAll("path")
@@ -95,27 +94,40 @@ var i = 0;
 //                .attr("d", geoPath);
 //    });
 
-    d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
-        console.log(json);
-        gCon.selectAll("path")
-                .data(json.features)
-                .enter()
-                .append("path")
-                .attr("fill", "#ffffff")
-                .attr("stroke", "#888888")
-                .each(function(d, i) {
-                    var district = d.properties.District;
-                    d3.select(this)
-                            .attr("id", "con" + district)
-                            .attr("onmouseover", 'd3.select(con' + district + ').attr("fill", "' + democratColor + '")')
-                            .attr("onclick", "console.log(" + district + ")")
-                            .attr("onmouseout", 'd3.select(con' + district + ').attr("fill", "#ffffff")');
-                })
-                .attr("d", geoPath);
-    });
+//    d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
+//        console.log(json);
+//        gCon.selectAll("path")
+//                .data(json.features)
+//                .enter()
+//                .append("path")
+//                .attr("fill", "#ffffff")
+//                .attr("stroke", "#888888")
+//                .each(function(d, i) {
+//                    var district = d.properties.District;
+//                    d3.select(this)
+//                            .attr("id", "con" + district)
+//                            .attr("onmouseover", 'd3.select(con' + district + ').attr("fill", "' + democratColor + '")')
+//                            .attr("onclick", "console.log(" + district + ")")
+//                            .attr("onmouseout", 'd3.select(con' + district + ').attr("fill", "#ffffff")');
+//                })
+//                .attr("d", geoPath);
+//    });
 
 
 //    console.log(JSON.parse(md));
+
+    function getPartyColor(partyString) {
+        if (partyString == "D" || partyString == "Democrat" || partyString == "Democratic") {
+            return democratColor;
+        }
+        else if (partyString == "R" || partyString == "Republican") {
+            return republicanColor;
+        }
+        else {
+            return independentColor;
+        }
+    }
+
 
     function getRepData() {
         var xhttp = new XMLHttpRequest();
@@ -124,7 +136,7 @@ var i = 0;
                 var repJSON = JSON.parse(this.responseText);
                 var repModel = {};
                 repJSON.forEach(function(rep){
-                    repModel[rep.district] = {"party": rep.party, "rep": rep.last_name};
+                    repModel[rep.district] = {"party": rep.party, "rep": rep.first_name + " " + rep.last_name};
 
                 });
                 d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
@@ -136,8 +148,8 @@ var i = 0;
                             .each(function(d, i) {
                                 var district = d.properties.District;
                                 d3.select(this)
-                                        .attr("id", "d" + district)
-                                        .attr("fill", repModel[district].party == "Democratic" ? democratColor : republicanColor)
+                                        .attr("id", "r" + district)
+                                        .attr("fill", getPartyColor(repModel[district].party))
 //                                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
                                         .attr("onclick", "console.log('" + repModel[district].rep + "')")
 //                                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
@@ -160,7 +172,7 @@ var i = 0;
                 var senJSON = JSON.parse(this.responseText);
                 var senModel = {};
                 senJSON.forEach(function(sen){
-                    senModel[sen.district] = {"party": sen.party, "rep": sen.last_name};
+                    senModel[sen.district] = {"party": sen.party, "rep": sen.first_name + " " + sen.last_name};
 
                 });
 
@@ -176,7 +188,7 @@ var i = 0;
                                 var district = d.properties.District;
                                 d3.select(this)
                                         .attr("id", "s" + district)
-                                        .attr("fill", senModel[district].party == "Democratic" ? democratColor : republicanColor)
+                                        .attr("fill", getPartyColor(senModel[district].party))
 //                                        .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + democratColor + '")')
                                         .attr("onclick", "console.log('" + senModel[district].rep + "')")
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
@@ -210,6 +222,32 @@ var i = 0;
     }
     getSenData();
 
+    function getRepCongressData() {
+        var repCongressModel = {};
+        ncCongressReps.results.forEach(function(rep){
+            repCongressModel[rep.district] = {"party": rep.party, "rep": rep.name};
+        });
+        console.log(repCongressModel)
+        d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
+            gCon.selectAll("path")
+                    .data(json.features)
+                    .enter()
+                    .append("path")
+                    .attr("stroke", "#222222")
+                    .each(function(d, i) {
+                        var district = d.properties.District;
+                        d3.select(this)
+                                .attr("id", "dcr" + district)
+                                .attr("fill", getPartyColor(repCongressModel[district].party))
+                                //                                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
+                                .attr("onclick", "console.log('" + repCongressModel[district].rep + "')")
+//                                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
+                    })
+                    .attr("d", geoPath);
+        });
+    }
+
+    getRepCongressData();
 
 //    features.properties.districts for district numbers
 
