@@ -6,7 +6,6 @@
     <link rel="stylesheet" type="text/css" href="style/generalStyle.css">
 </head>
 <body>
-<!--<h1 id = 'demo'></h1>-->
 <div class = "mapNavbar">
     <span id = "repMapToggle" class = "mapToggle" onclick = "toggleMap('rep')">NC House of Representatives Districts</span>
     <span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">NC Senate Districts</span>
@@ -14,30 +13,31 @@
     <!--<span id = "dcSenMapToggle"></span>-->
 </div>
 <hr>
-<div class = "mapContainer" style = "width: 1203px; height: auto; display: inline-block;">
-    <svg id="ncRepMap" width="900" height="450" style="border: 1px solid black;"></svg>
-    <div class = "mapContextContainer" style = "left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid; float: right;">
-        <p class="repName" id="repNameText" style="text-align: center; margin: auto; padding: 5px; width: 100%;">Representative Name</p>
-        <hr>
-        <div class="infoContainer">
-            <p id="districtText" class="infoText"></p>
-            <p id="partyText" class="infoText"></p>
-            <a id="nclegURLText" class="infoText"></a>
-            <a id="emailLink" class="infoText"></a>
-        </div>
-        <!--<div class="photoContainer">-->
-            <!--<img id = "repPhoto" class = "photo">-->
-        <!--</div>-->
-        <div class="addressContainer">
-            <div class = "leftAddressContainer">
-                <p id = "localAddress" class = "localAddress address"></p>
+<div class = "contentWrapper">
+    <div class = "mapContainer">
+        <svg id="map" width="900" height="450" style="border: 1px solid black;"></svg>
+        <div class = "mapContextContainer" style = "left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid; float: right;">
+            <p class="repName" id="repNameText" style="text-align: center; margin: auto; padding: 5px; width: 100%;">Representative Name</p>
+            <hr>
+            <div class="infoContainer">
+                <p id="districtText" class="infoText"></p>
+                <p id="partyText" class="infoText"></p>
+                <a id="nclegURLText" class="infoText"></a>
+                <a id="emailLink" class="infoText"></a>
             </div>
-            <div class = "rightAddressContainer">
-                <p id = "capitalAddress" class = "capitalAddress address"></p>
+            <!--<div class="photoContainer">-->
+                <!--<img id = "repPhoto" class = "photo">-->
+            <!--</div>-->
+            <div class="addressContainer">
+                <div class = "leftAddressContainer">
+                    <p id = "localAddress" class = "localAddress address"></p>
+                </div>
+                <div class = "rightAddressContainer">
+                    <p id = "capitalAddress" class = "capitalAddress address"></p>
+                </div>
             </div>
         </div>
     </div>
-    <!--<div class="mapContextContainer" style="left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid;"></div>-->
 </div>
 <script>
     var openStatesURL = "https://openstates.org/api/v1/METHOD/";
@@ -50,6 +50,10 @@
     var billLookupURL = "openstates.org/api/v1/bills/?state=nc&q=" //+ query
     var ncCongressURL = "http://apitts.com/"
     var billIds = [];
+
+    var repModel = {};
+    var senModel = {};
+    var conModel = {};
 
     var width = 900, height = 450;
 
@@ -71,9 +75,11 @@
             .attr( "width", width )
             .attr( "height", height );
 
-    var gr = d3.select("#ncRepMap").append( "g" );
-    var gs = svgSenMap.append( "g" );
-    var gCon = svgCongressMap.append( "g" );
+    var gr = d3.select("#map").append( "g" ).attr("id", "repMap");
+//    var gs = svgSenMap.append( "g" );
+    var gs = d3.select("#map").append( "g" ).attr("id", "senMap");
+//    var gCon = svgCongressMap.append( "g" );
+    var gc = d3.select("#map").append( "g" ).attr("id", "conMap");
     var ghb2 = svgHB2Map.append( "g" );
 
     var albersProjection = d3.geo.albersUsa()
@@ -88,6 +94,26 @@
     var republicanColor = "#DB1F1E";
     var democratColor = "#1840DE";
     var independentColor = "#AAADAD";
+
+    function toggleMap(map) {
+        if (map == "rep") {
+            document.getElementById("senMap").style.display = "none";
+            document.getElementById("conMap").style.display = "none";
+            document.getElementById("repMap").style.display = "block";
+        }
+        else if (map == "sen") {
+
+            document.getElementById("conMap").style.display = "none";
+            document.getElementById("repMap").style.display = "none";
+            document.getElementById("senMap").style.display = "block";
+        }
+        else if (map == "con") {
+            document.getElementById("senMap").style.display = "none";
+            document.getElementById("repMap").style.display = "none";
+            document.getElementById("conMap").style.display = "block";
+
+        }
+    }
 //    console.log(ncCongressReps);
 //    d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
 //        console.log(json);
@@ -129,7 +155,7 @@
 
 //    d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
 //        console.log(json);
-//        gCon.selectAll("path")
+//        cg.selectAll("path")
 //                .data(json.features)
 //                .enter()
 //                .append("path")
@@ -187,7 +213,7 @@
         document.getElementById("capitalAddress").innerHTML = rep.offices[1].address;
     }
 
-    function getRepData() {
+    function drawRepMap() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -231,16 +257,27 @@
                             })
                             .attr("d", geoPath);
                 });
-//                console.log(repModel);
-
             }
         };
         xhttp.open("GET", ncRepURL, true);
         xhttp.send();
     }
-    getRepData();
+    drawRepMap();
 
-    function getSenData() {
+
+//    function drawRepMap() {
+//
+//    }
+//
+//    function drawSenMap() {
+//
+//    }
+//
+//    function drawConMap() {
+//
+//    }
+
+    function drawSenMap() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
@@ -289,16 +326,16 @@
         xhttp.open("GET", ncSenateURL, true);
         xhttp.send();
     }
-    getSenData();
+    drawSenMap();
 
-    function getRepCongressData() {
+    function drawConMap() {
         var repCongressModel = {};
         ncCongressReps.results.forEach(function(rep){
             repCongressModel[rep.district] = {"party": rep.party, "rep": rep.name};
         });
         console.log(repCongressModel)
         d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
-            gCon.selectAll("path")
+            gc.selectAll("path")
                     .data(json.features)
                     .enter()
                     .append("path")
@@ -316,7 +353,7 @@
         });
     }
 
-//    getRepCongressData();
+    drawConMap();
 
 //    features.properties.districts for district numbers
 
