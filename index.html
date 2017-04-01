@@ -1,15 +1,19 @@
 <html>
 <head>
-    <title>A D3 map</title>
+    <title>NC General Assembly Map</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="representatives/ncCongressReps.js"></script>
     <link rel="stylesheet" type="text/css" href="style/generalStyle.css">
-    <!--<script src="ncsgeomin.js"></script>-->
-    <!--<script type="text/javascript" src="representatives/ncmetadata.json"></script>-->
 </head>
 <body>
-<h1 id = 'demo'></h1>
-
+<!--<h1 id = 'demo'></h1>-->
+<div class = "mapNavbar">
+    <span id = "repMapToggle" class = "mapToggle" onclick = "toggleMap('rep')">NC House of Representatives Districts</span>
+    <span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">NC Senate Districts</span>
+    <span id = "congressMapToggle" class = "mapToggle" onclick = "toggleMap('con')">NC Congressional Districts</span>
+    <!--<span id = "dcSenMapToggle"></span>-->
+</div>
+<hr>
 <div class = "mapContainer" style = "width: 1203px; height: auto; display: inline-block;">
     <svg id="ncRepMap" width="900" height="450" style="border: 1px solid black;"></svg>
     <div class = "mapContextContainer" style = "left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid; float: right;">
@@ -21,6 +25,9 @@
             <a id="nclegURLText" class="infoText"></a>
             <a id="emailLink" class="infoText"></a>
         </div>
+        <!--<div class="photoContainer">-->
+            <!--<img id = "repPhoto" class = "photo">-->
+        <!--</div>-->
         <div class="addressContainer">
             <div class = "leftAddressContainer">
                 <p id = "localAddress" class = "localAddress address"></p>
@@ -45,50 +52,6 @@
     var billIds = [];
 
     var width = 900, height = 450;
-//
-//    var svgRepMap = d3.select( ".mapContainer" )
-//            .append( "svg" )
-//            .attr( "id", "ncRepMap")
-//            .attr( "width", width )
-//            .attr( "height", height )
-//            .style("border", "1px black solid");
-//            .style("grid-column-start", "1")
-//            .style("grid-column-end", "span col4-start")
-//            .style("grid-row-start", "2")
-//            .style("grid-row-end", "span 2");
-
-//    d3.select(".mapContainer")
-//            .append("div")
-//            .attr("class", "mapContextContainer")
-////            .attr("positon", "relative")
-//            .style("left", "900px")
-//            .style("top", "0px")
-//            .style("width", "300px")
-//            .style("height", "450px")
-//            .style("display", "inline-block")
-//            .style("border-right", "1px black solid")
-//            .style("border-top", "1px black solid")
-//            .style("border-bottom", "1px black solid")
-//            .style("float", "right");
-
-//    d3.select(".mapContextContainer")
-//            .append("p")
-//            .attr("class", "repName")
-//            .attr("id", "repNameText")
-//            .html("Representative Name")
-//            .style("text-align", "center")
-//            .style("margin", "auto")
-//            .style("padding", "5px")
-//            .style("width", "100%");
-//            .style("position", "relative")
-//            .style("display", "inline-block")
-//            .style("left", "50px")
-
-//    d3.select(".mapContextContainer")
-//            .append("div")
-//            .attr("class", "addressContainer")
-
-
 
     var svgSenMap = d3.select( "body" )
             .append( "svg" )
@@ -125,7 +88,7 @@
     var republicanColor = "#DB1F1E";
     var democratColor = "#1840DE";
     var independentColor = "#AAADAD";
-    console.log(ncCongressReps);
+//    console.log(ncCongressReps);
 //    d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
 //        console.log(json);
 //        gr.selectAll("path")
@@ -199,8 +162,6 @@
     }
 
     function displayRepData(rep) {
-        console.log(rep);
-//        element.target.innerHTML = rep.rep;
         document.getElementById("repNameText").innerHTML = rep.rep;
         document.getElementById("emailLink").innerHTML = rep.email;
         document.getElementById("emailLink").href = rep.email;
@@ -208,6 +169,20 @@
         document.getElementById("partyText").innerHTML = rep.party;
         document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
         document.getElementById("nclegURLText").href = rep.ncLegURL;
+//        document.getElementById("repPhoto").src = rep.photoURL;
+        document.getElementById("localAddress").innerHTML = rep.offices[0].address;
+        document.getElementById("capitalAddress").innerHTML = rep.offices[1].address;
+    }
+
+    function displaySenData(rep) {
+        document.getElementById("repNameText").innerHTML = rep.rep;
+        document.getElementById("emailLink").innerHTML = rep.email;
+        document.getElementById("emailLink").href = rep.email;
+        document.getElementById("districtText").innerHTML = rep.district;
+        document.getElementById("partyText").innerHTML = rep.party;
+        document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
+        document.getElementById("nclegURLText").href = rep.ncLegURL;
+//        document.getElementById("repPhoto").src = rep.photoURL;
         document.getElementById("localAddress").innerHTML = rep.offices[0].address;
         document.getElementById("capitalAddress").innerHTML = rep.offices[1].address;
     }
@@ -226,7 +201,7 @@
                         "id": rep.leg_id,
                         "level": rep.level,
                         "offices": rep.offices,
-                        "photoURL": rep.photoURL,
+                        "photoURL": rep.photo_url,
                         "ncLegURL": rep.url,
                         "email": rep.email,
                         "chamber": rep.chamber,
@@ -265,45 +240,6 @@
     }
     getRepData();
 
-//    function drawHB2Votes() {
-//        var xhttp = new XMLHttpRequest();
-//        xhttp.onreadystatechange = function() {
-//            if (this.readyState == 4 && this.status == 200) {
-//                var repJSON = JSON.parse(this.responseText);
-//                console.log(repJSON);
-//                var repModel = {};
-//                repJSON.forEach(function(rep){
-//                    repModel[rep.district] = {"party": rep.party, "rep": rep.first_name + " " + rep.last_name};
-//
-//                });
-//                d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
-//                    ghb2.selectAll("path")
-//                            .data(json.features)
-//                            .enter()
-//                            .append("path")
-//                            .attr("stroke", "#222222")
-//                            .each(function(d, i) {
-//                                var district = d.properties.District;
-//                                d3.select(this)
-//                                        .attr("id", "r" + district)
-//                                        .attr("fill", getPartyColor(repModel[district].party))
-//                                        //                                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-//                                        .attr("onclick", "console.log('" + repModel[district].rep + "')")
-////                                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
-//                            })
-//                            .attr("d", geoPath);
-//                });
-////                console.log(repModel);
-//
-//            }
-//        };
-//        xhttp.open("GET", hb2BillURL, true);
-//        xhttp.send();
-//    }
-//    drawHB2Votes();
-
-
-
     function getSenData() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -311,8 +247,21 @@
                 var senJSON = JSON.parse(this.responseText);
                 var senModel = {};
                 senJSON.forEach(function(sen){
-                    senModel[sen.district] = {"party": sen.party, "rep": sen.first_name + " " + sen.last_name};
-
+                    senModel[sen.district] = {
+                        "party": sen.party,
+                        "senator": sen.full_name,
+                        "id": sen.leg_id,
+                        "level": sen.level,
+                        "offices": sen.offices,
+                        "photoURL": sen.photo_url,
+                        "ncLegURL": sen.url,
+                        "email": sen.email,
+                        "chamber": sen.chamber,
+                        "active": sen.active,
+                        "district": sen.district,
+                        "nimspCandID": sen.nimsp_candidate_id,
+                        "nimspID": sen.nimsp_id
+                    };
                 });
 
                 d3.json("ncsgeo/ncsendistrictsmin.json", function (json) {
@@ -321,45 +270,26 @@
                             .data(json.features)
                             .enter()
                             .append("path")
-//                            .attr("fill", "#ffffff")
-                            .attr("stroke", "#222222")
+//                            .attr("fill", "#888888")
+                            .attr("stroke", "#000000")
                             .each(function(d, i) {
                                 var district = d.properties.District;
                                 d3.select(this)
                                         .attr("id", "s" + district)
                                         .attr("fill", getPartyColor(senModel[district].party))
 //                                        .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + democratColor + '")')
-                                        .attr("onclick", "console.log('" + senModel[district].rep + "')")
+                                        .attr("onclick", "console.log('" + senModel[district].rep + "')");
+                                document.getElementById("s" + district).onclick = function(){displayRepData(repModel[district])};
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
                             })
                             .attr("d", geoPath);
                 });
-
-//                d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
-//                    gr.selectAll("path")
-//                            .data(json.features)
-//                            .enter()
-//                            .append("path")
-//                            .attr("stroke", "#222222")
-//                            .each(function(d, i) {
-//                                var district = d.properties.District;
-//                                d3.select(this)
-//                                        .attr("id", "d" + district)
-//                                        .attr("fill", repModel[district].party == "Democratic" ? democratColor : republicanColor)
-//                                        //                                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-//                                        .attr("onclick", "console.log('" + repModel[district].rep + "')")
-////                                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
-//                            })
-//                            .attr("d", geoPath);
-//                });
-//                console.log(repModel);
-
             }
         };
         xhttp.open("GET", ncSenateURL, true);
         xhttp.send();
     }
-//    getSenData();
+    getSenData();
 
     function getRepCongressData() {
         var repCongressModel = {};

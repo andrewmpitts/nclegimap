@@ -53,3 +53,18 @@
     max-width: 250px;
 
 }
+
+.photo {
+    max-width: 200px;
+}
+
+.mapNavbar {
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+}
+
+.mapToggle {
+    border: 1px black solid;
+    padding: 5px;
+}
