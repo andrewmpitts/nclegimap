@@ -1,0 +1,55 @@
+
+
+
+.addressContainer {
+    /*top: 271px;*/
+    position: relative;
+    height: 150px;
+    width: 100%;
+    border-top: 1px black solid;
+    display: inline-block;
+}
+
+.verticalLine {
+    position: relative;
+    left: 150px;
+    height: 150px;
+    width: 1px;
+    border-left: 1px solid black;
+    display: block;
+}
+
+.address {
+    position: relative;
+    display: block;
+    text-align: center;
+}
+
+.leftAddressContainer {
+    width: 150px;
+    height: 100%;
+    top: 0px;
+    position: relative;
+    display: inline-block
+}
+
+.rightAddressContainer {
+    width: 149px;
+    height: 100%;
+    top: 0px;
+    position: relative;
+    border-left: 1px black solid;
+    display: inline-block;
+    float: right;
+}
+
+.infoContainer {
+    position: relative;
+    padding: 10px;
+}
+
+.infoText {
+    width: auto;
+    max-width: 250px;
+
+}

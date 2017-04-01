@@ -3,13 +3,33 @@
     <title>A D3 map</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="representatives/ncCongressReps.js"></script>
+    <link rel="stylesheet" type="text/css" href="style/generalStyle.css">
     <!--<script src="ncsgeomin.js"></script>-->
     <!--<script type="text/javascript" src="representatives/ncmetadata.json"></script>-->
 </head>
 <body>
 <h1 id = 'demo'></h1>
-<div class = "mapContainer" style = "width: 1203px; height: auto; display: inline-block;">
 
+<div class = "mapContainer" style = "width: 1203px; height: auto; display: inline-block;">
+    <svg id="ncRepMap" width="900" height="450" style="border: 1px solid black;"></svg>
+    <div class = "mapContextContainer" style = "left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid; float: right;">
+        <p class="repName" id="repNameText" style="text-align: center; margin: auto; padding: 5px; width: 100%;">Representative Name</p>
+        <hr>
+        <div class="infoContainer">
+            <p id="districtText" class="infoText"></p>
+            <p id="partyText" class="infoText"></p>
+            <a id="nclegURLText" class="infoText"></a>
+            <a id="emailLink" class="infoText"></a>
+        </div>
+        <div class="addressContainer">
+            <div class = "leftAddressContainer">
+                <p id = "localAddress" class = "localAddress address"></p>
+            </div>
+            <div class = "rightAddressContainer">
+                <p id = "capitalAddress" class = "capitalAddress address"></p>
+            </div>
+        </div>
+    </div>
     <!--<div class="mapContextContainer" style="left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid;"></div>-->
 </div>
 <script>
@@ -26,42 +46,49 @@
 
     var width = 900, height = 450;
 //
-    var svgRepMap = d3.select( ".mapContainer" )
-            .append( "svg" )
-            .attr( "id", "ncRepMap")
-            .attr( "width", width )
-            .attr( "height", height )
-            .style("border", "1px black solid");
+//    var svgRepMap = d3.select( ".mapContainer" )
+//            .append( "svg" )
+//            .attr( "id", "ncRepMap")
+//            .attr( "width", width )
+//            .attr( "height", height )
+//            .style("border", "1px black solid");
 //            .style("grid-column-start", "1")
 //            .style("grid-column-end", "span col4-start")
 //            .style("grid-row-start", "2")
 //            .style("grid-row-end", "span 2");
 
-    d3.select(".mapContainer")
-            .append("div")
-            .attr("class", "mapContextContainer")
-//            .attr("positon", "relative")
-            .style("left", "900px")
-            .style("top", "0px")
-            .style("width", "300px")
-            .style("height", "450px")
-            .style("display", "inline-block")
-            .style("border-right", "1px black solid")
-            .style("border-top", "1px black solid")
-            .style("border-bottom", "1px black solid")
-            .style("float", "right");
+//    d3.select(".mapContainer")
+//            .append("div")
+//            .attr("class", "mapContextContainer")
+////            .attr("positon", "relative")
+//            .style("left", "900px")
+//            .style("top", "0px")
+//            .style("width", "300px")
+//            .style("height", "450px")
+//            .style("display", "inline-block")
+//            .style("border-right", "1px black solid")
+//            .style("border-top", "1px black solid")
+//            .style("border-bottom", "1px black solid")
+//            .style("float", "right");
 
-    d3.select(".mapContextContainer")
-            .append("p")
-            .attr("class", "repName")
-            .attr("id", "repNameText")
-            .html("Hi");
+//    d3.select(".mapContextContainer")
+//            .append("p")
+//            .attr("class", "repName")
+//            .attr("id", "repNameText")
+//            .html("Representative Name")
+//            .style("text-align", "center")
+//            .style("margin", "auto")
+//            .style("padding", "5px")
+//            .style("width", "100%");
 //            .style("position", "relative")
 //            .style("display", "inline-block")
 //            .style("left", "50px")
-//            .style("align", "center")
-//            .style("margin", "auto")
-//            .style("width", "200px");
+
+//    d3.select(".mapContextContainer")
+//            .append("div")
+//            .attr("class", "addressContainer")
+
+
 
     var svgSenMap = d3.select( "body" )
             .append( "svg" )
@@ -81,7 +108,7 @@
             .attr( "width", width )
             .attr( "height", height );
 
-    var gr = svgRepMap.append( "g" );
+    var gr = d3.select("#ncRepMap").append( "g" );
     var gs = svgSenMap.append( "g" );
     var gCon = svgCongressMap.append( "g" );
     var ghb2 = svgHB2Map.append( "g" );
@@ -90,7 +117,7 @@
             .scale(7000)
 //            .rotate( [71.057,0] )
 //            .center( [0, 42.313] )
-            .translate( [-1200,0] );
+            .translate( [-1200, -40] );
 
     var geoPath = d3.geo.path()
             .projection( albersProjection );
@@ -172,7 +199,17 @@
     }
 
     function displayRepData(rep) {
-        document.getElementById("repNameText").innerHTML = rep;
+        console.log(rep);
+//        element.target.innerHTML = rep.rep;
+        document.getElementById("repNameText").innerHTML = rep.rep;
+        document.getElementById("emailLink").innerHTML = rep.email;
+        document.getElementById("emailLink").href = rep.email;
+        document.getElementById("districtText").innerHTML = rep.district;
+        document.getElementById("partyText").innerHTML = rep.party;
+        document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
+        document.getElementById("nclegURLText").href = rep.ncLegURL;
+        document.getElementById("localAddress").innerHTML = rep.offices[0].address;
+        document.getElementById("capitalAddress").innerHTML = rep.offices[1].address;
     }
 
     function getRepData() {
@@ -181,8 +218,23 @@
             if (this.readyState == 4 && this.status == 200) {
                 var repJSON = JSON.parse(this.responseText);
                 var repModel = {};
+                console.log(repJSON);
                 repJSON.forEach(function(rep){
-                    repModel[rep.district] = {"party": rep.party, "rep": rep.first_name + " " + rep.last_name};
+                    repModel[rep.district] = {
+                        "party": rep.party,
+                        "rep": rep.full_name,
+                        "id": rep.leg_id,
+                        "level": rep.level,
+                        "offices": rep.offices,
+                        "photoURL": rep.photoURL,
+                        "ncLegURL": rep.url,
+                        "email": rep.email,
+                        "chamber": rep.chamber,
+                        "active": rep.active,
+                        "district": rep.district,
+                        "nimspCandID": rep.nimsp_candidate_id,
+                        "nimspID": rep.nimsp_id
+                    };
 
                 });
                 d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
@@ -193,11 +245,13 @@
                             .attr("stroke", "#222222")
                             .each(function(d, i) {
                                 var district = d.properties.District;
+//                                console.log(repModel[district])
                                 d3.select(this)
                                         .attr("id", "r" + district)
-                                        .attr("fill", getPartyColor(repModel[district].party))
+                                        .attr("fill", getPartyColor(repModel[district].party));
 //                                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-                                        .attr("onclick", "displayRepData('" + repModel[district].rep + "')")
+//                                        .attr("onclick", function(){displayRepData(repModel[district])});
+                                document.getElementById("r" + district).onclick = function(){displayRepData(repModel[district])};
 //                                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
                             })
                             .attr("d", geoPath);
