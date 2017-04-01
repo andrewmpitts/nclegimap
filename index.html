@@ -92,8 +92,12 @@
             .projection( albersProjection );
 
     var republicanColor = "#DB1F1E";
+    var selectedRepublicanColor = "#DB1F1E";
     var democratColor = "#1840DE";
+    var selectedDemocratColor = "#";
     var independentColor = "#AAADAD";
+    var selectedIndependentColor = "#";
+    var selectedColor = "#07C230";
 
     function toggleMap(map) {
         if (map == "rep") {
@@ -172,9 +176,6 @@
 //                .attr("d", geoPath);
 //    });
 
-
-//    console.log(JSON.parse(md));
-
     function getPartyColor(partyString) {
         if (partyString == "D" || partyString == "Democrat" || partyString == "Democratic") {
             return democratColor;
@@ -188,7 +189,7 @@
     }
 
     function displayRepData(rep) {
-        document.getElementById("repNameText").innerHTML = rep.rep;
+        document.getElementById("repNameText").innerHTML = rep.fullName;
         document.getElementById("emailLink").innerHTML = rep.email;
         document.getElementById("emailLink").href = rep.email;
         document.getElementById("districtText").innerHTML = rep.district;
@@ -200,17 +201,17 @@
         document.getElementById("capitalAddress").innerHTML = rep.offices[1].address;
     }
 
-    function displaySenData(rep) {
-        document.getElementById("repNameText").innerHTML = rep.rep;
-        document.getElementById("emailLink").innerHTML = rep.email;
-        document.getElementById("emailLink").href = rep.email;
-        document.getElementById("districtText").innerHTML = rep.district;
-        document.getElementById("partyText").innerHTML = rep.party;
+    function displaySenData(sen) {
+        document.getElementById("repNameText").innerHTML = sen.fullName;
+        document.getElementById("emailLink").innerHTML = sen.email;
+        document.getElementById("emailLink").href = sen.email;
+        document.getElementById("districtText").innerHTML = sen.district;
+        document.getElementById("partyText").innerHTML = sen.party;
         document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
-        document.getElementById("nclegURLText").href = rep.ncLegURL;
+        document.getElementById("nclegURLText").href = sen.ncLegURL;
 //        document.getElementById("repPhoto").src = rep.photoURL;
-        document.getElementById("localAddress").innerHTML = rep.offices[0].address;
-        document.getElementById("capitalAddress").innerHTML = rep.offices[1].address;
+        document.getElementById("localAddress").innerHTML = sen.offices[0].address;
+        document.getElementById("capitalAddress").innerHTML = sen.offices[1].address;
     }
 
     function drawRepMap() {
@@ -223,7 +224,7 @@
                 repJSON.forEach(function(rep){
                     repModel[rep.district] = {
                         "party": rep.party,
-                        "rep": rep.full_name,
+                        "fullName": rep.full_name,
                         "id": rep.leg_id,
                         "level": rep.level,
                         "offices": rep.offices,
@@ -249,11 +250,11 @@
 //                                console.log(repModel[district])
                                 d3.select(this)
                                         .attr("id", "r" + district)
-                                        .attr("fill", getPartyColor(repModel[district].party));
-//                                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-//                                        .attr("onclick", function(){displayRepData(repModel[district])});
+                                        .attr("fill", getPartyColor(repModel[district].party))
+                                        .attr("onmouseover", 'd3.select(r' + district + ').attr("fill", "' + selectedColor + '")')
+                                        .attr("onmouseout", 'd3.select(r' + district + ').attr("fill", "' + getPartyColor(repModel[district].party) + '")');
                                 document.getElementById("r" + district).onclick = function(){displayRepData(repModel[district])};
-//                                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
+
                             })
                             .attr("d", geoPath);
                 });
@@ -264,19 +265,6 @@
     }
     drawRepMap();
 
-
-//    function drawRepMap() {
-//
-//    }
-//
-//    function drawSenMap() {
-//
-//    }
-//
-//    function drawConMap() {
-//
-//    }
-
     function drawSenMap() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
@@ -286,7 +274,7 @@
                 senJSON.forEach(function(sen){
                     senModel[sen.district] = {
                         "party": sen.party,
-                        "senator": sen.full_name,
+                        "fullName": sen.full_name,
                         "id": sen.leg_id,
                         "level": sen.level,
                         "offices": sen.offices,
@@ -314,9 +302,9 @@
                                 d3.select(this)
                                         .attr("id", "s" + district)
                                         .attr("fill", getPartyColor(senModel[district].party))
-//                                        .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + democratColor + '")')
-                                        .attr("onclick", "console.log('" + senModel[district].rep + "')");
-                                document.getElementById("s" + district).onclick = function(){displayRepData(repModel[district])};
+                                        .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + selectedColor + '")')
+                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "' + getPartyColor(senModel[district].party) + '")');
+                                document.getElementById("s" + district).onclick = function(){displaySenData(senModel[district])};
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
                             })
                             .attr("d", geoPath);
@@ -333,7 +321,7 @@
         ncCongressReps.results.forEach(function(rep){
             repCongressModel[rep.district] = {"party": rep.party, "rep": rep.name};
         });
-        console.log(repCongressModel)
+        console.log(repCongressModel);
         d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
             gc.selectAll("path")
                     .data(json.features)
@@ -343,11 +331,13 @@
                     .each(function(d, i) {
                         var district = d.properties.District;
                         d3.select(this)
-                                .attr("id", "dcr" + district)
+                                .attr("id", "c" + district)
                                 .attr("fill", getPartyColor(repCongressModel[district].party))
-                                //                                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-                                .attr("onclick", "console.log('" + repCongressModel[district].rep + "')")
-//                                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
+//                              .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
+//                              .attr("onclick", "console.log('" + repCongressModel[district].rep + "')")
+                                .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
+//                              .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conModel[district].party) + '")');
+//                              .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
                     })
                     .attr("d", geoPath);
         });
@@ -355,130 +345,6 @@
 
     drawConMap();
 
-//    features.properties.districts for district numbers
-
-//    g.selectAll( "path" )
-//            .data( neighborhoods_json.features )
-////            .data( neighborhoods_json.geometries )
-//            .enter()
-//            .append( "path" )
-//            .attr( "fill", "#ffffff" )
-//            .attr("stroke", "#888888")
-////            .each(function(d, i) {
-////                d3.select(this)
-//////                    .attr("id", countyNames[i])
-////                        .attr("id", "c" + i)
-////                        .attr("onmouseover", 'd3.select(c' + i + ').attr("fill", "' + democratColor + '")')
-//////                        .attr("onmouseover", "console.log(countyNames[" + i + "])");
-////                        .attr("onmouseout", 'd3.select(c' + i + ').attr("fill", "#ffffff")');
-////
-////            })
-//            .attr( "d", geoPath );
-
-
-
-//    var width  = 1400;
-//    var height = 600;
-//
-//    var vis = d3.select("body").append("svg")
-//            .attr("width", width).attr("height", height)
-//
-//    d3.json("ncsgeo/ncrepdistrictsmin.json", function(json) {
-//        // create a first guess for the projection
-//        var center = d3.geo.centroid(json)
-//        var scale  = 150;
-//        var offset = [width/2, height/2];
-//        var projection = d3.geo.mercator().scale(scale).center(center)
-//                .translate(offset);
-//
-//        // create the path
-//        var path = d3.geo.path().projection(projection);
-//
-//        // using the path determine the bounds of the current map and use
-//        // these to determine better values for the scale and translation
-//        var bounds  = path.bounds(json);
-//        var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
-//        var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
-//        var scale   = (hscale < vscale) ? hscale : vscale;
-//        var offset  = [width - (bounds[0][0] + bounds[1][0])/2,
-//            height - (bounds[0][1] + bounds[1][1])/2];
-//
-//        // new projection
-//        projection = d3.geo.mercator().center(center)
-//                .scale(scale).translate(offset);
-//        path = path.projection(projection);
-//
-//        // add a rectangle to see the bound of the svg
-//        vis.append("rect").attr('width', width).attr('height', height)
-//                .style('stroke', 'black').style('fill', 'none');
-//        console.log(json)
-//        vis.selectAll("path").data(json.features).enter().append("path")
-//                .attr("d", path)
-//                .style("fill", "white")
-//                .style("stroke-width", "1")
-//                .style("stroke", "black")
-//    });
-
-
-
-
-
-//    var width  = 1400;
-//    var height = 600;
-//
-//    var vis = d3.select("body").append("svg")
-//            .attr("width", width).attr("height", height)
-//
-//    d3.json("ncsgeo/ncrepdistrictsmin.json", function(json) {
-//        // create a first guess for the projection
-//        var center = d3.geo.centroid(json)
-//        var scale  = 150;
-//        var offset = [width/2, height/2];
-//        var projection = d3.geo.mercator().scale(scale).center(center)
-//                .translate(offset);
-//
-//        // create the path
-//        var path = d3.geo.path().projection(projection);
-//
-//        // using the path determine the bounds of the current map and use
-//        // these to determine better values for the scale and translation
-//        var bounds  = path.bounds(json);
-//        var hscale  = scale*width  / (bounds[1][0] - bounds[0][0]);
-//        var vscale  = scale*height / (bounds[1][1] - bounds[0][1]);
-//        var scale   = (hscale < vscale) ? hscale : vscale;
-//        var offset  = [width - (bounds[0][0] + bounds[1][0])/2,
-//            height - (bounds[0][1] + bounds[1][1])/2];
-//
-//        // new projection
-//        projection = d3.geo.mercator().center(center)
-//                .scale(scale).translate(offset);
-//        path = path.projection(projection);
-//
-//        // add a rectangle to see the bound of the svg
-//        vis.append("rect").attr('width', width).attr('height', height)
-//                .style('stroke', 'black').style('fill', 'none');
-//        console.log(json)
-//        vis.selectAll("path").data(json.features).enter().append("path")
-//                .attr("d", path)
-//                .style("fill", "red")
-//                .style("stroke-width", "1")
-//                .style("stroke", "black")
-//    });
-
-
-
-
-
-//    console.log(
-
-//    console.log(countyNames);
-
-
-//    d3.select("path#c0").attr( "fill", "#220099" );
-
-//console.log(neighborhoods_json.features[10]);
-//            neighborhoods_json.features[0].properties.name
-//    );
 </script>
 </body>
 </html>
