@@ -20,15 +20,19 @@
             <h3 id = "legTitle">Representative</h3>
             <p class="repName" id="repNameText" style="text-align: center; margin: auto; padding: 5px; width: 100%;">Representative Name</p>
             <hr>
+
+            <div class="photoContainer">
+                <img id = "repPhoto" class = "photo">
+                <br>
+                <span id="districtText" class="infoText"></span>
+                <span><a id = "partyText"></a></span>
+            </div>
             <div class="infoContainer">
-                <p id="districtText" class="infoText"></p>
+
                 <!--<p id="partyText" class="infoText"></p>-->
                 <!--<a id="nclegURLText" class="infoText"></a>-->
                 <!--<a id="emailLink" class="infoText"></a>-->
             </div>
-            <!--<div class="photoContainer">-->
-                <!--<img id = "repPhoto" class = "photo">-->
-            <!--</div>-->
             <!--<div class="addressContainer">-->
                 <!--<div class = "leftAddressContainer">-->
                     <!--<p id = "localAddress" class = "localAddress address"></p>-->
@@ -58,7 +62,7 @@
             <ul>
                 <li><a id = "nclegURLText"></a></li>
                 <li>Email: <a id = "emailLink"></a></li>
-                <li><a id = "partyText"></a></li>
+
             </ul>
 
         </div>
@@ -124,6 +128,15 @@
     var selectedIndependentColor = "#";
     var selectedColor = "#07C230";
 
+    var photoHiResURL = "http://www.ncga.state.nc.us/House/pictures/hiRes/719.jpg";
+
+    function getThumbnailURL(url, house) {
+        var lastSlashIndex = url.indexOf("hiRes") + 6;
+        var fileName = url.substr(lastSlashIndex);
+        var thumbnailURL = "http://www.ncga.state.nc.us/" + house + "/pictures/" + fileName;
+        return thumbnailURL;
+    }
+
     function toggleMap(map) {
         if (map == "rep") {
             document.getElementById("senMap").style.display = "none";
@@ -145,6 +158,24 @@
             document.getElementById("conMap").style.display = "block";
 
         }
+    }
+
+    function parseDistrictString(district) {
+        var lastDigit = district.slice(-1);
+        var suffix = "";
+        if (lastDigit == 0 || lastDigit >= 4 ) {
+            suffix = "th";
+        }
+        else if (lastDigit == 3) {
+            suffix = "rd";
+        }
+        else if (lastDigit == 2) {
+            suffix = "nd";
+        }
+        else {
+            suffix = "st";
+        }
+        return district + suffix;
     }
 
     function parseAddress(address) {
@@ -249,12 +280,13 @@
         document.getElementById("repNameText").innerHTML = rep.fullName;
         document.getElementById("emailLink").innerHTML = rep.email;
         document.getElementById("emailLink").href = rep.email;
-        document.getElementById("districtText").innerHTML = rep.district;
+        document.getElementById("districtText").innerHTML = parseDistrictString(rep.district) + " District<br>";
         document.getElementById("partyText").innerHTML = rep.party;
         document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
         document.getElementById("nclegURLText").href = rep.ncLegURL;
-//        document.getElementById("repPhoto").src = rep.photoURL;
+        document.getElementById("repPhoto").src = getThumbnailURL(rep.photoURL, "House");
         var localPhone = rep.offices[0].phone != null ? "Phone: " + rep.offices[0].phone : "";
+        var capitalPhone = rep.offices[1].phone != null ? "Phone: " + rep.offices[1].phone : "";
         document.getElementById("localAddress").innerHTML = rep.offices[0].name + "<br><br>" + parseAddress(rep.offices[0].address) + "<br>" + localPhone;
         document.getElementById("capitalAddress").innerHTML = rep.offices[1].name + "<br><br>" + parseAddress(rep.offices[1].address) + "<br>Phone: " + rep.offices[1].phone;
     }
@@ -265,11 +297,13 @@
         document.getElementById("emailLink").href = sen.email;
         document.getElementById("districtText").innerHTML = sen.district;
         document.getElementById("partyText").innerHTML = sen.party;
-        document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
+        document.getElementById("nclegURLText").innerHTML = "Senator's NC Legislature Page";
         document.getElementById("nclegURLText").href = sen.ncLegURL;
-//        document.getElementById("repPhoto").src = rep.photoURL;
-        document.getElementById("localAddress").innerHTML = sen.offices[0].name + "<br><br>" + parseAddress(sen.offices[0].address) + "<br>Phone: " + sen.offices[0].phone;
-        document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>Phone: " + sen.offices[1].phone;
+        document.getElementById("repPhoto").src = getThumbnailURL(sen.photoURL, "Senate");
+        var localPhone = sen.offices[0].phone != null ? "Phone: " + sen.offices[0].phone : "";
+        var capitalPhone = sen.offices[1].phone != null ? "Phone: " + sen.offices[1].phone : "";
+        document.getElementById("localAddress").innerHTML = sen.offices[0].name + "<br><br>" + parseAddress(sen.offices[0].address) + "<br>" + localPhone;
+        document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>" + capitalPhone;
     }
 
     function drawRepMap() {
