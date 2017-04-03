@@ -17,25 +17,50 @@
     <div class = "mapContainer">
         <svg id="map" width="900" height="450" style="border: 1px solid black;"></svg>
         <div class = "mapContextContainer" style = "left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid; float: right;">
+            <h3 id = "legTitle">Representative</h3>
             <p class="repName" id="repNameText" style="text-align: center; margin: auto; padding: 5px; width: 100%;">Representative Name</p>
             <hr>
             <div class="infoContainer">
                 <p id="districtText" class="infoText"></p>
-                <p id="partyText" class="infoText"></p>
-                <a id="nclegURLText" class="infoText"></a>
-                <a id="emailLink" class="infoText"></a>
+                <!--<p id="partyText" class="infoText"></p>-->
+                <!--<a id="nclegURLText" class="infoText"></a>-->
+                <!--<a id="emailLink" class="infoText"></a>-->
             </div>
             <!--<div class="photoContainer">-->
                 <!--<img id = "repPhoto" class = "photo">-->
             <!--</div>-->
-            <div class="addressContainer">
-                <div class = "leftAddressContainer">
-                    <p id = "localAddress" class = "localAddress address"></p>
-                </div>
-                <div class = "rightAddressContainer">
-                    <p id = "capitalAddress" class = "capitalAddress address"></p>
-                </div>
+            <!--<div class="addressContainer">-->
+                <!--<div class = "leftAddressContainer">-->
+                    <!--<p id = "localAddress" class = "localAddress address"></p>-->
+                <!--</div>-->
+                <!--<div class = "rightAddressContainer">-->
+                    <!--<p id = "capitalAddress" class = "capitalAddress address"></p>-->
+                <!--</div>-->
+            <!--</div>-->
+        </div>
+    </div>
+    <div id = "bottomInfoContainer" class = "bottomInfoContainer">
+        <h3 id = "addressHeader">Addresses</h3>
+        <div id="capitolAddressContainer">
+            <div class = "rightAddressContainer">
+                <p id = "capitalAddress" class = "capitalAddress address">Raleigh Address</p>
             </div>
+        </div>
+        <div id="localAddressContainer" class="addressContainer">
+
+            <div class = "leftAddressContainer">
+                <p id = "localAddress" class = "localAddress address">Local Address</p>
+            </div>
+
+        </div>
+
+        <div id = "linkContainer">
+            <ul>
+                <li><a id = "nclegURLText"></a></li>
+                <li>Email: <a id = "emailLink"></a></li>
+                <li><a id = "partyText"></a></li>
+            </ul>
+
         </div>
     </div>
 </div>
@@ -103,19 +128,44 @@
         if (map == "rep") {
             document.getElementById("senMap").style.display = "none";
             document.getElementById("conMap").style.display = "none";
+            document.getElementById("legTitle").innerHTML = "Representative";
             document.getElementById("repMap").style.display = "block";
         }
         else if (map == "sen") {
 
             document.getElementById("conMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
+            document.getElementById("legTitle").innerHTML = "Senator";
             document.getElementById("senMap").style.display = "block";
         }
         else if (map == "con") {
             document.getElementById("senMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
+            document.getElementById("legTitle").innerHTML = "Representative (DC)";
             document.getElementById("conMap").style.display = "block";
 
+        }
+    }
+
+    function parseAddress(address) {
+        if (address.indexOf("N.C. House") != -1) {
+            var repLoc = address.indexOf('ves') + 3;
+//            address[repLoc] = "<br>";
+            address = address.substr(0, repLoc) + "<br>" + address.substr(repLoc + 1);
+            return address;
+        }
+        else if (address.indexOf("N.C. Senate") != -1) {
+            var senateLoc = address.indexOf('ate') + 3;
+//            address[firstComma] = "<br>";
+            address = address.substr(0, senateLoc) + "<br>" + address.substr(senateLoc + 1);
+            return address;
+        }
+        else {
+            var firstComma = address.indexOf(',');
+            var secondComma = address.ind
+//            address[firstComma] = "<br>";
+            address = address.substr(0, firstComma) + "<br>" + address.substr(firstComma + 1);
+            return address;
         }
     }
 //    console.log(ncCongressReps);
@@ -177,6 +227,13 @@
 //    });
 
     function getPartyColor(partyString) {
+        var republicanColor = "#DB1F1E";
+        var selectedRepublicanColor = "#DB1F1E";
+        var democratColor = "#1840DE";
+        var selectedDemocratColor = "#";
+        var independentColor = "#AAADAD";
+        var selectedIndependentColor = "#";
+        var selectedColor = "#07C230";
         if (partyString == "D" || partyString == "Democrat" || partyString == "Democratic") {
             return democratColor;
         }
@@ -197,8 +254,9 @@
         document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
         document.getElementById("nclegURLText").href = rep.ncLegURL;
 //        document.getElementById("repPhoto").src = rep.photoURL;
-        document.getElementById("localAddress").innerHTML = rep.offices[0].address;
-        document.getElementById("capitalAddress").innerHTML = rep.offices[1].address;
+        var localPhone = rep.offices[0].phone != null ? "Phone: " + rep.offices[0].phone : "";
+        document.getElementById("localAddress").innerHTML = rep.offices[0].name + "<br><br>" + parseAddress(rep.offices[0].address) + "<br>" + localPhone;
+        document.getElementById("capitalAddress").innerHTML = rep.offices[1].name + "<br><br>" + parseAddress(rep.offices[1].address) + "<br>Phone: " + rep.offices[1].phone;
     }
 
     function displaySenData(sen) {
@@ -210,8 +268,8 @@
         document.getElementById("nclegURLText").innerHTML = "Represenative's NC Legislature Page";
         document.getElementById("nclegURLText").href = sen.ncLegURL;
 //        document.getElementById("repPhoto").src = rep.photoURL;
-        document.getElementById("localAddress").innerHTML = sen.offices[0].address;
-        document.getElementById("capitalAddress").innerHTML = sen.offices[1].address;
+        document.getElementById("localAddress").innerHTML = sen.offices[0].name + "<br><br>" + parseAddress(sen.offices[0].address) + "<br>Phone: " + sen.offices[0].phone;
+        document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>Phone: " + sen.offices[1].phone;
     }
 
     function drawRepMap() {

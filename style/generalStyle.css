@@ -6,14 +6,39 @@
     margin: auto;
 }
 
-.addressContainer {
+#linkContainer {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    display: inline-block;
+    float: right;
+}
+
+#localAddressContainer {
     /*top: 271px;*/
     position: relative;
-    height: 150px;
-    width: 100%;
-    border-top: 1px black solid;
-    /*display: inline-block;*/
+    top: 25px;
+    right: 0px;
+    height: 225px;
+    width: 400px;
+    /*border-top: 1px black solid;*/
+    display: inline-block;
+    float: right;
 }
+
+#capitolAddressContainer {
+    /*top: 271px;*/
+    position: relative;
+    top: 25px;
+    right: 0px;
+    height: 225px;
+    width: 400px;
+    /*border-top: 1px black solid;*/
+    display: inline-block;
+    float: right;
+}
+
+
 
 .verticalLine {
     position: relative;
@@ -31,21 +56,28 @@
 }
 
 .leftAddressContainer {
-    width: 150px;
+    width: 100%;
     height: 100%;
     top: 0px;
     position: relative;
-    display: inline-block
+    /*display: inline-block;*/
+    float: right;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 1.1em;
 }
 
 .rightAddressContainer {
-    width: 149px;
+    width: 100%;
     height: 100%;
     top: 0px;
     position: relative;
-    border-left: 1px black solid;
+    /*border-left: 1px black solid;*/
     display: inline-block;
     float: right;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 1.1em;
 }
 
 .infoContainer {
@@ -89,4 +121,33 @@
 
 #conMap {
     display: none;
+}
+
+#bottomInfoContainer {
+    width: 1200px;
+    height: 250px;
+    /*border-top: none;*/
+    border-left: 1px black solid;
+    border-right: 1px black solid;
+    border-bottom: 1px black solid;
+    margin: auto;
+    /*float: right;*/
+}
+
+#legTitle {
+    margin: auto;
+    text-align: center;
+}
+
+#addressHeader {
+    position: relative;
+    top: 0px;
+    height: 15px;
+    padding: 10px;
+    left: 400px;
+    width: 800px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    /*float: right;*/
 }
