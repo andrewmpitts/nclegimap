@@ -428,12 +428,17 @@
         ncCongressReps.results.forEach(function(rep){
             repCongressModel[rep.district] = {
                 "party": rep.party,
-                "rep": rep.name,
+                "rep": rep.first_name + " " + rep.last_name,
                 "gender": rep.gender,
+                "title": rep.gender == "M" ? "Congressman":"Congresswoman",
+                "website": rep.url,
+                "facebook": rep.facebook_account,
+                "fax": rep.fax,
+                "phone": rep.phone,
+                "twitter": rep.twitter_account,
+                "youtube": rep.youtube_account,
                 "district": rep.district,
-                "id": rep.id,
-                "twitter": rep.twitter_id,
-                "youtube": rep.youtube_id
+                "id": rep.id
             };
         });
         console.log(ncCongressReps.results);
