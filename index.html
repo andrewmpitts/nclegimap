@@ -306,20 +306,7 @@
         document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>" + capitalPhone;
     }
 
-    function displaySenData(sen) {
-        document.getElementById("repNameText").innerHTML = sen.fullName;
-        document.getElementById("emailLink").innerHTML = sen.email;
-        document.getElementById("emailLink").href = sen.email;
-        document.getElementById("districtText").innerHTML = sen.district;
-        document.getElementById("partyText").innerHTML = sen.party;
-        document.getElementById("nclegURLText").innerHTML = "Senator's NC Legislature Page";
-        document.getElementById("nclegURLText").href = sen.ncLegURL;
-        document.getElementById("repPhoto").src = getThumbnailURL(sen.photoURL, "Senate");
-        var localPhone = sen.offices[0].phone != null ? "Phone: " + sen.offices[0].phone : "";
-        var capitalPhone = sen.offices[1].phone != null ? "Phone: " + sen.offices[1].phone : "";
-        document.getElementById("localAddress").innerHTML = sen.offices[0].name + "<br><br>" + parseAddress(sen.offices[0].address) + "<br>" + localPhone;
-        document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>" + capitalPhone;
-    }
+
 
     function drawRepMap() {
         var xhttp = new XMLHttpRequest();
@@ -423,12 +410,27 @@
     }
     drawSenMap();
 
+    function displayConData(con) {
+        document.getElementById("repNameText").innerHTML = con.fullName;
+//        document.getElementById("emailLink").innerHTML = con.email;
+//        document.getElementById("emailLink").href = con.email;
+        document.getElementById("districtText").innerHTML = con.district;
+        document.getElementById("partyText").innerHTML = con.party;
+        document.getElementById("nclegURLText").innerHTML = con.title + "'s Website";
+        document.getElementById("nclegURLText").href = con.website;
+//        document.getElementById("repPhoto").src = getThumbnailURL(con.photoURL, "Senate");
+//        var localPhone = sen.offices[0].phone != null ? "Phone: " + con.offices[0].phone : "";
+//        var capitalPhone = sen.offices[1].phone != null ? "Phone: " + con.offices[1].phone : "";
+//        document.getElementById("localAddress").innerHTML = con.offices[0].name + "<br><br>" + parseAddress(con.offices[0].address) + "<br>" + localPhone;
+//        document.getElementById("capitalAddress").innerHTML = con.offices[1].name + "<br><br>" + parseAddress(con.offices[1].address) + "<br>" + capitalPhone;
+    }
+
     function drawConMap() {
-        var repCongressModel = {};
+        var conModel = {};
         ncCongressReps.results.forEach(function(rep){
-            repCongressModel[rep.district] = {
+            conModel[rep.district] = {
                 "party": rep.party,
-                "rep": rep.first_name + " " + rep.last_name,
+                "fullName": rep.first_name + " " + rep.last_name,
                 "gender": rep.gender,
                 "title": rep.gender == "M" ? "Congressman":"Congresswoman",
                 "website": rep.url,
@@ -447,17 +449,18 @@
                     .data(json.features)
                     .enter()
                     .append("path")
-                    .attr("stroke", "#222222")
+                    .attr("stroke", "#444444")
                     .each(function(d, i) {
                         var district = d.properties.District;
                         d3.select(this)
                                 .attr("id", "c" + district)
-                                .attr("fill", getPartyColor(repCongressModel[district].party))
+                                .attr("fill", getPartyColor(conModel[district].party))
 //                              .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-                              .attr("onclick", "console.log('" + repCongressModel[district].rep + "')")
+                              .attr("onclick", "console.log('" + conModel[district].rep + "')")
                                 .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
-                              .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(repCongressModel[district].party) + '")');
+                              .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conModel[district].party) + '")');
 //                              .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
+                        document.getElementById("c" + district).onclick = function(){displayConData(conModel[district])};
                     })
                     .attr("d", geoPath);
         });
