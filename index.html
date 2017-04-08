@@ -60,8 +60,8 @@
 
         <div id = "linkContainer">
             <ul>
-                <li><a id = "nclegURLText"></a></li>
-                <li>Email: <a id = "emailLink"></a></li>
+                <li id = "urlLi"><a id = "nclegURLText"></a></li>
+                <li id = "emailLi">Email: <a id = "emailLink"></a></li>
 
             </ul>
 
@@ -278,6 +278,7 @@
 
     function displayRepData(rep) {
         document.getElementById("repNameText").innerHTML = rep.fullName;
+        document.getElementById("emailLi").style.display = "block";
         document.getElementById("emailLink").innerHTML = rep.email;
         document.getElementById("emailLink").href = rep.email;
         document.getElementById("districtText").innerHTML = parseDistrictString(rep.district) + " District<br>";
@@ -293,9 +294,10 @@
 
     function displaySenData(sen) {
         document.getElementById("repNameText").innerHTML = sen.fullName;
+        document.getElementById("emailLi").style.display = "block";
         document.getElementById("emailLink").innerHTML = sen.email;
         document.getElementById("emailLink").href = sen.email;
-        document.getElementById("districtText").innerHTML = sen.district;
+        document.getElementById("districtText").innerHTML = parseDistrictString(sen.district) + " District<br>";
         document.getElementById("partyText").innerHTML = sen.party;
         document.getElementById("nclegURLText").innerHTML = "Senator's NC Legislature Page";
         document.getElementById("nclegURLText").href = sen.ncLegURL;
@@ -412,13 +414,14 @@
 
     function displayConData(con) {
         document.getElementById("repNameText").innerHTML = con.fullName;
+        document.getElementById("emailLi").style.display = "none";
 //        document.getElementById("emailLink").innerHTML = con.email;
 //        document.getElementById("emailLink").href = con.email;
-        document.getElementById("districtText").innerHTML = con.district;
-        document.getElementById("partyText").innerHTML = con.party;
+        document.getElementById("districtText").innerHTML = parseDistrictString(con.district) + " District<br>";
+        document.getElementById("partyText").innerHTML = con.party == "R" ? "Republican" : "Democrat";
         document.getElementById("nclegURLText").innerHTML = con.title + "'s Website";
         document.getElementById("nclegURLText").href = con.website;
-//        document.getElementById("repPhoto").src = getThumbnailURL(con.photoURL, "Senate");
+        document.getElementById("repPhoto").src = "img/congress/" + con.district + ".jpg";
 //        var localPhone = sen.offices[0].phone != null ? "Phone: " + con.offices[0].phone : "";
 //        var capitalPhone = sen.offices[1].phone != null ? "Phone: " + con.offices[1].phone : "";
 //        document.getElementById("localAddress").innerHTML = con.offices[0].name + "<br><br>" + parseAddress(con.offices[0].address) + "<br>" + localPhone;

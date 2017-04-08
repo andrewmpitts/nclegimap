@@ -39,7 +39,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "1",
          "missed_votes_pct": "6.36",
-         "votes_with_party_pct": "96.60"
+         "votes_with_party_pct": "96.60",
+         "email": ""
       },
       {
          "gender": "M",
@@ -78,7 +79,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "2"
          ,"missed_votes_pct": "0.91",
-         "votes_with_party_pct": "96.33"
+         "votes_with_party_pct": "96.33",
+         "email": ""
       },
       {
          "gender": "M",
@@ -117,7 +119,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "3"
          ,"missed_votes_pct": "11.36",
-         "votes_with_party_pct": "60.51"
+         "votes_with_party_pct": "60.51",
+         "email": ""
       },
       {
          "gender": "M",
@@ -156,7 +159,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "4"
          ,"missed_votes_pct": "2.27",
-         "votes_with_party_pct": "95.35"
+         "votes_with_party_pct": "95.35",
+         "email": ""
       },
       {
          "gender": "F",
@@ -195,7 +199,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "5"
          ,"missed_votes_pct": "0.00",
-         "votes_with_party_pct": "96.82"
+         "votes_with_party_pct": "96.82",
+         "email": ""
       },
       {
          "gender": "M",
@@ -234,7 +239,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "6"
          ,"missed_votes_pct": "5.91",
-         "votes_with_party_pct": "98.07"
+         "votes_with_party_pct": "98.07",
+         "email": ""
       },
       {
          "gender": "M",
@@ -273,7 +279,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "7"
          ,"missed_votes_pct": "0.00",
-         "votes_with_party_pct": "96.82"
+         "votes_with_party_pct": "96.82",
+         "email": ""
       },
       {
          "gender": "M",
@@ -312,7 +319,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "8"
          ,"missed_votes_pct": "12.73",
-         "votes_with_party_pct": "96.35"
+         "votes_with_party_pct": "96.35",
+         "email": ""
       },
       {
          "gender": "M",
@@ -351,7 +359,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "9"
          ,"missed_votes_pct": "5.00",
-         "votes_with_party_pct": "96.65"
+         "votes_with_party_pct": "96.65",
+         "email": ""
       },
       {
          "gender": "M",
@@ -390,7 +399,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "10"
          ,"missed_votes_pct": "0.00",
-         "votes_with_party_pct": "99.09"
+         "votes_with_party_pct": "99.09",
+         "email": ""
       },
       {
          "gender": "M",
@@ -429,7 +439,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "11"
          ,"missed_votes_pct": "1.36",
-         "votes_with_party_pct": "97.70"
+         "votes_with_party_pct": "97.70",
+         "email": ""
       },
       {
          "gender": "F",
@@ -468,7 +479,8 @@ var ncCongressReps = {
          "state": "NC",
          "district": "12"
          ,"missed_votes_pct": "0.45",
-         "votes_with_party_pct": "97.72"
+         "votes_with_party_pct": "97.72",
+         "email": ""
       },
       {
          "gender": "M",
@@ -507,6 +519,7 @@ var ncCongressReps = {
          "state": "NC",
          "district": "13"
          ,"missed_votes_pct": "0.45",
-         "votes_with_party_pct": "98.17"
+         "votes_with_party_pct": "98.17",
+         "email": ""
       }
 ]}

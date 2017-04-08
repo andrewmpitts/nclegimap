@@ -98,6 +98,7 @@
 .photo {
     margin: auto;
     max-width: 200px;
+    max-height: 235px;
 }
 
 .mapNavbar {
