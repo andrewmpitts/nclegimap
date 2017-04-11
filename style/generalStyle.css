@@ -176,18 +176,6 @@ html {
     padding: 5px;
 }
 
-#addressHeader {
-    position: relative;
-    top: 0px;
-    height: 15px;
-    padding: 10px;
-    left: 400px;
-    width: 800px;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    text-align: center;
-    /*float: right;*/
-}
 
 #navbarTitle {
     float: left;
@@ -239,10 +227,60 @@ html {
     /*display: none;*/
 }
 
+/*Bottom context container*/
+#linkContainer {
+    position: relative;
+    width: 400px;
+    height: auto;
+    top: 15px;
+    display: inline-block;
+    float: left;
+}
+
+#socialMediaIconContainer {
+    position: relative;
+    width: auto;
+    height: 75px;
+    margin: auto;
+    padding-left: 35px;
+}
+
+#facebookIcon {
+    display: none;
+}
+
+#twitterIcon {
+    display: none;
+}
+
+#youtubeIcon {
+    display: none;
+}
+
+.socialMediaIcon {
+    max-width: 48px;
+    max-height: 48px;
+    text-align: center;
+    float: left;
+    padding: 5px;
+}
+
+/*Addresses*/
+.address {
+    position: relative;
+    width: 50%;
+    height: 175px;
+    top: 0%;
+    display: inline-block;
+    float: left;
+    margin: auto;
+}
+
+
 #addressContainer {
     width: 800px;
     height: 100%;
-    top: 0px;
+    top: 15px;
     position: relative;
     /*border-left: 1px black solid;*/
     display: inline-block;
@@ -253,19 +291,16 @@ html {
     /*border-left: 1px black solid;*/
 }
 
-#linkContainer {
-    position: relative;
-    width: 400px;
-    height: 100%;
-    display: inline-block;
-    float: left;
-}
 
-.address {
+#addressHeader {
     position: relative;
-    width: 50%;
-    height: 175px;
-    top: 0%;
-    display: inline-block;
-    float: left;
+    top: 0px;
+    height: 15px;
+    padding: 10px;
+    left: 325px;
+    width: 800px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    /*float: right;*/
 }
