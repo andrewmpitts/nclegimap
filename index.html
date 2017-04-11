@@ -47,16 +47,19 @@
     </div>
     <div id = "bottomInfoContainer" class = "bottomInfoContainer">
         <h3 id = "addressHeader">Addresses</h3>
-        <div id="capitolAddressContainer">
-            <div class = "rightAddressContainer">
-                <p id = "capitalAddress" class = "capitalAddress address">Raleigh Address</p>
-            </div>
-        </div>
-        <div id="localAddressContainer" class="addressContainer">
+        <!--<div id="capitolAddressContainer">-->
+            <!--<div class = "rightAddressContainer">-->
+                <!--<p id = "capitalAddress" class = "capitalAddress address">Raleigh Address</p>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div id="localAddressContainer" class="addressContainer">-->
 
-            <div class = "leftAddressContainer">
-                <p id = "localAddress" class = "localAddress address">Local Address</p>
-            </div>
+            <!--<div class = "leftAddressContainer">-->
+                <!--<p id = "localAddress" class = "localAddress address">Local Address</p>-->
+            <!--</div>-->
+
+        <!--</div>-->
+        <div id = "addressContainer">
 
         </div>
 
@@ -137,7 +140,7 @@
     function toggleMap(map) {
         if (map == "rep") {
             clearLegData();
-            displayRepData(1);
+//            displayRepData(1);
             document.getElementById("senMap").style.display = "none";
             document.getElementById("conMap").style.display = "none";
             document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
@@ -148,7 +151,7 @@
         }
         else if (map == "sen") {
             clearLegData();
-            displaySenData(1)
+//            displaySenData(1)
             document.getElementById("conMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
             document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
@@ -160,7 +163,7 @@
         }
         else if (map == "con") {
             clearLegData();
-            displayConData(1);
+//            displayConData(1);
             document.getElementById("senMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
             document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
@@ -244,8 +247,9 @@
         document.getElementById("repPhoto").src = "";
         var localPhone = "";
         var capitalPhone = "";
-        document.getElementById("localAddress").innerHTML = "";
-        document.getElementById("capitalAddress").innerHTML = "";
+        document.getElementById("addressContainer").innerHTML = "";
+//        document.getElementById("localAddress").innerHTML = "";
+//        document.getElementById("capitalAddress").innerHTML = "";
     }
 
     function displayRepData(district) {
@@ -266,8 +270,18 @@
         document.getElementById("repPhoto").src = getThumbnailURL(rep.photoURL, "House");
         var localPhone = rep.offices[0].phone != null ? "Phone: " + rep.offices[0].phone : "";
         var capitalPhone = rep.offices[1].phone != null ? "Phone: " + rep.offices[1].phone : "";
-        document.getElementById("localAddress").innerHTML = rep.offices[0].name + "<br><br>" + parseAddress(rep.offices[0].address) + "<br>" + localPhone;
-        document.getElementById("capitalAddress").innerHTML = rep.offices[1].name + "<br><br>" + parseAddress(rep.offices[1].address) + "<br>Phone: " + rep.offices[1].phone;
+        document.getElementById("addressHeader").innerHTML = "Addresses";
+        document.getElementById("addressContainer").innerHTML = "";
+        for (var i = 0; i < rep.offices.length; i++) {
+            var addressDiv = document.createElement("div");
+            var phone = i % 2 == 0 ? localPhone : capitalPhone;
+            addressDiv.className = "address";
+            addressDiv.id = "rAddress" + i;
+            document.getElementById("addressContainer").appendChild(addressDiv);
+            document.getElementById("rAddress" + i).innerHTML = rep.offices[i].name + "<br><br>" + parseAddress(rep.offices[i].address) + "<br>" + phone;
+        }
+//        document.getElementById("localAddress").innerHTML = rep.offices[0].name + "<br><br>" + parseAddress(rep.offices[0].address) + "<br>" + localPhone;
+//        document.getElementById("capitalAddress").innerHTML = rep.offices[1].name + "<br><br>" + parseAddress(rep.offices[1].address) + "<br>Phone: " + rep.offices[1].phone;
     }
 
     function displaySenData(district) {
@@ -285,8 +299,18 @@
         document.getElementById("repPhoto").src = getThumbnailURL(sen.photoURL, "Senate");
         var localPhone = sen.offices[0].phone != null ? "Phone: " + sen.offices[0].phone : "";
         var capitalPhone = sen.offices[1].phone != null ? "Phone: " + sen.offices[1].phone : "";
-        document.getElementById("localAddress").innerHTML = sen.offices[0].name + "<br><br>" + parseAddress(sen.offices[0].address) + "<br>" + localPhone;
-        document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>" + capitalPhone;
+        document.getElementById("addressHeader").innerHTML = "Addresses";
+        document.getElementById("addressContainer").innerHTML = "";
+        for (var i = 0; i < sen.offices.length; i++) {
+            var addressDiv = document.createElement("div");
+            var phone = i % 2 == 0 ? localPhone : capitalPhone;
+            addressDiv.className = "address";
+            addressDiv.id = "rAddress" + i;
+            document.getElementById("addressContainer").appendChild(addressDiv);
+            document.getElementById("rAddress" + i).innerHTML = sen.offices[i].name + "<br><br>" + parseAddress(sen.offices[i].address) + "<br>" + phone;
+        }
+//        document.getElementById("localAddress").innerHTML = sen.offices[0].name + "<br><br>" + parseAddress(sen.offices[0].address) + "<br>" + localPhone;
+//        document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>" + capitalPhone;
     }
 
 
@@ -408,6 +432,18 @@
         document.getElementById("nclegURLText").innerHTML = con.title + "'s Website";
         document.getElementById("nclegURLText").href = con.website;
         document.getElementById("repPhoto").src = "img/congress/" + con.district + ".jpg";
+        document.getElementById("addressHeader").innerHTML = "Addresses";
+        document.getElementById("addressContainer").innerHTML = "";
+        for (var i = 0; i < con.offices.length; i++) {
+            var addressDiv = document.createElement("div");
+            var phone = con.offices[i].phone != null ? "Phone: " + con.offices[i].phone + "<br>" : "";
+            var fax = con.offices[i].fax != null ? "Fax: " + con.offices[i].fax + "<br>" : "";
+            addressDiv.className = "address";
+            addressDiv.id = "rAddress" + i;
+            document.getElementById("addressContainer").appendChild(addressDiv);
+            document.getElementById("rAddress" + i).innerHTML = con.offices[i].title + "<br>" + con.offices[i].address + "<br>" + con.offices[i].city + ", " + con.offices[i].state + " " + con.offices[i].zip + "<br>" + phone + fax;
+        }
+
 //        var localPhone = sen.offices[0].phone != null ? "Phone: " + con.offices[0].phone : "";
 //        var capitalPhone = sen.offices[1].phone != null ? "Phone: " + con.offices[1].phone : "";
 //        document.getElementById("localAddress").innerHTML = con.offices[0].name + "<br><br>" + parseAddress(con.offices[0].address) + "<br>" + localPhone;
@@ -429,7 +465,8 @@
                 "twitter": rep.twitter_account,
                 "youtube": rep.youtube_account,
                 "district": rep.district,
-                "id": rep.id
+                "id": rep.id,
+                "offices": rep.offices
             };
         });
 //        console.log(ncCongressReps.results);

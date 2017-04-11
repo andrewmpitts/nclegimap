@@ -18,14 +18,6 @@ html {
     /*bottom-border: 1px black solid;*/
 }
 
-#linkContainer {
-    position: relative;
-    width: 400px;
-    height: 250px;
-    display: inline-block;
-    float: right;
-}
-
 #localAddressContainer {
     /*top: 271px;*/
     position: relative;
@@ -245,4 +237,35 @@ html {
 
 #emailLi {
     /*display: none;*/
+}
+
+#addressContainer {
+    width: 800px;
+    height: 100%;
+    top: 0px;
+    position: relative;
+    /*border-left: 1px black solid;*/
+    display: inline-block;
+    float: right;
+    /*margin-left: 25px;*/
+    /*margin-right: 25px;*/
+    font-size: 1.1em;
+    /*border-left: 1px black solid;*/
+}
+
+#linkContainer {
+    position: relative;
+    width: 400px;
+    height: 100%;
+    display: inline-block;
+    float: left;
+}
+
+.address {
+    position: relative;
+    width: 50%;
+    height: 175px;
+    top: 0%;
+    display: inline-block;
+    float: left;
 }

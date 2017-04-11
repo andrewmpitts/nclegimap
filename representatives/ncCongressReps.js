@@ -41,11 +41,11 @@ var ncCongressReps = {
          "missed_votes_pct": "6.36",
          "votes_with_party_pct": "96.60",
          "email": "",
-         "addresses": {
-            0: {"title": "Washington Office", "address": "2080 Rayburn House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3101", "fax": null},
-            1: {"title": "Durham Office", "address": "411 W. Chapel Hill Street, Suite 905", "city": "Durham", "state": "NC", "zip": 27701, "phone": "(919) 908-0164", "fax": "(919) 908-0169"},
-            2: {"title": "Wilson Office", "address": "216 NE Nash Street, Suite B", "city": "Wilson", "state": NC, "zip": 27893, "phone": "(252) 237-9816", "fax": "(252) 291-0356"}
-         }
+         "offices": [
+            {"title": "Washington Office", "address": "2080 Rayburn House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3101", "fax": null},
+            {"title": "Durham Office", "address": "411 W. Chapel Hill Street, Suite 905", "city": "Durham", "state": "NC", "zip": 27701, "phone": "(919) 908-0164", "fax": "(919) 908-0169"},
+            {"title": "Wilson Office", "address": "216 NE Nash Street, Suite B", "city": "Wilson", "state": "NC", "zip": 27893, "phone": "(252) 237-9816", "fax": "(252) 291-0356"}
+         ]
       },
       {
          "gender": "M",
@@ -86,10 +86,10 @@ var ncCongressReps = {
          ,"missed_votes_pct": "0.91",
          "votes_with_party_pct": "96.33",
          "email": "",
-         "addresses": {
-            0: {"title": "Washington Office", "address": "1110 Longworth House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3032", "fax": "(202) 225-0181"},
-            1: {"title": "Raleigh Office", "address": "6404 Falls of Neuse Road, Suite 103", "city": "Raleigh", "state": "NC", "zip": 27615, "phone": "(919) 782-4400", "fax": "(919) 782-4490"},
-            }
+         "offices": [
+            {"title": "Washington Office", "address": "1110 Longworth House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3032", "fax": "(202) 225-0181"},
+            {"title": "Raleigh Office", "address": "6404 Falls of Neuse Road, Suite 103", "city": "Raleigh", "state": "NC", "zip": 27615, "phone": "(919) 782-4400", "fax": "(919) 782-4490"},
+            ]
       },
       {
          "gender": "M",
@@ -130,12 +130,12 @@ var ncCongressReps = {
          ,"missed_votes_pct": "11.36",
          "votes_with_party_pct": "60.51",
          "email": "",
-         "addresses": {
-            0: {"title": "Washington Office", "address": "2333 Rayburn HOB", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3415", "fax": null},
-            1: {"title": "Greenville Office", "address": "1105-C Corporate Drive", "city": "Greenville", "state": "NC", "zip": 27858, "phone": "(252) 931-1003", "fax": "(252) 931-1002"},
-            2: {"title": "Havelock Office", "address": "1 Governmental Avenue", "city": "Havelock", "state": "NC", "zip": 28532, "phone": "(252) 565-6846", "fax": null},
-            3: {"title": "Jacksonville Office", "address": "234 Northwest Corridor Blvd. Room 313B", "city": "Jacksonville", "state": "NC", "zip": 28540, "phone": "(252) 565-6846", "fax": null}
-         }
+         "offices": [
+            {"title": "Washington Office", "address": "2333 Rayburn HOB", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3415", "fax": null},
+            {"title": "Greenville Office", "address": "1105-C Corporate Drive", "city": "Greenville", "state": "NC", "zip": 27858, "phone": "(252) 931-1003", "fax": "(252) 931-1002"},
+            {"title": "Havelock Office", "address": "1 Governmental Avenue", "city": "Havelock", "state": "NC", "zip": 28532, "phone": "(252) 565-6846", "fax": null},
+            {"title": "Jacksonville Office", "address": "234 Northwest Corridor Blvd. Room 313B", "city": "Jacksonville", "state": "NC", "zip": 28540, "phone": "(252) 565-6846", "fax": null}
+         ]
       },
       {
          "gender": "M",
@@ -176,11 +176,11 @@ var ncCongressReps = {
          ,"missed_votes_pct": "2.27",
          "votes_with_party_pct": "95.35",
          "email": "",
-         "addresses": {
-            0: {"title": "Washington Office", "address": "2108 Rayburn Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-1784", "fax": "(202) 225-2014"},
-            1: {"title": "Raleigh Office", "address": "436 N. Harrington St Suite 100", "city": "Raleigh", "state": "NC", "zip": 27603, "phone": "(919) 859-5999", "fax": "(919) 859-5998"},
-            2: {"title": "Western District Office", "address": "1777 Fordham Blvd, Suite 204", "city": "Chapel Hill", "state": "NC", "zip": 27514, "phone": "(919) 967-7924", "fax": "(919) 967-8324"}
-            }
+         "offices": [
+            {"title": "Washington Office", "address": "2108 Rayburn Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-1784", "fax": "(202) 225-2014"},
+            {"title": "Raleigh Office", "address": "436 N. Harrington St Suite 100", "city": "Raleigh", "state": "NC", "zip": 27603, "phone": "(919) 859-5999", "fax": "(919) 859-5998"},
+            {"title": "Western District Office", "address": "1777 Fordham Blvd, Suite 204", "city": "Chapel Hill", "state": "NC", "zip": 27514, "phone": "(919) 967-7924", "fax": "(919) 967-8324"}
+            ]
       },
       {
          "gender": "F",
@@ -221,11 +221,11 @@ var ncCongressReps = {
          ,"missed_votes_pct": "0.00",
          "votes_with_party_pct": "96.82",
          "email": "",
-         "addresses": {
-            0: {"title": "Washington Office", "address": "2262 Rayburn House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-2071", "fax": "(202) 225-2995"},
-            1: {"title": "Boone Office", "address": "400 Shadowline Dr, Suite 205", "city": "Boone", "state": "NC", "zip": 28607, "phone": "(828) 265-0240", "fax": "(828) 265-0390"},
-            2: {"title": "Clemmons Office", "address": "3540 Clemmons Rd, Suite 125", "city": "Clemmons", "state": "NC", "zip": 27012, "phone": "(336) 778-0211", "fax": "(336) 778-2290"}
-         }
+         "offices": [
+            {"title": "Washington Office", "address": "2262 Rayburn House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-2071", "fax": "(202) 225-2995"},
+            {"title": "Boone Office", "address": "400 Shadowline Dr, Suite 205", "city": "Boone", "state": "NC", "zip": 28607, "phone": "(828) 265-0240", "fax": "(828) 265-0390"},
+            {"title": "Clemmons Office", "address": "3540 Clemmons Rd, Suite 125", "city": "Clemmons", "state": "NC", "zip": 27012, "phone": "(336) 778-0211", "fax": "(336) 778-2290"}
+         ]
       },
       {
          "gender": "M",
@@ -266,12 +266,12 @@ var ncCongressReps = {
          ,"missed_votes_pct": "5.91",
          "votes_with_party_pct": "98.07",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "1305 Longworth House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3065", "fax": "(202) 225-8611"},
-              1: {"title": "Asheboro Office", "address": "400 Shadowline Dr, Suite 205", "city": "Asheboro", "state": "NC", "zip": 27203, "phone": "(336) 626-3060", "fax": "(336) 629-7819"},
-              2: {"title": "Graham Office", "address": "219 B West Elm Street Post Office Box 812", "city": "Graham", "state": "NC", "zip": 27253, "phone": "(336) 229-0159", "fax": "(336) 350-9514"},
-              3: {"title": "Greensboro Office", "address": "809 Green Valley Road Suite 104", "city": "Greensboro", "state": "NC", "zip": 27408, "phone": "(336) 333-5005", "fax": null}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "1305 Longworth House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3065", "fax": "(202) 225-8611"},
+              {"title": "Asheboro Office", "address": "400 Shadowline Dr, Suite 205", "city": "Asheboro", "state": "NC", "zip": 27203, "phone": "(336) 626-3060", "fax": "(336) 629-7819"},
+              {"title": "Graham Office", "address": "219 B West Elm Street Post Office Box 812", "city": "Graham", "state": "NC", "zip": 27253, "phone": "(336) 229-0159", "fax": "(336) 350-9514"},
+              {"title": "Greensboro Office", "address": "809 Green Valley Road Suite 104", "city": "Greensboro", "state": "NC", "zip": 27408, "phone": "(336) 333-5005", "fax": null}
+          ]
       },
       {
          "gender": "M",
@@ -312,12 +312,12 @@ var ncCongressReps = {
          ,"missed_votes_pct": "0.00",
          "votes_with_party_pct": "96.82",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "424 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-2731", "fax": "(202) 225-5773"},
-              1: {"title": "Brunswick County Office", "address": "310 Government Center Drive Unit 1", "city": "Bolivia", "state": "NC", "zip": 28422, "phone": "(910) 253-6111", "fax": "(910) 253-6114"},
-              2: {"title": "Johnston County Office", "address": "4001 US Hwy. 301 S. Suite 106", "city": "Four Oaks", "state": "NC", "zip": 27524, "phone": "(919) 938-3040", "fax": "(919) 938-3540"},
-              3: {"title": "New Hanover Office", "address": "230 Government Center Drive Suite 113", "city": "Wilmington", "state": "NC", "zip": 28403, "phone": "(910) 395-0202", "fax": "(910) 395-0209"}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "424 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-2731", "fax": "(202) 225-5773"},
+              {"title": "Brunswick County Office", "address": "310 Government Center Drive Unit 1", "city": "Bolivia", "state": "NC", "zip": 28422, "phone": "(910) 253-6111", "fax": "(910) 253-6114"},
+              {"title": "Johnston County Office", "address": "4001 US Hwy. 301 S. Suite 106", "city": "Four Oaks", "state": "NC", "zip": 27524, "phone": "(919) 938-3040", "fax": "(919) 938-3540"},
+              {"title": "New Hanover Office", "address": "230 Government Center Drive Suite 113", "city": "Wilmington", "state": "NC", "zip": 28403, "phone": "(910) 395-0202", "fax": "(910) 395-0209"}
+          ]
       },
       {
          "gender": "M",
@@ -358,11 +358,11 @@ var ncCongressReps = {
          ,"missed_votes_pct": "12.73",
          "votes_with_party_pct": "96.35",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "429 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3715", "fax": null},
-              1: {"title": "Concord Office", "address": "325 McGill Avenue, NW, Suite 500", "city": "Concord", "state": "NC", "zip": 28027, "phone": "(704) 786-1612", "fax": "(704) 782-1004"},
-              2: {"title": "Fayetteville Office", "address": "225 Green Street, Suite 202", "city": "Fayetteville", "state": "NC", "zip": 28301, "phone": "(910) 997-2070", "fax": "(910) 817-7202"}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "429 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3715", "fax": null},
+              {"title": "Concord Office", "address": "325 McGill Avenue, NW, Suite 500", "city": "Concord", "state": "NC", "zip": 28027, "phone": "(704) 786-1612", "fax": "(704) 782-1004"},
+              {"title": "Fayetteville Office", "address": "225 Green Street, Suite 202", "city": "Fayetteville", "state": "NC", "zip": 28301, "phone": "(910) 997-2070", "fax": "(910) 817-7202"}
+          ]
       },
       {
          "gender": "M",
@@ -403,12 +403,12 @@ var ncCongressReps = {
          ,"missed_votes_pct": "5.00",
          "votes_with_party_pct": "96.65",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "224 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-1976", "fax": "(202) 225-3389"},
-              1: {"title": "Charlotte Office", "address": "5970 Fairview Road, Suite 430", "city": "Charlotte", "state": "NC", "zip": 28210, "phone": "(704) 362-1060", "fax": "(704) 365-6384"},
-              2: {"title": "Fayetteville Office", "address": "225 Ray Avenue, Suite 100", "city": "Fayetteville", "state": "NC", "zip": 28301, "phone": "(910) 303-0669", "fax": "(704) 365-6384"},
-              3: {"title": "Monroe Office", "address": "100 West Jefferson Street, Suite 1A", "city": "Monroe", "state": "NC", "zip": 28112, "phone": "(704) 917-9573", "fax": "(704) 365-6384"}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "224 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-1976", "fax": "(202) 225-3389"},
+              {"title": "Charlotte Office", "address": "5970 Fairview Road, Suite 430", "city": "Charlotte", "state": "NC", "zip": 28210, "phone": "(704) 362-1060", "fax": "(704) 365-6384"},
+              {"title": "Fayetteville Office", "address": "225 Ray Avenue, Suite 100", "city": "Fayetteville", "state": "NC", "zip": 28301, "phone": "(910) 303-0669", "fax": "(704) 365-6384"},
+              {"title": "Monroe Office", "address": "100 West Jefferson Street, Suite 1A", "city": "Monroe", "state": "NC", "zip": 28112, "phone": "(704) 917-9573", "fax": "(704) 365-6384"}
+          ]
       },
       {
          "gender": "M",
@@ -449,12 +449,12 @@ var ncCongressReps = {
          ,"missed_votes_pct": "0.00",
          "votes_with_party_pct": "99.09",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "2334 Rayburn House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-2576", "fax": "(202) 225-0316"},
-              1: {"title": "Hickory Office", "address": "1990 Main Avenue SE, PO Box 1830", "city": "Hickory", "state": "NC", "zip": 28603, "phone": "(828) 327-6100", "fax": "(828) 327-8311"},
-              2: {"title": "Gastonia Office", "address": "Gaston County Administrative Bldg 128 West Main Avenue", "city": "Gastonia", "state": "NC", "zip": 28052, "phone": "(704) 833-0096", "fax": "(704) 833-0887"},
-              3: {"title": "Black Mountain Office", "address": "160 Midland Avenue", "city": "Black Mountain", "state": "NC", "zip": 28711, "phone": "(828) 669-0600", "fax": null}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "2334 Rayburn House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-2576", "fax": "(202) 225-0316"},
+              {"title": "Hickory Office", "address": "1990 Main Avenue SE, PO Box 1830", "city": "Hickory", "state": "NC", "zip": 28603, "phone": "(828) 327-6100", "fax": "(828) 327-8311"},
+              {"title": "Gastonia Office", "address": "Gaston County Administrative Bldg 128 West Main Avenue", "city": "Gastonia", "state": "NC", "zip": 28052, "phone": "(704) 833-0096", "fax": "(704) 833-0887"},
+              {"title": "Black Mountain Office", "address": "160 Midland Avenue", "city": "Black Mountain", "state": "NC", "zip": 28711, "phone": "(828) 669-0600", "fax": null}
+          ]
       },
       {
          "gender": "M",
@@ -495,10 +495,10 @@ var ncCongressReps = {
          ,"missed_votes_pct": "1.36",
          "votes_with_party_pct": "97.70",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "1024 Longworth HOB", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-6401", "fax": "(202) 226-6422"},
-              1: {"title": "Henderson County Office", "address": "Henderson County Court House 200 N. Grove Street, Suite 90", "city": "Hickory", "state": "NC", "zip": 28792, "phone": "(828) 693-5660", "fax": "(828) 693-5603"}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "1024 Longworth HOB", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-6401", "fax": "(202) 226-6422"},
+              {"title": "Henderson County Office", "address": "Henderson County Court House 200 N. Grove Street, Suite 90", "city": "Hickory", "state": "NC", "zip": 28792, "phone": "(828) 693-5660", "fax": "(828) 693-5603"}
+          ]
       },
       {
          "gender": "F",
@@ -539,10 +539,10 @@ var ncCongressReps = {
          ,"missed_votes_pct": "0.45",
          "votes_with_party_pct": "97.72",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "222 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-1510", "fax": "(202) 225-1512"},
-              1: {"title": "Charlotte Office", "address": "801 E Morehead Street, Suite 150", "city": "Charlotte", "state": "NC", "zip": 28202, "phone": "(704) 344-9950", "fax": "(704) 344-9971"}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "222 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-1510", "fax": "(202) 225-1512"},
+              {"title": "Charlotte Office", "address": "801 E Morehead Street, Suite 150", "city": "Charlotte", "state": "NC", "zip": 28202, "phone": "(704) 344-9950", "fax": "(704) 344-9971"}
+          ]
       },
       {
          "gender": "M",
@@ -583,10 +583,10 @@ var ncCongressReps = {
          ,"missed_votes_pct": "0.45",
          "votes_with_party_pct": "98.17",
          "email": "",
-          "addresses": {
-              0: {"title": "Washington Office", "address": "118 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-4531", "fax": null},
-              1: {"title": "Advance Office", "address": "128 Peachtree Lane, Suite A", "city": "Advance", "state": "NC", "zip": 27006, "phone": "(336) 998-1313", "fax": null},
-              2: {"title": "High Point Office", "address": "4000 Piedmont Parkway, Suite 131", "city": "High Point", "state": "NC", "zip": 27265, "phone": null, "fax": null}
-          }
+          "offices": [
+              {"title": "Washington Office", "address": "118 Cannon House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-4531", "fax": null},
+              {"title": "Advance Office", "address": "128 Peachtree Lane, Suite A", "city": "Advance", "state": "NC", "zip": 27006, "phone": "(336) 998-1313", "fax": null},
+              {"title": "High Point Office", "address": "4000 Piedmont Parkway, Suite 131", "city": "High Point", "state": "NC", "zip": 27265, "phone": null, "fax": null}
+          ]
       }
 ]}
