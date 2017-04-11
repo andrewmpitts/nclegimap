@@ -129,7 +129,13 @@ var ncCongressReps = {
          "district": "3"
          ,"missed_votes_pct": "11.36",
          "votes_with_party_pct": "60.51",
-         "email": ""
+         "email": "",
+         "addresses": {
+            0: {"title": "Washington Office", "address": "2333 Rayburn HOB", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3415", "fax": null},
+            1: {"title": "Greenville Office", "address": "1105-C Corporate Drive", "city": "Greenville", "state": "NC", "zip": 27858, "phone": "(252) 931-1003", "fax": "(252) 931-1002"},
+            2: {"title": "Havelock Office", "address": "1 Governmental Avenue", "city": "Havelock", "state": "NC", "zip": 28532, "phone": " (252) 565-6846", "fax": null},
+            3: {"title": "Jacksonville Office", "address": "234 Northwest Corridor Blvd. Room 313B", "city": "Jacksonville", "state": "NC", "zip": 28540, "phone": "(252) 565-6846", "fax": null}
+         }
       },
       {
          "gender": "M",
