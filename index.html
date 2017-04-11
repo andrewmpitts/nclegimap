@@ -62,8 +62,8 @@
 
         <div id = "linkContainer">
             <ul>
-                <li id = "urlLi"><a id = "nclegURLText"></a></li>
-                <li id = "emailLi">Email: <a id = "emailLink"></a></li>
+                <p id = "urlLi"><a id = "nclegURLText"></a></p>
+                <p id = "emailLi"><a id = "emailLink"></a></p>
 
             </ul>
 
@@ -85,6 +85,10 @@
     var repModel = {};
     var senModel = {};
     var conModel = {};
+
+    var selectedRepDistrict = 0;
+    var selectedSenDistrict = 0;
+    var selectedConDistrict = 0;
 
     var width = 900, height = 450;
 
@@ -133,6 +137,7 @@
     function toggleMap(map) {
         if (map == "rep") {
             clearLegData();
+            displayRepData(1);
             document.getElementById("senMap").style.display = "none";
             document.getElementById("conMap").style.display = "none";
             document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
@@ -143,6 +148,7 @@
         }
         else if (map == "sen") {
             clearLegData();
+            displaySenData(1)
             document.getElementById("conMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
             document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
@@ -154,6 +160,7 @@
         }
         else if (map == "con") {
             clearLegData();
+            displayConData(1);
             document.getElementById("senMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
             document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
@@ -203,63 +210,6 @@
             return address;
         }
     }
-//    console.log(ncCongressReps);
-//    d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
-//        console.log(json);
-//        gr.selectAll("path")
-//                .data(json.features)
-//                .enter()
-//                .append("path")
-//                .attr("fill", "#ffffff")
-//                .attr("stroke", "#888888")
-//                .each(function(d, i) {
-//                    var district = d.properties.District;
-//                    d3.select(this)
-//                        .attr("id", "d" + district)
-//                        .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-//                        .attr("onclick", "console.log(" + district + ")")
-//                        .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
-//            })
-//                .attr("d", geoPath);
-//    });
-
-//    d3.json("ncsgeo/ncsendistrictsmin.json", function (json) {
-//        console.log(json);
-//        gs.selectAll("path")
-//                .data(json.features)
-//                .enter()
-//                .append("path")
-//                .attr("fill", "#ffffff")
-//                .attr("stroke", "#888888")
-//                .each(function(d, i) {
-//                    var district = d.properties.District;
-//                    d3.select(this)
-//                            .attr("id", "s" + district)
-//                            .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + democratColor + '")')
-//                            .attr("onclick", "console.log(" + district + ")")
-//                            .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
-//                })
-//                .attr("d", geoPath);
-//    });
-
-//    d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
-//        console.log(json);
-//        cg.selectAll("path")
-//                .data(json.features)
-//                .enter()
-//                .append("path")
-//                .attr("fill", "#ffffff")
-//                .attr("stroke", "#888888")
-//                .each(function(d, i) {
-//                    var district = d.properties.District;
-//                    d3.select(this)
-//                            .attr("id", "con" + district)
-//                            .attr("onmouseover", 'd3.select(con' + district + ').attr("fill", "' + democratColor + '")')
-//                            .attr("onclick", "console.log(" + district + ")")
-//                            .attr("onmouseout", 'd3.select(con' + district + ').attr("fill", "#ffffff")');
-//                })
-//                .attr("d", geoPath);
-//    });
 
     function getPartyColor(partyString) {
         var republicanColor = "#DB1F1E";
@@ -298,11 +248,16 @@
         document.getElementById("capitalAddress").innerHTML = "";
     }
 
-    function displayRepData(rep) {
+    function displayRepData(district) {
+        rep = repModel[district];
+//        if (selectedRepDistrict != 0) {
+//            document.getElementById("r" + district).fill(getPartyColor(rep.party));
+//        }
+//        selectedRepDistrict = district;
         document.getElementById("legTitle").innerHTML = "Representative";
         document.getElementById("repNameText").innerHTML = rep.fullName;
         document.getElementById("emailLi").style.display = "block";
-        document.getElementById("emailLink").innerHTML = rep.email;
+        document.getElementById("emailLink").innerHTML = "Representative's E-Mail";
         document.getElementById("emailLink").href = rep.email;
         document.getElementById("districtText").innerHTML = parseDistrictString(rep.district) + " District<br>";
         document.getElementById("partyText").innerHTML = rep.party;
@@ -315,7 +270,8 @@
         document.getElementById("capitalAddress").innerHTML = rep.offices[1].name + "<br><br>" + parseAddress(rep.offices[1].address) + "<br>Phone: " + rep.offices[1].phone;
     }
 
-    function displaySenData(sen) {
+    function displaySenData(district) {
+        sen = senModel[district];
         document.getElementById("legTitle").innerHTML = "Senator";
         document.getElementById("senMapToggle").class = "mapToggle activeMapToggle";
         document.getElementById("repNameText").innerHTML = sen.fullName;
@@ -340,7 +296,7 @@
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var repJSON = JSON.parse(this.responseText);
-                var repModel = {};
+//                var repModel = {};
                 console.log(repJSON);
                 repJSON.forEach(function(rep){
                     repModel[rep.district] = {
@@ -374,11 +330,11 @@
                                         .attr("fill", getPartyColor(repModel[district].party))
                                         .attr("onmouseover", 'd3.select(r' + district + ').attr("fill", "' + selectedColor + '")')
                                         .attr("onmouseout", 'd3.select(r' + district + ').attr("fill", "' + getPartyColor(repModel[district].party) + '")');
-                                document.getElementById("r" + district).onclick = function(){displayRepData(repModel[district])};
+                                document.getElementById("r" + district).onclick = function(){displayRepData(district)};
 
                             })
                             .attr("d", geoPath);
-                            displayRepData(repModel[1]);
+                            displayRepData(1);
                 });
             }
         };
@@ -387,12 +343,13 @@
     }
     drawRepMap();
 
+
     function drawSenMap() {
         var xhttp = new XMLHttpRequest();
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var senJSON = JSON.parse(this.responseText);
-                var senModel = {};
+//                var senModel = {};
                 senJSON.forEach(function(sen){
                     senModel[sen.district] = {
                         "party": sen.party,
@@ -426,7 +383,7 @@
                                         .attr("fill", getPartyColor(senModel[district].party))
                                         .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + selectedColor + '")')
                                         .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "' + getPartyColor(senModel[district].party) + '")');
-                                document.getElementById("s" + district).onclick = function(){displaySenData(senModel[district])};
+                                document.getElementById("s" + district).onclick = function(){displaySenData(district)};
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
                             })
                             .attr("d", geoPath);
@@ -439,7 +396,8 @@
     }
     drawSenMap();
 
-    function displayConData(con) {
+    function displayConData(district) {
+        con = conModel[district]
         document.getElementById("legTitle").innerHTML = con.title;
         document.getElementById("repNameText").innerHTML = con.fullName;
         document.getElementById("emailLi").style.display = "none";
@@ -457,7 +415,7 @@
     }
 
     function drawConMap() {
-        var conModel = {};
+//        var conModel = {};
         ncCongressReps.results.forEach(function(rep){
             conModel[rep.district] = {
                 "party": rep.party,
@@ -474,7 +432,7 @@
                 "id": rep.id
             };
         });
-        console.log(ncCongressReps.results);
+//        console.log(ncCongressReps.results);
         d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
             gc.selectAll("path")
                     .data(json.features)
@@ -491,7 +449,7 @@
                                 .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
                               .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conModel[district].party) + '")');
 //                              .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
-                        document.getElementById("c" + district).onclick = function(){displayConData(conModel[district])};
+                        document.getElementById("c" + district).onclick = function(){displayConData(district)};
                     })
                     .attr("d", geoPath);
 //                    displayConData(conModel[1]);
@@ -499,6 +457,7 @@
     }
 
     drawConMap();
+
 
 </script>
 </body>

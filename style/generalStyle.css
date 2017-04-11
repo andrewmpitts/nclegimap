@@ -199,7 +199,7 @@ html {
 
 #navbarTitle {
     float: left;
-    margin-left: 15px;
+    /*margin-left: 15px;*/
     padding: 5px;
     font-size: 1.2em;
 }
@@ -239,3 +239,10 @@ html {
     top: 10px;
 }
 
+#urlLi {
+    /*display: none;*/
+}
+
+#emailLi {
+    /*display: none;*/
+}

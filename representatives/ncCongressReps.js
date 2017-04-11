@@ -40,7 +40,12 @@ var ncCongressReps = {
          "district": "1",
          "missed_votes_pct": "6.36",
          "votes_with_party_pct": "96.60",
-         "email": ""
+         "email": "",
+         "addresses": {
+            0: {"title": "Washington Office", "address": "2080 Rayburn House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3101", "fax": null},
+            1: {"title": "Durham Office", "address": "411 W. Chapel Hill Street, Suite 905", "city": "Durham", "state": "NC", "zip": 27701, "phone": "(919) 908-0164", "fax": "(919) 908-0169"},
+            2: {"title": "Wilson Office", "address": "216 NE Nash Street, Suite B", "city": "Wilson", "state": NC, "zip": 27893, "phone": "(252) 237-9816", "fax": "(252) 291-0356"}
+         }
       },
       {
          "gender": "M",
@@ -80,7 +85,11 @@ var ncCongressReps = {
          "district": "2"
          ,"missed_votes_pct": "0.91",
          "votes_with_party_pct": "96.33",
-         "email": ""
+         "email": "",
+         "addresses": {
+            0: {"title": "Washington Office", "address": "1110 Longworth House Office Building", "city": "Washington", "state": "DC", "zip": 20515, "phone": "(202) 225-3032", "fax": "(202) 225-0181"},
+            1: {"title": "Raleigh Office", "address": "6404 Falls of Neuse Road, Suite 103", "city": "Raleigh", "state": "NC", "zip": 27615, "phone": "(919) 782-4400", "fax": "(919) 782-4490"},
+            }
       },
       {
          "gender": "M",
