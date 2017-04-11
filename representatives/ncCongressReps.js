@@ -6,7 +6,7 @@ var ncCongressReps = {
          "gender": "M",
          "id": "B001251",
          "api_uri":"https://api.propublica.org/congress/v1/members/B001251.json",
-         "first_name": "G.",
+         "first_name": "G.K.",
          "middle_name": "K.",
          "last_name": "Butterfield",
          "party": "D",

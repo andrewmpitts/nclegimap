@@ -9,10 +9,9 @@
 <div class = "mapNavbar">
     <span id = "navbarTitle">NC Legimap</span>
 
-
     <span id = "congressMapToggle" class = "mapToggle" onclick = "toggleMap('con')">NC Representatives</span>
     <span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">NC Senate</span>
-    <span id = "repMapToggle" class = "mapToggle" onclick = "toggleMap('rep')">NC House</span>
+    <span id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "toggleMap('rep')">NC House</span>
     <!--<span id = "dcSenMapToggle"></span>-->
 </div>
 <!--<hr>-->
@@ -89,37 +88,30 @@
 
     var width = 900, height = 450;
 
-    var svgSenMap = d3.select( "body" )
-            .append( "svg" )
-            .attr( "id", "ncSenMap")
-            .attr( "width", width )
-            .attr( "height", height );
+    var gr = d3.select("#map")
+            .append("g")
+            .attr("id", "repMap")
+            .attr("width", width)
+            .attr("height", height);
 
-    var svgCongressMap = d3.select( "body" )
-            .append( "svg" )
-            .attr( "id", "ncSenMap")
-            .attr( "width", width )
-            .attr( "height", height );
+    var gs = d3.select("#map")
+            .append("g")
+            .attr("id", "senMap")
+            .attr("width", width)
+            .attr("height", height);
 
-    var svgHB2Map = d3.select( "body" )
-            .append( "svg" )
-            .attr( "id", "ncSenMap")
-            .attr( "width", width )
-            .attr( "height", height );
-
-    var gr = d3.select("#map").append( "g" ).attr("id", "repMap");
-    var gs = d3.select("#map").append( "g" ).attr("id", "senMap");
-    var gc = d3.select("#map").append( "g" ).attr("id", "conMap");
-    var ghb2 = svgHB2Map.append( "g" );
+    var gc = d3.select("#map")
+            .append("g")
+            .attr("id", "conMap")
+            .attr("width", width)
+            .attr("height", height);
 
     var albersProjection = d3.geo.albersUsa()
             .scale(7000)
-//            .rotate( [71.057,0] )
-//            .center( [0, 42.313] )
             .translate( [-1200, -40] );
 
     var geoPath = d3.geo.path()
-            .projection( albersProjection );
+            .projection(albersProjection);
 
     var republicanColor = "#DB1F1E";
     var selectedRepublicanColor = "#DB1F1E";
@@ -144,6 +136,9 @@
             document.getElementById("conMap").style.display = "none";
 //            document.getElementById("legTitle").innerHTML = "Representative";
             document.getElementById("repMap").style.display = "block";
+            document.getElementById("congressMapToggle").className = "mapToggle";
+            document.getElementById("senMapToggle").className = "mapToggle";
+            document.getElementById("repMapToggle").className = "mapToggle activeMapToggle";
         }
         else if (map == "sen") {
 
@@ -151,12 +146,18 @@
             document.getElementById("repMap").style.display = "none";
 //            document.getElementById("legTitle").innerHTML = "Senator";
             document.getElementById("senMap").style.display = "block";
+            document.getElementById("congressMapToggle").className = "mapToggle";
+            document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
+            document.getElementById("repMapToggle").className = "mapToggle";
         }
         else if (map == "con") {
             document.getElementById("senMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
 //            document.getElementById("legTitle").innerHTML = "Representative (DC)";
             document.getElementById("conMap").style.display = "block";
+            document.getElementById("congressMapToggle").className = "mapToggle activeMapToggle";
+            document.getElementById("senMapToggle").className = "mapToggle";
+            document.getElementById("repMapToggle").className = "mapToggle";
 
         }
     }
