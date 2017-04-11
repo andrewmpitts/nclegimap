@@ -1,18 +1,21 @@
 <html>
 <head>
-    <title>NC General Assembly Map</title>
+    <title>NC Legimap</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="representatives/ncCongressReps.js"></script>
     <link rel="stylesheet" type="text/css" href="style/generalStyle.css">
 </head>
 <body>
 <div class = "mapNavbar">
-    <span id = "repMapToggle" class = "mapToggle" onclick = "toggleMap('rep')">NC House of Representatives Districts</span>
-    <span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">NC Senate Districts</span>
-    <span id = "congressMapToggle" class = "mapToggle" onclick = "toggleMap('con')">NC Congressional Districts</span>
+    <span id = "navbarTitle">NC Legimap</span>
+
+
+    <span id = "congressMapToggle" class = "mapToggle" onclick = "toggleMap('con')">NC Representatives</span>
+    <span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">NC Senate</span>
+    <span id = "repMapToggle" class = "mapToggle" onclick = "toggleMap('rep')">NC House</span>
     <!--<span id = "dcSenMapToggle"></span>-->
 </div>
-<hr>
+<!--<hr>-->
 <div class = "contentWrapper">
     <div class = "mapContainer">
         <svg id="map" width="900" height="450" style="border: 1px solid black;"></svg>
@@ -105,9 +108,7 @@
             .attr( "height", height );
 
     var gr = d3.select("#map").append( "g" ).attr("id", "repMap");
-//    var gs = svgSenMap.append( "g" );
     var gs = d3.select("#map").append( "g" ).attr("id", "senMap");
-//    var gCon = svgCongressMap.append( "g" );
     var gc = d3.select("#map").append( "g" ).attr("id", "conMap");
     var ghb2 = svgHB2Map.append( "g" );
 
@@ -141,20 +142,20 @@
         if (map == "rep") {
             document.getElementById("senMap").style.display = "none";
             document.getElementById("conMap").style.display = "none";
-            document.getElementById("legTitle").innerHTML = "Representative";
+//            document.getElementById("legTitle").innerHTML = "Representative";
             document.getElementById("repMap").style.display = "block";
         }
         else if (map == "sen") {
 
             document.getElementById("conMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
-            document.getElementById("legTitle").innerHTML = "Senator";
+//            document.getElementById("legTitle").innerHTML = "Senator";
             document.getElementById("senMap").style.display = "block";
         }
         else if (map == "con") {
             document.getElementById("senMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
-            document.getElementById("legTitle").innerHTML = "Representative (DC)";
+//            document.getElementById("legTitle").innerHTML = "Representative (DC)";
             document.getElementById("conMap").style.display = "block";
 
         }
@@ -277,6 +278,7 @@
     }
 
     function displayRepData(rep) {
+        document.getElementById("legTitle").innerHTML = "Representative";
         document.getElementById("repNameText").innerHTML = rep.fullName;
         document.getElementById("emailLi").style.display = "block";
         document.getElementById("emailLink").innerHTML = rep.email;
@@ -293,6 +295,8 @@
     }
 
     function displaySenData(sen) {
+        document.getElementById("legTitle").innerHTML = "Senator";
+        document.getElementById("senMapToggle").class = "mapToggle activeMapToggle";
         document.getElementById("repNameText").innerHTML = sen.fullName;
         document.getElementById("emailLi").style.display = "block";
         document.getElementById("emailLink").innerHTML = sen.email;
@@ -413,6 +417,7 @@
     drawSenMap();
 
     function displayConData(con) {
+        document.getElementById("legTitle").innerHTML = con.title;
         document.getElementById("repNameText").innerHTML = con.fullName;
         document.getElementById("emailLi").style.display = "none";
 //        document.getElementById("emailLink").innerHTML = con.email;
