@@ -2,6 +2,12 @@
     /*height: 800px;*/
 /*}*/
 
+html {
+    background-color: #ffffff;
+}
+
+
+
 .mapContainer {
     /*position: relative;*/
     width: 1203px;
@@ -9,6 +15,7 @@
     /*display: inline-block;*/
     top: 25px;
     margin: auto;
+    /*bottom-border: 1px black solid;*/
 }
 
 #linkContainer {
@@ -43,14 +50,17 @@
     float: right;
 }
 
-
+#map {
+    /*border: 1px solid black;*/
+    /*bottom-border: 1px black solid;*/
+}
 
 .verticalLine {
     position: relative;
     left: 150px;
     height: 150px;
     width: 1px;
-    border-left: 1px solid black;
+    /*border-left: 1px solid black;*/
     display: block;
 }
 
@@ -111,11 +121,14 @@
     margin: auto;
     text-align: center;
     height: 35px;
+    border-bottom: 2px black solid;
 }
 
 .mapToggle {
     /*border-bottom: 1px black solid;*/
-    padding: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
     /*text-decoration: underline;*/
     float: right;
     font-size: 1.1em;
@@ -123,13 +136,23 @@
     /*margin-left: 15px;*/
 }
 
+.navBullet {
+    position: relative;
+    float: right;
+    top: 9px;
+}
+
 .activeMapToggle {
-    text-decoration: underline;
+    /*text-decoration: underline;*/
+    border-bottom: 2px solid black;
 }
 
 .contentWrapper {
     width: 100%;
+    position: relative;
     margin: auto;
+    top: 15px;
+    /*background-color: #eeeeee;*/
 }
 
 #repMap {
@@ -148,9 +171,9 @@
     width: 1200px;
     height: 200px;
     /*border-top: none;*/
-    border-left: 1px black solid;
-    border-right: 1px black solid;
-    border-bottom: 1px black solid;
+    /*border-left: 1px black solid;*/
+    /*border-right: 1px black solid;*/
+    /*border-bottom: 1px black solid;*/
     margin: auto;
     /*float: right;*/
 }
@@ -158,6 +181,7 @@
 #legTitle {
     margin: auto;
     text-align: center;
+    padding: 5px;
 }
 
 #addressHeader {
@@ -179,3 +203,39 @@
     padding: 5px;
     font-size: 1.2em;
 }
+
+#repNameText {
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+    width: 100%;
+    font-size: 1.2em;
+}
+
+.mapContextContainer {
+    left: 900px;
+    top: 0px;
+    width: 300px;
+    height: 450px;
+    display: inline-block;
+    /*border-right-width: 1px;*/
+    /*border-right-color: black;*/
+    /*border-right-style: solid;*/
+    /*border-top-width: 1px;*/
+    /*border-top-color: black;*/
+    /*border-top-style: solid;*/
+    /*border-bottom-width: 1px;*/
+    /*border-bottom-color: black;*/
+    /*border-bottom-style: solid;*/
+    float: right;
+}
+
+#mapTitle {
+    margin: auto;
+    position: relative;
+    width: 100%;
+    text-align: center;
+    /* padding: 5px; */
+    top: 10px;
+}
+

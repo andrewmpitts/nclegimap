@@ -8,20 +8,20 @@
 <body>
 <div class = "mapNavbar">
     <span id = "navbarTitle">NC Legimap</span>
-
-    <span id = "congressMapToggle" class = "mapToggle" onclick = "toggleMap('con')">NC Representatives</span>
-    <span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">NC Senate</span>
-    <span id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "toggleMap('rep')">NC House</span>
-    <!--<span id = "dcSenMapToggle"></span>-->
+    <span id = "aboutToggle" class = "mapToggle" onclick = "toggleMap('rep')">About</span>
+    <span class = "navBullet">&#8226</span><span id = "congressMapToggle" class = "mapToggle" onclick = "toggleMap('con')">Congress</span>
+    <span class = "navBullet">&#8226</span><span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">Senate</span>
+    <span class = "navBullet">&#8226</span><span id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "toggleMap('rep')">House</span>
 </div>
 <!--<hr>-->
+<h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
 <div class = "contentWrapper">
     <div class = "mapContainer">
-        <svg id="map" width="900" height="450" style="border: 1px solid black;"></svg>
-        <div class = "mapContextContainer" style = "left: 900px; top: 0px; width: 300px; height: 450px; display: inline-block; border-right-width: 1px; border-right-color: black; border-right-style: solid; border-top-width: 1px; border-top-color: black; border-top-style: solid; border-bottom-width: 1px; border-bottom-color: black; border-bottom-style: solid; float: right;">
-            <h3 id = "legTitle">Representative</h3>
-            <p class="repName" id="repNameText" style="text-align: center; margin: auto; padding: 5px; width: 100%;">Representative Name</p>
-            <hr>
+        <svg id="map" width="900" height="450"></svg>
+        <div class = "mapContextContainer" style = "">
+            <h3 id = "legTitle"></h3>
+            <p class="repName" id="repNameText" style=""></p>
+            <!--<hr>-->
 
             <div class="photoContainer">
                 <img id = "repPhoto" class = "photo">
@@ -132,33 +132,35 @@
 
     function toggleMap(map) {
         if (map == "rep") {
+            clearLegData();
             document.getElementById("senMap").style.display = "none";
             document.getElementById("conMap").style.display = "none";
-//            document.getElementById("legTitle").innerHTML = "Representative";
+            document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
             document.getElementById("repMap").style.display = "block";
             document.getElementById("congressMapToggle").className = "mapToggle";
             document.getElementById("senMapToggle").className = "mapToggle";
             document.getElementById("repMapToggle").className = "mapToggle activeMapToggle";
         }
         else if (map == "sen") {
-
+            clearLegData();
             document.getElementById("conMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
-//            document.getElementById("legTitle").innerHTML = "Senator";
+            document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
             document.getElementById("senMap").style.display = "block";
             document.getElementById("congressMapToggle").className = "mapToggle";
             document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
             document.getElementById("repMapToggle").className = "mapToggle";
+
         }
         else if (map == "con") {
+            clearLegData();
             document.getElementById("senMap").style.display = "none";
             document.getElementById("repMap").style.display = "none";
-//            document.getElementById("legTitle").innerHTML = "Representative (DC)";
+            document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
             document.getElementById("conMap").style.display = "block";
             document.getElementById("congressMapToggle").className = "mapToggle activeMapToggle";
             document.getElementById("senMapToggle").className = "mapToggle";
             document.getElementById("repMapToggle").className = "mapToggle";
-
         }
     }
 
@@ -278,6 +280,24 @@
         }
     }
 
+    function clearLegData() {
+        document.getElementById("addressHeader").innerHTML = "";
+        document.getElementById("legTitle").innerHTML = "";
+        document.getElementById("repNameText").innerHTML = "";
+        document.getElementById("emailLi").style.display = "";
+        document.getElementById("emailLink").innerHTML = "";
+        document.getElementById("emailLink").href = "";
+        document.getElementById("districtText").innerHTML = "";
+        document.getElementById("partyText").innerHTML = "";
+        document.getElementById("nclegURLText").innerHTML = "";
+        document.getElementById("nclegURLText").href = "";
+        document.getElementById("repPhoto").src = "";
+        var localPhone = "";
+        var capitalPhone = "";
+        document.getElementById("localAddress").innerHTML = "";
+        document.getElementById("capitalAddress").innerHTML = "";
+    }
+
     function displayRepData(rep) {
         document.getElementById("legTitle").innerHTML = "Representative";
         document.getElementById("repNameText").innerHTML = rep.fullName;
@@ -358,6 +378,7 @@
 
                             })
                             .attr("d", geoPath);
+                            displayRepData(repModel[1]);
                 });
             }
         };
@@ -409,6 +430,7 @@
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
                             })
                             .attr("d", geoPath);
+//                            displaySenData(repModel[1]);
                 });
             }
         };
@@ -472,6 +494,7 @@
                         document.getElementById("c" + district).onclick = function(){displayConData(conModel[district])};
                     })
                     .attr("d", geoPath);
+//                    displayConData(conModel[1]);
         });
     }
 
