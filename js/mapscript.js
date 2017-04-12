@@ -15,9 +15,9 @@ var ncSenateURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=u
 var ncRepURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=lower";
 
 // List of legislator objects
-var repModel = {};
-var senModel = {};
-var conModel = {};
+var houseReps = {};
+var senators = {};
+var conReps = {};
 
 // Variables to track which legislative district is selected
 var selectedRepDistrict = 0;
@@ -67,7 +67,7 @@ var independentColor = "#AAADAD";
 var selectedIndependentColor = "#";
 var selectedColor = "#07C230";
 
-
+// Modifies legislator's photo url to the url of a smaller thumbnail photo
 function getThumbnailURL(url, house) {
     var lastSlashIndex = url.indexOf("hiRes") + 6;
     var fileName = url.substr(lastSlashIndex);
@@ -75,8 +75,7 @@ function getThumbnailURL(url, house) {
     return thumbnailURL;
 }
 
-
-
+// Adds the correct suffix to the legislator's district number
 function parseDistrictString(district) {
     var lastDigit = district.slice(-1);
     var suffix = "";
@@ -95,28 +94,26 @@ function parseDistrictString(district) {
     return district + suffix;
 }
 
-function parseAddress(address) {
+//Formats the legislator's address into a more readable form (Revise, seems pointless with new updates)
+function formatAddress(address) {
     if (address.indexOf("N.C. House") != -1) {
         var repLoc = address.indexOf('ves') + 3;
-//            address[repLoc] = "<br>";
         address = address.substr(0, repLoc) + "<br>" + address.substr(repLoc + 1);
         return address;
     }
     else if (address.indexOf("N.C. Senate") != -1) {
         var senateLoc = address.indexOf('ate') + 3;
-//            address[firstComma] = "<br>";
         address = address.substr(0, senateLoc) + "<br>" + address.substr(senateLoc + 1);
         return address;
     }
     else {
         var firstComma = address.indexOf(',');
-        var secondComma = address.ind
-//            address[firstComma] = "<br>";
         address = address.substr(0, firstComma) + "<br>" + address.substr(firstComma + 1);
         return address;
     }
 }
 
+// Returns the party's color (Clunky, need to revise approach)
 function getPartyColor(partyString) {
     var republicanColor = "#DB1F1E";
     var selectedRepublicanColor = "#DB1F1E";
@@ -190,7 +187,7 @@ function clearLegData() {
 
 //Displays information about selected state representative
 function displayRepData(district) {
-    rep = repModel[district];
+    rep = houseReps[district];
     document.getElementById("legTitle").innerHTML = "Representative";
     document.getElementById("repNameText").innerHTML = rep.fullName;
     document.getElementById("emailLink").href = rep.email;
@@ -210,14 +207,14 @@ function displayRepData(district) {
         addressDiv.className = "address";
         addressDiv.id = "rAddress" + i;
         document.getElementById("addressContainer").appendChild(addressDiv);
-        document.getElementById("rAddress" + i).innerHTML = rep.offices[i].name + "<br><br>" + parseAddress(rep.offices[i].address) + "<br>" + phone;
+        document.getElementById("rAddress" + i).innerHTML = rep.offices[i].name + "<br><br>" + formatAddress(rep.offices[i].address) + "<br>" + phone;
     }
     populateIconList(rep);
 }
 
 // Displays information about selected state senator
 function displaySenData(district) {
-    sen = senModel[district];
+    sen = senators[district];
     document.getElementById("legTitle").innerHTML = "Senator";
     document.getElementById("senMapToggle").class = "mapToggle activeMapToggle";
     document.getElementById("repNameText").innerHTML = sen.fullName;
@@ -236,14 +233,14 @@ function displaySenData(district) {
         addressDiv.className = "address";
         addressDiv.id = "rAddress" + i;
         document.getElementById("addressContainer").appendChild(addressDiv);
-        document.getElementById("rAddress" + i).innerHTML = sen.offices[i].name + "<br><br>" + parseAddress(sen.offices[i].address) + "<br>" + phone;
+        document.getElementById("rAddress" + i).innerHTML = sen.offices[i].name + "<br><br>" + formatAddress(sen.offices[i].address) + "<br>" + phone;
     }
     populateIconList(sen);
 }
 
 // Displays information about selected congress member
 function displayConData(district) {
-    con = conModel[district]
+    con = conReps[district]
     document.getElementById("legTitle").innerHTML = con.title;
     document.getElementById("repNameText").innerHTML = con.fullName;
     document.getElementById("districtText").innerHTML = parseDistrictString(con.district) + " District<br>";
@@ -310,7 +307,7 @@ function drawRepMap() {
             var repJSON = JSON.parse(this.responseText);
             // console.log(repJSON);
             repJSON.forEach(function(rep){
-                repModel[rep.district] = {
+                houseReps[rep.district] = {
                     "party": rep.party,
                     "fullName": rep.full_name,
                     "id": rep.leg_id,
@@ -338,12 +335,12 @@ function drawRepMap() {
                     .attr("stroke", "#222222")
                     .each(function(d, i) {
                         var district = d.properties.District;
-//                                console.log(repModel[district])
+//                                console.log(houseReps[district])
                         d3.select(this)
                             .attr("id", "r" + district)
-                            .attr("fill", getPartyColor(repModel[district].party))
+                            .attr("fill", getPartyColor(houseReps[district].party))
                             .attr("onmouseover", 'd3.select(r' + district + ').attr("fill", "' + selectedColor + '")')
-                            .attr("onmouseout", 'd3.select(r' + district + ').attr("fill", "' + getPartyColor(repModel[district].party) + '")');
+                            .attr("onmouseout", 'd3.select(r' + district + ').attr("fill", "' + getPartyColor(houseReps[district].party) + '")');
                         document.getElementById("r" + district).onclick = function(){displayRepData(district)};
 
                     })
@@ -364,7 +361,7 @@ function drawSenMap() {
             var senJSON = JSON.parse(this.responseText);
             // console.log(senJSON);
             senJSON.forEach(function(sen){
-                senModel[sen.district] = {
+                senators[sen.district] = {
                     "party": sen.party,
                     "fullName": sen.full_name,
                     "id": sen.leg_id,
@@ -390,20 +387,19 @@ function drawSenMap() {
                     .data(json.features)
                     .enter()
                     .append("path")
-                    //                            .attr("fill", "#888888")
                     .attr("stroke", "#000000")
                     .each(function(d, i) {
                         var district = d.properties.District;
                         d3.select(this)
                             .attr("id", "s" + district)
-                            .attr("fill", getPartyColor(senModel[district].party))
+                            .attr("fill", getPartyColor(senators[district].party))
                             .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + selectedColor + '")')
-                            .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "' + getPartyColor(senModel[district].party) + '")');
+                            .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "' + getPartyColor(senators[district].party) + '")');
                         document.getElementById("s" + district).onclick = function(){displaySenData(district)};
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
                     })
                     .attr("d", geoPath);
-//                            displaySenData(repModel[1]);
+                           // displaySenData(houseReps[1]);
             });
         }
     };
@@ -411,10 +407,11 @@ function drawSenMap() {
     xhttp.send();
 }
 
+
 //Draws NC Congressional district map based on geoJSON data
 function drawConMap() {
     ncCongressReps.results.forEach(function(rep){
-        conModel[rep.district] = {
+        conReps[rep.district] = {
             "party": rep.party,
             "fullName": rep.first_name + " " + rep.last_name,
             "gender": rep.gender,
@@ -431,7 +428,7 @@ function drawConMap() {
             "email": rep.email
         };
     });
-    // console.log(conModel);
+    // console.log(conReps);
     d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
         gc.selectAll("path")
             .data(json.features)
@@ -442,12 +439,12 @@ function drawConMap() {
                 var district = d.properties.District;
                 d3.select(this)
                     .attr("id", "c" + district)
-                    .attr("fill", getPartyColor(conModel[district].party))
-                    //                              .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
-                    .attr("onclick", "console.log('" + conModel[district].rep + "')")
+                    .attr("fill", getPartyColor(conReps[district].party))
+                    //.attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
+                    .attr("onclick", "console.log('" + conReps[district].rep + "')")
                     .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
-                    .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conModel[district].party) + '")');
-//                              .attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
+                    .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conReps[district].party) + '")');
+                    //.attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
                 document.getElementById("c" + district).onclick = function(){displayConData(district)};
             })
             .attr("d", geoPath);
