@@ -1,45 +1,56 @@
 /**
  * Created by andrewpitts on 4/11/17.
  */
-var openStatesURL = "https://openstates.org/api/v1/METHOD/";
-var ncMetadataURL = "openstates.org/api/v1/metadata/nc/";
-var ncLegislatorsURL = "https://openstates.org/api/v1/legislators/?state=nc";
+// URL variables kept for reference
+// var openStatesURL = "https://openstates.org/api/v1/METHOD/";
+// var ncMetadataURL = "openstates.org/api/v1/metadata/nc/";
+// var ncLegislatorsURL = "https://openstates.org/api/v1/legislators/?state=nc";
+// var billLookupURL = "https://openstates.org/api/v1/bills/NCB00010747/";
+// var hb2BillURL = "https://openstates.org/api/v1/bills/NCB00009985/"; //Detailed bill example
+// var billLookupURL = "openstates.org/api/v1/bills/?state=nc&q=" //+ query
+// var photoHiResURL = "http://www.ncga.state.nc.us/House/pictures/hiRes/719.jpg";
+
+// Used URLs for AJAX calls
 var ncSenateURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=upper";
 var ncRepURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=lower";
-var billLookupURL = "https://openstates.org/api/v1/bills/NCB00010747/";
-var hb2BillURL = "https://openstates.org/api/v1/bills/NCB00009985/"; //Detailed bill example
-var billLookupURL = "openstates.org/api/v1/bills/?state=nc&q=" //+ query
-var ncCongressURL = "http://apitts.com/"
-var billIds = [];
 
+// List of legislator objects
 var repModel = {};
 var senModel = {};
 var conModel = {};
 
+// Variables to track which legislative district is selected
 var selectedRepDistrict = 0;
 var selectedSenDistrict = 0;
 var selectedConDistrict = 0;
 
+// Map dimensions
 var width = 900, height = 450;
 
+
+//Adds <g> element for containing map SVG coordinates.
+//State House of Representatives <g> element
 var gr = d3.select("#map")
     .append("g")
     .attr("id", "repMap")
     .attr("width", width)
     .attr("height", height);
 
+//State Senate <g> element
 var gs = d3.select("#map")
     .append("g")
     .attr("id", "senMap")
     .attr("width", width)
     .attr("height", height);
 
+//State Congressionial Districts <g> element
 var gc = d3.select("#map")
     .append("g")
     .attr("id", "conMap")
     .attr("width", width)
     .attr("height", height);
 
+// Map Project with translations to optimally display state map
 var albersProjection = d3.geo.albersUsa()
     .scale(7000)
     .translate([-1200, -40]);
@@ -47,6 +58,7 @@ var albersProjection = d3.geo.albersUsa()
 var geoPath = d3.geo.path()
     .projection(albersProjection);
 
+// Map Colors
 var republicanColor = "#DB1F1E";
 var selectedRepublicanColor = "#DB1F1E";
 var democratColor = "#1840DE";
@@ -55,7 +67,6 @@ var independentColor = "#AAADAD";
 var selectedIndependentColor = "#";
 var selectedColor = "#07C230";
 
-var photoHiResURL = "http://www.ncga.state.nc.us/House/pictures/hiRes/719.jpg";
 
 function getThumbnailURL(url, house) {
     var lastSlashIndex = url.indexOf("hiRes") + 6;
@@ -64,42 +75,7 @@ function getThumbnailURL(url, house) {
     return thumbnailURL;
 }
 
-function toggleMap(map) {
-    if (map == "rep") {
-        clearLegData();
-        displayRepData(1);
-        document.getElementById("senMap").style.display = "none";
-        document.getElementById("conMap").style.display = "none";
-        document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
-        document.getElementById("repMap").style.display = "block";
-        document.getElementById("congressMapToggle").className = "mapToggle";
-        document.getElementById("senMapToggle").className = "mapToggle";
-        document.getElementById("repMapToggle").className = "mapToggle activeMapToggle";
-    }
-    else if (map == "sen") {
-        clearLegData();
-        displaySenData(1)
-        document.getElementById("conMap").style.display = "none";
-        document.getElementById("repMap").style.display = "none";
-        document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
-        document.getElementById("senMap").style.display = "block";
-        document.getElementById("congressMapToggle").className = "mapToggle";
-        document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
-        document.getElementById("repMapToggle").className = "mapToggle";
 
-    }
-    else if (map == "con") {
-        clearLegData();
-        displayConData(1);
-        document.getElementById("senMap").style.display = "none";
-        document.getElementById("repMap").style.display = "none";
-        document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
-        document.getElementById("conMap").style.display = "block";
-        document.getElementById("congressMapToggle").className = "mapToggle activeMapToggle";
-        document.getElementById("senMapToggle").className = "mapToggle";
-        document.getElementById("repMapToggle").className = "mapToggle";
-    }
-}
 
 function parseDistrictString(district) {
     var lastDigit = district.slice(-1);
@@ -160,6 +136,46 @@ function getPartyColor(partyString) {
     }
 }
 
+//Displays house district map
+function displayRepMap() {
+    clearLegData();
+    displayRepData(1);
+    document.getElementById("senMap").style.display = "none";
+    document.getElementById("conMap").style.display = "none";
+    document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
+    document.getElementById("repMap").style.display = "block";
+    document.getElementById("congressMapToggle").className = "mapToggle";
+    document.getElementById("senMapToggle").className = "mapToggle";
+    document.getElementById("repMapToggle").className = "mapToggle activeMapToggle";
+}
+
+// Displays senate district map
+function displaySenMap() {
+    clearLegData();
+    displaySenData(1);
+    document.getElementById("conMap").style.display = "none";
+    document.getElementById("repMap").style.display = "none";
+    document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
+    document.getElementById("senMap").style.display = "block";
+    document.getElementById("congressMapToggle").className = "mapToggle";
+    document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
+    document.getElementById("repMapToggle").className = "mapToggle";
+}
+
+// Displays congressional district map
+function displayConMap() {
+    clearLegData();
+    displayConData(1);
+    document.getElementById("senMap").style.display = "none";
+    document.getElementById("repMap").style.display = "none";
+    document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
+    document.getElementById("conMap").style.display = "block";
+    document.getElementById("congressMapToggle").className = "mapToggle activeMapToggle";
+    document.getElementById("senMapToggle").className = "mapToggle";
+    document.getElementById("repMapToggle").className = "mapToggle";
+}
+
+//Clears all displayed legislator info
 function clearLegData() {
     document.getElementById("addressHeader").innerHTML = "";
     document.getElementById("legTitle").innerHTML = "";
@@ -169,11 +185,10 @@ function clearLegData() {
     document.getElementById("nclegURLText").innerHTML = "";
     document.getElementById("nclegURLText").href = "";
     document.getElementById("repPhoto").src = "";
-    var localPhone = "";
-    var capitalPhone = "";
     document.getElementById("addressContainer").innerHTML = "";
 }
 
+//Displays information about selected state representative
 function displayRepData(district) {
     rep = repModel[district];
     document.getElementById("legTitle").innerHTML = "Representative";
@@ -200,6 +215,7 @@ function displayRepData(district) {
     populateIconList(rep);
 }
 
+// Displays information about selected state senator
 function displaySenData(district) {
     sen = senModel[district];
     document.getElementById("legTitle").innerHTML = "Senator";
@@ -225,6 +241,7 @@ function displaySenData(district) {
     populateIconList(sen);
 }
 
+// Displays information about selected congress member
 function displayConData(district) {
     con = conModel[district]
     document.getElementById("legTitle").innerHTML = con.title;
@@ -249,12 +266,11 @@ function displayConData(district) {
 }
 
 
-
+//Populates social media / contact icon list based on data provided
 function populateIconList(legislator) {
     if (legislator.facebook != "") {
         document.getElementById("facebookIcon").style.display = "block";
         document.getElementById("facebookLink").href = "http://facebook.com/" + legislator.facebook;
-
     }
     else {
         document.getElementById("facebookIcon").style.display = "none";
@@ -286,6 +302,7 @@ function populateIconList(legislator) {
     }
 }
 
+//Draws NC House district map based on geoJSON data
 function drawRepMap() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -339,7 +356,7 @@ function drawRepMap() {
     xhttp.send();
 }
 
-
+//Draws NC Senate district map based on geoJSON data
 function drawSenMap() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -394,6 +411,7 @@ function drawSenMap() {
     xhttp.send();
 }
 
+//Draws NC Congressional district map based on geoJSON data
 function drawConMap() {
     ncCongressReps.results.forEach(function(rep){
         conModel[rep.district] = {
@@ -436,6 +454,7 @@ function drawConMap() {
     });
 }
 
+// Draws maps
 function initMaps() {
     drawRepMap();
     drawSenMap();

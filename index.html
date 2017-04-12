@@ -9,11 +9,10 @@
 <div class = "mapNavbar">
     <span id = "navbarTitle">NC Legimap</span>
     <span id = "aboutToggle" class = "mapToggle" onclick = "toggleMap('rep')">About</span>
-    <span class = "navBullet">&#8226</span><span id = "congressMapToggle" class = "mapToggle" onclick = "toggleMap('con')">Congress</span>
-    <span class = "navBullet">&#8226</span><span id = "senMapToggle" class = "mapToggle" onclick = "toggleMap('sen')">Senate</span>
-    <span class = "navBullet">&#8226</span><span id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "toggleMap('rep')">House</span>
+    <span class = "navBullet">&#8226</span><span id = "congressMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</span>
+    <span class = "navBullet">&#8226</span><span id = "senMapToggle" class = "mapToggle" onclick = "displaySenMap()">Senate</span>
+    <span class = "navBullet">&#8226</span><span id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "displayRepMap()">House</span>
 </div>
-<!--<hr>-->
 <h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
 <div class = "contentWrapper">
     <div class = "mapContainer">
