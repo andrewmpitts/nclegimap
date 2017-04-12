@@ -257,6 +257,10 @@ html {
     display: none;
 }
 
+#emailIcon {
+
+}
+
 .socialMediaIcon {
     max-width: 48px;
     max-height: 48px;
@@ -303,4 +307,9 @@ html {
     margin-bottom: 0px;
     text-align: center;
     /*float: right;*/
+}
+
+.teleIcon {
+    position: relative;
+    max-height: 24px;
 }
