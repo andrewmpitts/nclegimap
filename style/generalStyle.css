@@ -311,5 +311,6 @@ html {
 
 .teleIcon {
     position: relative;
-    max-height: 24px;
+    max-height: 16px;
+    top: 2px;
 }
