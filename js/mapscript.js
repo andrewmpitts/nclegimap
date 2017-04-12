@@ -164,9 +164,6 @@ function clearLegData() {
     document.getElementById("addressHeader").innerHTML = "";
     document.getElementById("legTitle").innerHTML = "";
     document.getElementById("repNameText").innerHTML = "";
-    // document.getElementById("emailLi").style.display = "";
-    // document.getElementById("emailLink").innerHTML = "";
-    // document.getElementById("emailLink").href = "";
     document.getElementById("districtText").innerHTML = "";
     document.getElementById("partyText").innerHTML = "";
     document.getElementById("nclegURLText").innerHTML = "";
@@ -175,20 +172,12 @@ function clearLegData() {
     var localPhone = "";
     var capitalPhone = "";
     document.getElementById("addressContainer").innerHTML = "";
-//        document.getElementById("localAddress").innerHTML = "";
-//        document.getElementById("capitalAddress").innerHTML = "";
 }
 
 function displayRepData(district) {
     rep = repModel[district];
-//        if (selectedRepDistrict != 0) {
-//            document.getElementById("r" + district).fill(getPartyColor(rep.party));
-//        }
-//        selectedRepDistrict = district;
     document.getElementById("legTitle").innerHTML = "Representative";
     document.getElementById("repNameText").innerHTML = rep.fullName;
-    // document.getElementById("emailLi").style.display = "block";
-    // document.getElementById("emailLink").innerHTML = "Representative's E-Mail";
     document.getElementById("emailLink").href = rep.email;
     document.getElementById("districtText").innerHTML = parseDistrictString(rep.district) + " District<br>";
     document.getElementById("partyText").innerHTML = rep.party;
@@ -205,23 +194,10 @@ function displayRepData(district) {
         var addressDiv = document.createElement("div");
         addressDiv.className = "address";
         addressDiv.id = "rAddress" + i;
-
-//            var addressText =
         document.getElementById("addressContainer").appendChild(addressDiv);
         document.getElementById("rAddress" + i).innerHTML = rep.offices[i].name + "<br><br>" + parseAddress(rep.offices[i].address) + "<br>" + phone;
     }
-    // document.getElementById("socialMediaIconContainer").style.display = "none";
-
-    if (rep.email != "") {
-        document.getElementById("emailLink").href = "mailto:" + rep.email;
-        document.getElementById("emailIcon").style.display = "block";
-    }
-    else {
-        document.getElementById("emailLink").href = "";
-        document.getElementById("emailIcon").style.display = "none";
-    }
-//        document.getElementById("localAddress").innerHTML = rep.offices[0].name + "<br><br>" + parseAddress(rep.offices[0].address) + "<br>" + localPhone;
-//        document.getElementById("capitalAddress").innerHTML = rep.offices[1].name + "<br><br>" + parseAddress(rep.offices[1].address) + "<br>Phone: " + rep.offices[1].phone;
+    populateIconList(rep);
 }
 
 function displaySenData(district) {
@@ -229,9 +205,6 @@ function displaySenData(district) {
     document.getElementById("legTitle").innerHTML = "Senator";
     document.getElementById("senMapToggle").class = "mapToggle activeMapToggle";
     document.getElementById("repNameText").innerHTML = sen.fullName;
-    // document.getElementById("emailLi").style.display = "block";
-    // document.getElementById("emailLink").innerHTML = sen.email;
-    // document.getElementById("emailLink").href = sen.email;
     document.getElementById("districtText").innerHTML = parseDistrictString(sen.district) + " District<br>";
     document.getElementById("partyText").innerHTML = sen.party;
     document.getElementById("nclegURLText").innerHTML = "Senator's NC Legislature Page";
@@ -249,28 +222,76 @@ function displaySenData(district) {
         document.getElementById("addressContainer").appendChild(addressDiv);
         document.getElementById("rAddress" + i).innerHTML = sen.offices[i].name + "<br><br>" + parseAddress(sen.offices[i].address) + "<br>" + phone;
     }
-    if (sen.email != "") {
-        document.getElementById("emailLink").href = "mailto:" + sen.email;
-        document.getElementById("emailIcon").style.display = "block";
+    populateIconList(sen);
+}
+
+function displayConData(district) {
+    con = conModel[district]
+    document.getElementById("legTitle").innerHTML = con.title;
+    document.getElementById("repNameText").innerHTML = con.fullName;
+    document.getElementById("districtText").innerHTML = parseDistrictString(con.district) + " District<br>";
+    document.getElementById("partyText").innerHTML = con.party == "R" ? "Republican" : "Democrat";
+    document.getElementById("nclegURLText").innerHTML = con.title + "'s Website";
+    document.getElementById("nclegURLText").href = con.website;
+    document.getElementById("repPhoto").src = "img/congress/" + con.district + ".jpg";
+    document.getElementById("addressHeader").innerHTML = "Addresses";
+    document.getElementById("addressContainer").innerHTML = "";
+    for (var i = 0; i < con.offices.length; i++) {
+        var addressDiv = document.createElement("div");
+        var phone = con.offices[i].phone != null ? "<img class = 'teleIcon' src = 'icons/phone/phone2.png'>  " + con.offices[i].phone + "<br>" : "";
+        var fax = con.offices[i].fax != null ? "<img class = 'teleIcon' src = 'icons/fax/fax.png'>  " + con.offices[i].fax + "<br>" : "";
+        addressDiv.className = "address";
+        addressDiv.id = "rAddress" + i;
+        document.getElementById("addressContainer").appendChild(addressDiv);
+        document.getElementById("rAddress" + i).innerHTML = con.offices[i].title + "<br>" + con.offices[i].address + "<br>" + con.offices[i].city + ", " + con.offices[i].state + " " + con.offices[i].zip + "<br>" + phone + fax;
     }
-    else {
-        document.getElementById("emailLink").href = "";
-        document.getElementById("emailIcon").style.display = "none";
-    }
-    // document.getElementById("socialMediaIconContainer").style.display = "none";
-//        document.getElementById("localAddress").innerHTML = sen.offices[0].name + "<br><br>" + parseAddress(sen.offices[0].address) + "<br>" + localPhone;
-//        document.getElementById("capitalAddress").innerHTML = sen.offices[1].name + "<br><br>" + parseAddress(sen.offices[1].address) + "<br>" + capitalPhone;
+    populateIconList(con);
 }
 
 
+
+function populateIconList(legislator) {
+    if (legislator.facebook != "") {
+        document.getElementById("facebookIcon").style.display = "block";
+        document.getElementById("facebookLink").href = "http://facebook.com/" + legislator.facebook;
+
+    }
+    else {
+        document.getElementById("facebookIcon").style.display = "none";
+        document.getElementById("facebookLink").href = "";
+    }
+    if (legislator.youtube != "") {
+        document.getElementById("youtubeIcon").style.display = "block";
+        document.getElementById("youtubeLink").href = "http://youtube.com/" + legislator.youtube;
+    }
+    else {
+        document.getElementById("youtubeIcon").style.display = "none";
+        document.getElementById("youtubeLink").href = "";
+    }
+    if (legislator.twitter != "") {
+        document.getElementById("twitterIcon").style.display = "block";
+        document.getElementById("twitterLink").href = "http://twitter.com/" + legislator.twitter;
+    }
+    else {
+        document.getElementById("twitterIcon").style.display = "none";
+        document.getElementById("twitterLink").href = "";
+    }
+    if (legislator.email != "") {
+        document.getElementById("emailIcon").style.display = "block";
+        document.getElementById("emailLink").href = "emailto:" + legislator.email;
+    }
+    else {
+        document.getElementById("emailIcon").style.display = "none";
+        document.getElementById("emailLink").href = "";
+    }
+}
 
 function drawRepMap() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var repJSON = JSON.parse(this.responseText);
-//                var repModel = {};
-            console.log(repJSON);
+            // console.log(repJSON);
             repJSON.forEach(function(rep){
                 repModel[rep.district] = {
                     "party": rep.party,
@@ -285,7 +306,10 @@ function drawRepMap() {
                     "active": rep.active,
                     "district": rep.district,
                     "nimspCandID": rep.nimsp_candidate_id,
-                    "nimspID": rep.nimsp_id
+                    "nimspID": rep.nimsp_id,
+                    "facebook": "",
+                    "twitter": "",
+                    "youtube": ""
                 };
 
             });
@@ -314,7 +338,6 @@ function drawRepMap() {
     xhttp.open("GET", ncRepURL, true);
     xhttp.send();
 }
-drawRepMap();
 
 
 function drawSenMap() {
@@ -322,7 +345,7 @@ function drawSenMap() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var senJSON = JSON.parse(this.responseText);
-//                var senModel = {};
+            // console.log(senJSON);
             senJSON.forEach(function(sen){
                 senModel[sen.district] = {
                     "party": sen.party,
@@ -337,7 +360,10 @@ function drawSenMap() {
                     "active": sen.active,
                     "district": sen.district,
                     "nimspCandID": sen.nimsp_candidate_id,
-                    "nimspID": sen.nimsp_id
+                    "nimspID": sen.nimsp_id,
+                    "facebook": "",
+                    "twitter": "",
+                    "youtube": ""
                 };
             });
 
@@ -367,67 +393,6 @@ function drawSenMap() {
     xhttp.open("GET", ncSenateURL, true);
     xhttp.send();
 }
-drawSenMap();
-
-function displayConData(district) {
-    con = conModel[district]
-    document.getElementById("legTitle").innerHTML = con.title;
-    document.getElementById("repNameText").innerHTML = con.fullName;
-    // document.getElementById("emailLi").style.display = "none";
-//        document.getElementById("emailLink").innerHTML = con.email;
-//        document.getElementById("emailLink").href = con.email;
-    document.getElementById("districtText").innerHTML = parseDistrictString(con.district) + " District<br>";
-    document.getElementById("partyText").innerHTML = con.party == "R" ? "Republican" : "Democrat";
-    document.getElementById("nclegURLText").innerHTML = con.title + "'s Website";
-    document.getElementById("nclegURLText").href = con.website;
-    document.getElementById("repPhoto").src = "img/congress/" + con.district + ".jpg";
-    document.getElementById("addressHeader").innerHTML = "Addresses";
-    document.getElementById("addressContainer").innerHTML = "";
-    for (var i = 0; i < con.offices.length; i++) {
-        var addressDiv = document.createElement("div");
-        var phone = con.offices[i].phone != null ? "<img class = 'teleIcon' src = 'icons/phone/phone2.png'>  " + con.offices[i].phone + "<br>" : "";
-        var fax = con.offices[i].fax != null ? "<img class = 'teleIcon' src = 'icons/fax/fax.png'>  " + con.offices[i].fax + "<br>" : "";
-        addressDiv.className = "address";
-        addressDiv.id = "rAddress" + i;
-        document.getElementById("addressContainer").appendChild(addressDiv);
-        document.getElementById("rAddress" + i).innerHTML = con.offices[i].title + "<br>" + con.offices[i].address + "<br>" + con.offices[i].city + ", " + con.offices[i].state + " " + con.offices[i].zip + "<br>" + phone + fax;
-    }
-
-    document.getElementById("socialMediaIconContainer").style.display = "block";
-    if (con.facebook != "") {
-        document.getElementById("facebookIcon").style.display = "block";
-        document.getElementById("facebookLink").href = "http://facebook.com/" + con.facebook;
-
-    }
-    else {
-        document.getElementById("facebookIcon").style.display = "none";
-        document.getElementById("facebookLink").href = "";
-    }
-    if (con.youtube != "") {
-        document.getElementById("youtubeIcon").style.display = "block";
-        document.getElementById("youtubeLink").href = "http://youtube.com/" + con.youtube;
-    }
-    else {
-        document.getElementById("youtubeIcon").style.display = "none";
-        document.getElementById("youtubeLink").href = "";
-    }
-    if (con.twitter != "") {
-        document.getElementById("twitterIcon").style.display = "block";
-        document.getElementById("twitterLink").href = "http://twitter.com/" + con.twitter;
-    }
-    else {
-        document.getElementById("twitterIcon").style.display = "none";
-        document.getElementById("twitterLink").href = "";
-    }
-    if (con.email != "") {
-        document.getElementById("emailIcon").style.display = "block";
-        document.getElementById("emailLink").href = "emailto:" + con.email;
-    }
-    else {
-        document.getElementById("emailIcon").style.display = "none";
-        document.getElementById("emailLink").href = "";
-    }
-}
 
 function drawConMap() {
     ncCongressReps.results.forEach(function(rep){
@@ -448,6 +413,7 @@ function drawConMap() {
             "email": rep.email
         };
     });
+    // console.log(conModel);
     d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
         gc.selectAll("path")
             .data(json.features)
@@ -470,4 +436,10 @@ function drawConMap() {
     });
 }
 
-drawConMap();
+function initMaps() {
+    drawRepMap();
+    drawSenMap();
+    drawConMap();
+}
+
+initMaps();
