@@ -59,9 +59,9 @@ var geoPath = d3.geo.path()
     .projection(albersProjection);
 
 // Map Colors
-var republicanColor = "#DB1F1E";
+var republicanColor = "#E70018";
 var selectedRepublicanColor = "#DB1F1E";
-var democratColor = "#1840DE";
+var democratColor = "#145AFF";
 var selectedDemocratColor = "#";
 var independentColor = "#AAADAD";
 var selectedIndependentColor = "#";
