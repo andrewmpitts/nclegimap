@@ -160,14 +160,12 @@ html {
 }
 
 #bottomInfoContainer {
+    position: relative;
     width: 1200px;
-    height: 200px;
-    /*border-top: none;*/
-    /*border-left: 1px black solid;*/
-    /*border-right: 1px black solid;*/
-    /*border-bottom: 1px black solid;*/
+    height: auto;
+    min-height: 200px;
     margin: auto;
-    /*float: right;*/
+    /*overflow: auto;*/
 }
 
 #legTitle {
@@ -196,7 +194,7 @@ html {
     left: 900px;
     top: 0px;
     width: 300px;
-    height: 450px;
+    height: 375px;
     display: inline-block;
     float: right;
 }
@@ -300,7 +298,8 @@ html {
 
 #addressContainer {
     width: 800px;
-    height: 100%;
+    height: auto;
+    min-height: 200px;
     top: 15px;
     position: relative;
     /*border-left: 1px black solid;*/
@@ -340,4 +339,14 @@ html {
     width: 300px;
     height: 300px;
     border: 1px black solid;
+}
+
+/*Footer*/
+#footer {
+    position: relative;
+    height: 75px;
+    width: 1200px;
+    /*background-color: bisque;*/
+    margin: auto;
+    display: block;
 }

@@ -51,9 +51,11 @@ var gc = d3.select("#map")
     .attr("height", height);
 
 // Map Project with translations to optimally display state map
-var albersProjection = d3.geo.albersUsa()
-    .scale(7000)
-    .translate([-1200, -40]);
+var albersProjection = d3.geo.mercator()
+    .scale(5650)
+    .translate([8320, 3900]);
+    // .scale(8500);
+    // .translate([-1200, -40]);
 
 var geoPath = d3.geo.path()
     .projection(albersProjection);
