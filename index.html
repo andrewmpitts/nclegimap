@@ -13,7 +13,14 @@
     <span class = "navBullet">&#8226</span><span id = "senMapToggle" class = "mapToggle" onclick = "displaySenMap()">Senate</span>
     <span class = "navBullet">&#8226</span><span id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "displayRepMap()">House</span>
 </div>
-<h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
+<div id = "titleZipHolder">
+    <h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
+    <form id = "zipForm" action="/action_page.php">
+      <!--<span id = "zipFormTitle">Lookup by Zip Code:</span>-->
+      <input type="text" name="zip" value="Lookup by zip">
+      <input id = "zipFormSubmit" type="submit" value="Submit">
+    </form>
+</div>
 <div class = "contentWrapper">
     <div class = "mapContainer">
         <svg id="map" width="900" height="450"></svg>
