@@ -172,6 +172,11 @@ function displayConMap() {
     document.getElementById("repMapToggle").className = "mapToggle";
 }
 
+//Hides the maps and displays an about page
+function displayAboutPage() {
+
+}
+
 //Clears all displayed legislator info
 function clearLegData() {
     document.getElementById("addressHeader").innerHTML = "";
@@ -187,7 +192,9 @@ function clearLegData() {
 
 //Displays information about selected state representative
 function displayRepData(district) {
+
     rep = houseReps[district];
+    document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = "Representative";
     document.getElementById("repNameText").innerHTML = rep.fullName;
     document.getElementById("emailLink").href = rep.email;
@@ -215,6 +222,7 @@ function displayRepData(district) {
 // Displays information about selected state senator
 function displaySenData(district) {
     sen = senators[district];
+    document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = "Senator";
     document.getElementById("senMapToggle").class = "mapToggle activeMapToggle";
     document.getElementById("repNameText").innerHTML = sen.fullName;
@@ -241,6 +249,7 @@ function displaySenData(district) {
 // Displays information about selected congress member
 function displayConData(district) {
     con = conReps[district]
+    document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = con.title;
     document.getElementById("repNameText").innerHTML = con.fullName;
     document.getElementById("districtText").innerHTML = parseDistrictString(con.district) + " District<br>";
@@ -440,11 +449,14 @@ function drawConMap() {
                 d3.select(this)
                     .attr("id", "c" + district)
                     .attr("fill", getPartyColor(conReps[district].party))
-                    //.attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + democratColor + '")')
+                    // .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + selectedColor + '")')
                     .attr("onclick", "console.log('" + conReps[district].rep + "')")
+                    // .attr("onmouseover", 'd3.select(c' + district + ').attr("transform", "scale(1.5),translate(-125,-110)")')
+                    // .attr("onmouseover", 'popOutDistrict("c", ' + district + ')');
+                    // .attr("onmouseout", 'd3.select(c' + district + ').attr("transform", "scale(1),translate(125,110)")');
+                    // .attr("onmouseout", 'clearPopOutDistrict()');
                     .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
                     .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conReps[district].party) + '")');
-                    //.attr("onmouseout", 'd3.select(d' + district + ').attr("fill", "#ffffff")');
                 document.getElementById("c" + district).onclick = function(){displayConData(district)};
             })
             .attr("d", geoPath);

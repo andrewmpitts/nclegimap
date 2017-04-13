@@ -314,3 +314,13 @@ html {
     max-height: 16px;
     top: 2px;
 }
+
+/*Popout District Map*/
+/*May not use*/
+#districtPopout {
+    position: absolute;
+    display: block;
+    width: 300px;
+    height: 300px;
+    border: 1px black solid;
+}
