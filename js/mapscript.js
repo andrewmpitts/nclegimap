@@ -66,6 +66,7 @@ var selectedDemocratColor = "#";
 var independentColor = "#AAADAD";
 var selectedIndependentColor = "#";
 var selectedColor = "#07C230";
+var strokeColor = "#333333";
 
 // Modifies legislator's photo url to the url of a smaller thumbnail photo
 function getThumbnailURL(url, house) {
@@ -341,7 +342,7 @@ function drawRepMap() {
                     .data(json.features)
                     .enter()
                     .append("path")
-                    .attr("stroke", "#222222")
+                    .attr("stroke", strokeColor)
                     .each(function(d, i) {
                         var district = d.properties.District;
 //                                console.log(houseReps[district])
@@ -396,7 +397,7 @@ function drawSenMap() {
                     .data(json.features)
                     .enter()
                     .append("path")
-                    .attr("stroke", "#000000")
+                    .attr("stroke", strokeColor)
                     .each(function(d, i) {
                         var district = d.properties.District;
                         d3.select(this)
@@ -443,7 +444,7 @@ function drawConMap() {
             .data(json.features)
             .enter()
             .append("path")
-            .attr("stroke", "#444444")
+            .attr("stroke", strokeColor)
             .each(function(d, i) {
                 var district = d.properties.District;
                 d3.select(this)

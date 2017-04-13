@@ -198,15 +198,6 @@ html {
     width: 300px;
     height: 450px;
     display: inline-block;
-    /*border-right-width: 1px;*/
-    /*border-right-color: black;*/
-    /*border-right-style: solid;*/
-    /*border-top-width: 1px;*/
-    /*border-top-color: black;*/
-    /*border-top-style: solid;*/
-    /*border-bottom-width: 1px;*/
-    /*border-bottom-color: black;*/
-    /*border-bottom-style: solid;*/
     float: right;
 }
 
@@ -215,8 +206,10 @@ html {
     position: relative;
     width: 100%;
     text-align: center;
-    /* padding: 5px; */
     top: 10px;
+    font-size: 1.2em;
+
+
 }
 
 #urlLi {
