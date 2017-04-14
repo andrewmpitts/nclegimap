@@ -10,66 +10,71 @@
 <div class = "mapNavbar">
     <span id = "navbarTitle">NC Legimap</span>
     <span id = "aboutToggle" class = "mapToggle" onclick = "displayAboutPage()">About</span>
-    <span class = "navBullet">&#8226</span><span id = "congressMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</span>
+    <span class = "navBullet">&#8226</span><span id ="conMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</span>
     <span class = "navBullet">&#8226</span><span id = "senMapToggle" class = "mapToggle" onclick = "displaySenMap()">Senate</span>
     <span class = "navBullet">&#8226</span><span id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "displayRepMap()">House</span>
 </div>
-<div id = "titleZipHolder">
-    <h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
-    <div id = "zipForm">
-      <input type="text" name="zip" id = "zipCodeInput" value="Lookup by zip">
-      <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())">Submit</button>
-    </div>
-</div>
-<div class = "contentWrapper">
-    <div class = "mapContainer">
-        <svg id="map" width="900" height="375"></svg>
-        <div class = "mapContextContainer" style = "">
-            <h3 id = "legTitle"></h3>
-            <p class="repName" id="repNameText" style=""></p>
-
-            <div class="photoContainer">
-                <img id = "repPhoto" class = "photo">
-                <br>
-                <span id="districtText" class="infoText"></span>
-                <span><a id = "partyText"></a></span>
-            </div>
-            <div class="infoContainer"></div>
+<div id = "legimapMainContainer">
+    <div id = "titleZipHolder">
+        <h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
+        <div id = "zipForm">
+          <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip">
+          <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())">Submit</button>
         </div>
     </div>
-    <div id = "bottomInfoContainer">
-        <h3 id = "addressHeader">Addresses</h3>
-        <div id = "addressContainer">
+    <div class = "contentWrapper">
+        <div class = "mapContainer">
+            <svg id="map" width="900" height="375"></svg>
+            <div class = "mapContextContainer" style = "">
+                <h3 id = "legTitle"></h3>
+                <p class="repName" id="repNameText" style=""></p>
 
-        </div>
-
-        <div id = "linkContainer">
-            <ul>
-                <p id = "urlLi"><a id = "nclegURLText"></a></p>
-            </ul>
-            <div id = "socialMediaIconContainer">
-                <a id = "facebookLink" href = "">
-                    <img id = "facebookIcon" class = "socialMediaIcon" src = "icons/facebook/facebookIcon.png">
-                </a>
-                <a id = "twitterLink" href = "">
-                    <img id = "twitterIcon" class = "socialMediaIcon" src = "icons/twitter/roundedSquareIcon/twitterIcon.png">
-                </a>
-                <a id = "youtubeLink" href = "">
-                    <img id = "youtubeIcon" class = "socialMediaIcon" src = "icons/youtube/128px/youtubeIcon.png">
-                </a>
-                <a id = "emailLink" href = "">
-                    <img id = "emailIcon" class = "socialMediaIcon" src = "icons/email/email.png">
-                </a>
+                <div class="photoContainer">
+                    <img id = "repPhoto" class = "photo">
+                    <br>
+                    <span id="districtText" class="infoText"></span>
+                    <span><a id = "partyText"></a></span>
+                </div>
+                <div class="infoContainer"></div>
             </div>
         </div>
+        <div id = "bottomInfoContainer">
+            <h3 id = "addressHeader">Addresses</h3>
+            <div id = "addressContainer">
+
+            </div>
+
+            <div id = "linkContainer">
+                <ul>
+                    <p id = "urlLi"><a id = "nclegURLText"></a></p>
+                </ul>
+                <div id = "socialMediaIconContainer">
+                    <a id = "facebookLink" href = "">
+                        <img id = "facebookIcon" class = "socialMediaIcon" src = "icons/facebook/facebookIcon.png">
+                    </a>
+                    <a id = "twitterLink" href = "">
+                        <img id = "twitterIcon" class = "socialMediaIcon" src = "icons/twitter/roundedSquareIcon/twitterIcon.png">
+                    </a>
+                    <a id = "youtubeLink" href = "">
+                        <img id = "youtubeIcon" class = "socialMediaIcon" src = "icons/youtube/128px/youtubeIcon.png">
+                    </a>
+                    <a id = "emailLink" href = "">
+                        <img id = "emailIcon" class = "socialMediaIcon" src = "icons/email/email.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div id = "billTrackerContainer">
+
+        </div>
+        <!--<div id = "footer">-->
+            <!--<hr>-->
+        <!--</div>-->
+    </div>
+    <div id = "aboutContainer">
 
     </div>
-    <div id = "billTrackerContainer">
-
-    </div>
-    <!--<div id = "footer">-->
-        <!--<hr>-->
-    <!--</div>-->
 </div>
 <script>
 

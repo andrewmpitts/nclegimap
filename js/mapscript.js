@@ -138,6 +138,8 @@ function getPartyColor(partyString) {
 
 //Displays house district map
 function displayRepMap() {
+    document.getElementById("legimapMainContainer").style.display = "block";
+    document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displayRepData(1);
     document.getElementById("senMap").style.display = "none";
@@ -146,13 +148,16 @@ function displayRepMap() {
     document.getElementById("repMap").style.display = "block";
     document.getElementById("zipForm").style.display = "block";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('rep', getZipInput())};
-    document.getElementById("congressMapToggle").className = "mapToggle";
+    document.getElementById("conMapToggle").className = "mapToggle";
     document.getElementById("senMapToggle").className = "mapToggle";
     document.getElementById("repMapToggle").className = "mapToggle activeMapToggle";
+    activateToggleButton("repMapToggle");
 }
 
 // Displays senate district map
 function displaySenMap() {
+    document.getElementById("legimapMainContainer").style.display = "block";
+    document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displaySenData(1);
     document.getElementById("conMap").style.display = "none";
@@ -161,13 +166,16 @@ function displaySenMap() {
     document.getElementById("senMap").style.display = "block";
     document.getElementById("zipForm").style.display = "block";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('sen', getZipInput());};
-    document.getElementById("congressMapToggle").className = "mapToggle";
-    document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
-    document.getElementById("repMapToggle").className = "mapToggle";
+    // document.getElementById("conMapToggle").className = "mapToggle";
+    // document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
+    // document.getElementById("repMapToggle").className = "mapToggle";
+    activateToggleButton("senMapToggle");
 }
 
 // Displays congressional district map
 function displayConMap() {
+    document.getElementById("legimapMainContainer").style.display = "block";
+    document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displayConData(1);
     document.getElementById("senMap").style.display = "none";
@@ -176,14 +184,26 @@ function displayConMap() {
     document.getElementById("conMap").style.display = "block";
     document.getElementById("zipForm").style.display = "none";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('con', getZipInput());};
-    document.getElementById("congressMapToggle").className = "mapToggle activeMapToggle";
-    document.getElementById("senMapToggle").className = "mapToggle";
-    document.getElementById("repMapToggle").className = "mapToggle";
+    // document.getElementById("conMapToggle").className = "mapToggle activeMapToggle";
+    // document.getElementById("senMapToggle").className = "mapToggle";
+    // document.getElementById("repMapToggle").className = "mapToggle";
+    activateToggleButton("conMapToggle");
 }
 
 //Hides the maps and displays an about page
 function displayAboutPage() {
+    // clearLegData();
+    document.getElementById("legimapMainContainer").style.display = "none";
+    document.getElementById("aboutContainer").style.display = "block";
+    activateToggleButton("aboutToggle");
+}
 
+function activateToggleButton(buttonId) {
+    document.getElementById("senMapToggle").className = "mapToggle";
+    document.getElementById("repMapToggle").className = "mapToggle";
+    document.getElementById("conMapToggle").className = "mapToggle";
+    document.getElementById("aboutToggle").className = "mapToggle";
+    document.getElementById(buttonId).className += " activeMapToggle";
 }
 
 //Clears all displayed legislator info

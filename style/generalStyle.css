@@ -212,7 +212,7 @@ html {
 
 #zipForm {
     float: right;
-    top: -20px;
+    top: -22px;
     left: -85px;
     position: relative;
     margin: 0px;
@@ -349,4 +349,18 @@ html {
     /*background-color: bisque;*/
     margin: auto;
     display: block;
+}
+
+
+/*Map and About containers*/
+#legimapMainContainer {
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+#aboutContainer {
+    width: auto;
+    height: auto;
+    display: none;
 }
