@@ -183,7 +183,7 @@ function toggleViewById(id) {
         document.getElementById("aboutContainer").style.display = "block";
     }
     else {
-        // document.getElementById("aboutContainer").style.display = "none";
+        document.getElementById("aboutContainer").style.display = "none";
         document.getElementById("legimapMainContainer").style.display = "block";
         document.getElementById("senMap").style.display = "none";
         document.getElementById("repMap").style.display = "none";

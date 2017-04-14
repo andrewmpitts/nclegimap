@@ -232,6 +232,7 @@ html {
     position: relative;
     margin: 0px;
     left: 1005px;
+    width: 250px;
 }
 
 #zipFormSubmit {
