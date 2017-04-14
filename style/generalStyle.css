@@ -9,13 +9,15 @@ html {
 
 
 .mapContainer {
-    /*position: relative;*/
+    position: relative;
     width: 1203px;
     height: auto;
     /*display: inline-block;*/
-    top: 25px;
+    padding-top: 10px;
+    top: -15px;
     margin: auto;
-    /*bottom-border: 1px black solid;*/
+    border-bottom: 1px black solid;
+    /*border-top: 1px black solid;*/
 }
 
 #localAddressContainer {
@@ -45,6 +47,8 @@ html {
 #map {
     /*border: 1px solid black;*/
     /*bottom-border: 1px black solid;*/
+    border-top: 1px black solid;
+    border-right: 1px black solid;
 }
 
 .verticalLine {
@@ -114,6 +118,9 @@ html {
     text-align: center;
     height: 35px;
     border-bottom: 2px black solid;
+    font-family: verdana;
+
+
 }
 
 .mapToggle {
@@ -123,7 +130,7 @@ html {
     padding-top: 5px;
     /*text-decoration: underline;*/
     float: right;
-    font-size: 1.1em;
+    font-size: 1em;
     /*left: 15px;*/
     /*margin-left: 15px;*/
 }
@@ -131,7 +138,9 @@ html {
 .navBullet {
     position: relative;
     float: right;
-    top: 9px;
+    top: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 
 .activeMapToggle {
@@ -172,6 +181,7 @@ html {
     margin: auto;
     text-align: center;
     padding: 5px;
+
 }
 
 
@@ -180,6 +190,9 @@ html {
     /*margin-left: 15px;*/
     padding: 5px;
     font-size: 1.2em;
+    font-family: verdana;
+
+
 }
 
 #repNameText {
@@ -197,13 +210,17 @@ html {
     height: 375px;
     display: inline-block;
     float: right;
+    border-top: 1px black solid;
+    border-left: 1px black solid;
+    border-top: 1px black solid;
 }
 
 #titleZipHolder {
     position: relative;
-    width: 100%;
-    height: 45px;
-    top: 10px;
+    width: 1200px;
+    height: 30px;
+    margin: auto;
+    top: 5px;
 }
 
 #zipFormTitle {
@@ -211,26 +228,36 @@ html {
 }
 
 #zipForm {
-    float: right;
     top: -22px;
-    left: -85px;
     position: relative;
     margin: 0px;
+    left: 1005px;
 }
 
 #zipFormSubmit {
+    top: 1px;
+    position: relative
+}
 
+#zipCodeInput {
+    height: 25px;
+    top: -3px;
+    position: relative
+}
+
+#searchicon {
+    max-width: 15px;
 }
 
 #mapTitle {
-    margin: auto;
+    top: 4px;
+    left: 5px;
     position: relative;
-    width: 700px;
-    text-align: center;
+    width: 1200px;
+    /* text-align: center; */
     /*top: 10px;*/
     margin: auto;
     font-size: 1.2em;
-
 
 }
 
@@ -247,7 +274,7 @@ html {
     position: relative;
     width: 400px;
     height: auto;
-    top: 15px;
+    /*top: 15px;*/
     display: inline-block;
     float: left;
 }
@@ -288,7 +315,7 @@ html {
 .address {
     position: relative;
     width: 50%;
-    height: 175px;
+    height: 145px;
     top: 0%;
     display: inline-block;
     float: left;
@@ -339,6 +366,14 @@ html {
     width: 300px;
     height: 300px;
     border: 1px black solid;
+}
+
+#districtText {
+    font-size: 1.1em;
+}
+
+#partyText {
+    font-size: 1.1em;
 }
 
 /*Footer*/

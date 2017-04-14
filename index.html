@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class = "mapNavbar">
-    <span id = "navbarTitle">NC Legimap</span>
+    <span id = "navbarTitle" onclick = "displayRepMap()">NC Legimap</span>
     <span id = "aboutToggle" class = "mapToggle" onclick = "displayAboutPage()">About</span>
     <span class = "navBullet">&#8226</span><span id ="conMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</span>
     <span class = "navBullet">&#8226</span><span id = "senMapToggle" class = "mapToggle" onclick = "displaySenMap()">Senate</span>
@@ -19,7 +19,7 @@
         <h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
         <div id = "zipForm">
           <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip">
-          <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())">Submit</button>
+          <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())"><img id = "searchIcon" src = "icons/search/search.png"></button>
         </div>
     </div>
     <div class = "contentWrapper">

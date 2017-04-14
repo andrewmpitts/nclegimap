@@ -1,14 +1,6 @@
 /**
  * Created by andrewpitts on 4/11/17.
  */
-// URL variables kept for reference
-// var openStatesURL = "https://openstates.org/api/v1/METHOD/";
-// var ncMetadataURL = "openstates.org/api/v1/metadata/nc/";
-// var ncLegislatorsURL = "https://openstates.org/api/v1/legislators/?state=nc";
-// var billLookupURL = "https://openstates.org/api/v1/bills/NCB00010747/";
-// var hb2BillURL = "https://openstates.org/api/v1/bills/NCB00009985/"; //Detailed bill example
-// var billLookupURL = "openstates.org/api/v1/bills/?state=nc&q=" //+ query
-// var photoHiResURL = "http://www.ncga.state.nc.us/House/pictures/hiRes/719.jpg";
 
 // Used URLs for AJAX calls
 var ncSenateURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=upper";
@@ -138,8 +130,6 @@ function getPartyColor(partyString) {
 
 //Displays house district map
 function displayRepMap() {
-    // document.getElementById("legimapMainContainer").style.display = "block";
-    // document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displayRepData(1);
     toggleViewById("repMap");
@@ -151,8 +141,6 @@ function displayRepMap() {
 
 // Displays senate district map
 function displaySenMap() {
-    // document.getElementById("legimapMainContainer").style.display = "block";
-    // document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displaySenData(1);
     toggleViewById("senMap");
@@ -164,8 +152,6 @@ function displaySenMap() {
 
 // Displays congressional district map
 function displayConMap() {
-    // document.getElementById("legimapMainContainer").style.display = "block";
-    // document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displayConData(1);
     toggleViewById("conMap");
@@ -177,7 +163,6 @@ function displayConMap() {
 
 //Hides the maps and displays an about page
 function displayAboutPage() {
-    // clearLegData();
     document.getElementById("legimapMainContainer").style.display = "none";
     document.getElementById("aboutContainer").style.display = "block";
     toggleViewById("about");
@@ -508,7 +493,6 @@ function getZipInput() {
 }
 
 function getLegislatorByZip(chamber, zip) {
-    // console.log(getZipInput());
     if (isZipValid(zip)) {
         getLegislatorDataByZip(chamber, zip);
     }
