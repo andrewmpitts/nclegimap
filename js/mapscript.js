@@ -144,6 +144,8 @@ function displayRepMap() {
     document.getElementById("conMap").style.display = "none";
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
     document.getElementById("repMap").style.display = "block";
+    document.getElementById("zipForm").style.display = "block";
+    document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('rep', getZipInput())};
     document.getElementById("congressMapToggle").className = "mapToggle";
     document.getElementById("senMapToggle").className = "mapToggle";
     document.getElementById("repMapToggle").className = "mapToggle activeMapToggle";
@@ -157,6 +159,8 @@ function displaySenMap() {
     document.getElementById("repMap").style.display = "none";
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
     document.getElementById("senMap").style.display = "block";
+    document.getElementById("zipForm").style.display = "block";
+    document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('sen', getZipInput());};
     document.getElementById("congressMapToggle").className = "mapToggle";
     document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
     document.getElementById("repMapToggle").className = "mapToggle";
@@ -170,6 +174,8 @@ function displayConMap() {
     document.getElementById("repMap").style.display = "none";
     document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
     document.getElementById("conMap").style.display = "block";
+    document.getElementById("zipForm").style.display = "none";
+    document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('con', getZipInput());};
     document.getElementById("congressMapToggle").className = "mapToggle activeMapToggle";
     document.getElementById("senMapToggle").className = "mapToggle";
     document.getElementById("repMapToggle").className = "mapToggle";
@@ -464,6 +470,57 @@ function drawConMap() {
             })
             .attr("d", geoPath);
     });
+}
+
+function isZipValid(zip) {
+    if (isNaN(zip)) {
+        return false;
+    }
+    else if (zip < 27006 || zip > 28909){
+        return false;
+    }
+    return true;
+}
+
+function getZipInput() {
+    return document.getElementById("zipCodeInput").value;
+}
+
+function getLegislatorByZip(chamber, zip) {
+    // console.log(getZipInput());
+    if (isZipValid(zip)) {
+        getLegislatorDataByZip(chamber, zip);
+    }
+    else {
+        console.log("Invalid NC Zip");
+        // Display this in a tooltip
+    }
+}
+
+function getLegislatorDataByZip(chamber, zip) {
+    if (chamber == "con") {
+        console.log("Not implemented yet. :(");
+    }
+    var geoURL = "https://openstates.org/api/v1/legislators/geo/?lat=" + zipCodes[zip].lat + "&long=" + zipCodes[zip].long;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var responseJSON = JSON.parse(this.responseText);
+            console.log(responseJSON);
+            if (chamber == "rep") {
+                displayRepData(responseJSON[0].district);
+                // d3.select("#r" + responseJSON[0].district)
+            }
+            else if (chamber == "sen") {
+                displaySenData(responseJSON[1].district);
+                // d3.select("#s" + responseJSON[1].district)
+            }
+        }
+    }
+    xhttp.open("GET", geoURL, true);
+    xhttp.send();
+
 }
 
 // Draws maps

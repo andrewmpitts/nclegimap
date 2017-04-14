@@ -3,6 +3,7 @@
     <title>NC Legimap</title>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <script src="representatives/ncCongressReps.js" charset="utf-8"></script>
+    <script src="ncsgeo/zips.js" charset="utf-8"></script>
     <link rel="stylesheet" type="text/css" href="style/generalStyle.css">
 </head>
 <body>
@@ -15,11 +16,10 @@
 </div>
 <div id = "titleZipHolder">
     <h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
-    <form id = "zipForm" action="/action_page.php">
-      <!--<span id = "zipFormTitle">Lookup by Zip Code:</span>-->
-      <input type="text" name="zip" value="Lookup by zip">
-      <input id = "zipFormSubmit" type="submit" value="Submit">
-    </form>
+    <div id = "zipForm">
+      <input type="text" name="zip" id = "zipCodeInput" value="Lookup by zip">
+      <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())">Submit</button>
+    </div>
 </div>
 <div class = "contentWrapper">
     <div class = "mapContainer">
