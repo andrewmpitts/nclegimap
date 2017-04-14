@@ -163,8 +163,8 @@ function displayConMap() {
 
 //Hides the maps and displays an about page
 function displayAboutPage() {
-    document.getElementById("legimapMainContainer").style.display = "none";
-    document.getElementById("aboutContainer").style.display = "block";
+    // document.getElementById("legimapMainContainer").style.display = "none";
+    // document.getElementById("aboutContainer").style.display = "block";
     toggleViewById("about");
 }
 
