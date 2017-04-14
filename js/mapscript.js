@@ -138,55 +138,40 @@ function getPartyColor(partyString) {
 
 //Displays house district map
 function displayRepMap() {
-    document.getElementById("legimapMainContainer").style.display = "block";
-    document.getElementById("aboutContainer").style.display = "none";
+    // document.getElementById("legimapMainContainer").style.display = "block";
+    // document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displayRepData(1);
-    document.getElementById("senMap").style.display = "none";
-    document.getElementById("conMap").style.display = "none";
+    toggleViewById("repMap");
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
-    document.getElementById("repMap").style.display = "block";
     document.getElementById("zipForm").style.display = "block";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('rep', getZipInput())};
-    document.getElementById("conMapToggle").className = "mapToggle";
-    document.getElementById("senMapToggle").className = "mapToggle";
-    document.getElementById("repMapToggle").className = "mapToggle activeMapToggle";
     activateToggleButton("repMapToggle");
 }
 
 // Displays senate district map
 function displaySenMap() {
-    document.getElementById("legimapMainContainer").style.display = "block";
-    document.getElementById("aboutContainer").style.display = "none";
+    // document.getElementById("legimapMainContainer").style.display = "block";
+    // document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displaySenData(1);
-    document.getElementById("conMap").style.display = "none";
-    document.getElementById("repMap").style.display = "none";
+    toggleViewById("senMap");
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
-    document.getElementById("senMap").style.display = "block";
     document.getElementById("zipForm").style.display = "block";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('sen', getZipInput());};
-    // document.getElementById("conMapToggle").className = "mapToggle";
-    // document.getElementById("senMapToggle").className = "mapToggle activeMapToggle";
-    // document.getElementById("repMapToggle").className = "mapToggle";
     activateToggleButton("senMapToggle");
 }
 
 // Displays congressional district map
 function displayConMap() {
-    document.getElementById("legimapMainContainer").style.display = "block";
-    document.getElementById("aboutContainer").style.display = "none";
+    // document.getElementById("legimapMainContainer").style.display = "block";
+    // document.getElementById("aboutContainer").style.display = "none";
     clearLegData();
     displayConData(1);
-    document.getElementById("senMap").style.display = "none";
-    document.getElementById("repMap").style.display = "none";
+    toggleViewById("conMap");
     document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
-    document.getElementById("conMap").style.display = "block";
     document.getElementById("zipForm").style.display = "none";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('con', getZipInput());};
-    // document.getElementById("conMapToggle").className = "mapToggle activeMapToggle";
-    // document.getElementById("senMapToggle").className = "mapToggle";
-    // document.getElementById("repMapToggle").className = "mapToggle";
     activateToggleButton("conMapToggle");
 }
 
@@ -195,7 +180,7 @@ function displayAboutPage() {
     // clearLegData();
     document.getElementById("legimapMainContainer").style.display = "none";
     document.getElementById("aboutContainer").style.display = "block";
-    activateToggleButton("aboutToggle");
+    toggleViewById("about");
 }
 
 function activateToggleButton(buttonId) {
@@ -204,6 +189,22 @@ function activateToggleButton(buttonId) {
     document.getElementById("conMapToggle").className = "mapToggle";
     document.getElementById("aboutToggle").className = "mapToggle";
     document.getElementById(buttonId).className += " activeMapToggle";
+}
+
+function toggleViewById(id) {
+    if (id == "about") {
+        activateToggleButton("aboutToggle");
+        document.getElementById("legimapMainContainer").style.display = "none";
+        document.getElementById("aboutContainer").style.display = "block";
+    }
+    else {
+        document.getElementById("aboutContainer").style.display = "none";
+        document.getElementById("legimapMainContainer").style.display = "block";
+        document.getElementById("senMap").style.display = "none";
+        document.getElementById("repMap").style.display = "none";
+        document.getElementById("conMap").style.display = "none";
+        document.getElementById(id).style.display = "block";
+    }
 }
 
 //Clears all displayed legislator info
@@ -521,7 +522,7 @@ function getLegislatorDataByZip(chamber, zip) {
     if (chamber == "con") {
         console.log("Not implemented yet. :(");
     }
-    var geoURL = "https://openstates.org/api/v1/legislators/geo/?lat=" + zipCodes[zip].lat + "&long=" + zipCodes[zip].long;
+    var geoURL = "https://openstates.org/api/v1/legislators/geo/?lat=" + zipCodes[zip].lat + "&long=" + zipCodes[zip].long + "&fields=district";
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
