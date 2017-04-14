@@ -20,7 +20,7 @@
     <div id = "titleZipHolder">
         <h4 id = "mapTitle">NC General Assembly - House of Representatives District Map</h4>
         <div id = "zipForm">
-          <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip">
+          <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip" onkeyup="getZipOnEnter(event, 'rep')" onfocus="zipFormFocused()" onblur = "zipFormUnfocused()">
           <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())"><img id = "searchIcon" src = "icons/search/search.png"></button>
         </div>
     </div>

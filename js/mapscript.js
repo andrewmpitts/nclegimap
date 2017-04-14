@@ -2,6 +2,10 @@
  * Created by andrewpitts on 4/11/17.
  */
 
+// Determines if the zip code lookup input is focused
+var isZipFocused = false;
+
+
 // Used URLs for AJAX calls
 var ncSenateURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=upper";
 var ncRepURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=lower";
@@ -136,6 +140,7 @@ function displayRepMap() {
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
     document.getElementById("zipForm").style.display = "block";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('rep', getZipInput())};
+    document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'rep')};
     activateToggleButton("repMapToggle");
 }
 
@@ -147,6 +152,7 @@ function displaySenMap() {
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
     document.getElementById("zipForm").style.display = "block";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('sen', getZipInput());};
+    document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'sen')};
     activateToggleButton("senMapToggle");
 }
 
@@ -158,6 +164,7 @@ function displayConMap() {
     document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
     document.getElementById("zipForm").style.display = "none";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('con', getZipInput());};
+    document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'con')};
     activateToggleButton("conMapToggle");
 }
 
@@ -487,6 +494,21 @@ function getLegislatorByZip(chamber, zip) {
     else {
         console.log("Invalid NC Zip");
         // Display this in a tooltip
+    }
+}
+
+function zipFormFocused() {
+    isZipFocused = true;
+}
+
+function zipFormUnfocused() {
+    isZipFocused = false;
+}
+
+function getZipOnEnter(event, chamber) {
+
+    if (isZipFocused && event.key == "Enter") {
+        getLegislatorByZip(chamber, getZipInput());
     }
 }
 
