@@ -171,7 +171,7 @@ html {
 #bottomInfoContainer {
     position: relative;
     width: 1200px;
-    height: auto;
+    height: 350px;
     min-height: 200px;
     margin: auto;
     /*overflow: auto;*/
@@ -425,4 +425,17 @@ html {
     display: inline-block;
     /*border: 1px black solid;*/
     float: right;
+}
+
+#footer {
+    height: 35px;
+}
+
+.footerElement {
+    top: 12px;
+    position: relative;
+    font-family: Helvetica;
+    font-size: .7em;
+    width: 1200px;
+    text-align: center;
 }

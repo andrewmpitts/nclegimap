@@ -172,7 +172,7 @@ function activateToggleButton(buttonId) {
     document.getElementById("senMapToggle").className = "mapToggle";
     document.getElementById("repMapToggle").className = "mapToggle";
     document.getElementById("conMapToggle").className = "mapToggle";
-    document.getElementById("aboutToggle").className = "mapToggle";
+    // document.getElementById("aboutToggle").className = "mapToggle";
     document.getElementById(buttonId).className += " activeMapToggle";
 }
 
@@ -183,7 +183,7 @@ function toggleViewById(id) {
         document.getElementById("aboutContainer").style.display = "block";
     }
     else {
-        document.getElementById("aboutContainer").style.display = "none";
+        // document.getElementById("aboutContainer").style.display = "none";
         document.getElementById("legimapMainContainer").style.display = "block";
         document.getElementById("senMap").style.display = "none";
         document.getElementById("repMap").style.display = "none";
@@ -329,7 +329,6 @@ function drawRepMap() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var repJSON = JSON.parse(this.responseText);
-            // console.log(repJSON);
             repJSON.forEach(function(rep){
                 houseReps[rep.district] = {
                     "party": rep.party,
@@ -359,7 +358,6 @@ function drawRepMap() {
                     .attr("stroke", strokeColor)
                     .each(function(d, i) {
                         var district = d.properties.District;
-//                                console.log(houseReps[district])
                         d3.select(this)
                             .attr("id", "r" + district)
                             .attr("fill", getPartyColor(houseReps[district].party))
@@ -383,7 +381,6 @@ function drawSenMap() {
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var senJSON = JSON.parse(this.responseText);
-            // console.log(senJSON);
             senJSON.forEach(function(sen){
                 senators[sen.district] = {
                     "party": sen.party,
@@ -423,7 +420,6 @@ function drawSenMap() {
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
                     })
                     .attr("d", geoPath);
-                           // displaySenData(houseReps[1]);
             });
         }
     };
@@ -452,7 +448,6 @@ function drawConMap() {
             "email": rep.email
         };
     });
-    // console.log(conReps);
     d3.json("ncsgeo/ncdccongressdistrictsmin.json", function (json) {
         gc.selectAll("path")
             .data(json.features)
@@ -464,12 +459,7 @@ function drawConMap() {
                 d3.select(this)
                     .attr("id", "c" + district)
                     .attr("fill", getPartyColor(conReps[district].party))
-                    // .attr("onmouseover", 'd3.select(d' + district + ').attr("fill", "' + selectedColor + '")')
                     .attr("onclick", "console.log('" + conReps[district].rep + "')")
-                    // .attr("onmouseover", 'd3.select(c' + district + ').attr("transform", "scale(1.5),translate(-125,-110)")')
-                    // .attr("onmouseover", 'popOutDistrict("c", ' + district + ')');
-                    // .attr("onmouseout", 'd3.select(c' + district + ').attr("transform", "scale(1),translate(125,110)")');
-                    // .attr("onmouseout", 'clearPopOutDistrict()');
                     .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
                     .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conReps[district].party) + '")');
                 document.getElementById("c" + district).onclick = function(){displayConData(district)};
@@ -507,12 +497,10 @@ function getLegislatorDataByZip(chamber, zip) {
         console.log("Not implemented yet. :(");
     }
     var geoURL = "https://openstates.org/api/v1/legislators/geo/?lat=" + zipCodes[zip].lat + "&long=" + zipCodes[zip].long + "&fields=district";
-
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var responseJSON = JSON.parse(this.responseText);
-            console.log(responseJSON);
             if (chamber == "rep") {
                 displayRepData(responseJSON[0].district);
                 // d3.select("#r" + responseJSON[0].district)
