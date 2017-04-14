@@ -315,7 +315,7 @@ function populateIconList(legislator) {
     }
     if (legislator.email != "") {
         document.getElementById("emailIcon").style.display = "block";
-        document.getElementById("emailLink").href = "emailto:" + legislator.email;
+        document.getElementById("emailLink").href = "mailto:" + legislator.email;
     }
     else {
         document.getElementById("emailIcon").style.display = "none";
