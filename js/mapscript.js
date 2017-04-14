@@ -403,7 +403,6 @@ function drawSenMap() {
             });
 
             d3.json("ncsgeo/ncsendistrictsmin.json", function (json) {
-                console.log(json);
                 gs.selectAll("path")
                     .data(json.features)
                     .enter()
@@ -459,7 +458,6 @@ function drawConMap() {
                 d3.select(this)
                     .attr("id", "c" + district)
                     .attr("fill", getPartyColor(conReps[district].party))
-                    .attr("onclick", "console.log('" + conReps[district].rep + "')")
                     .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
                     .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conReps[district].party) + '")');
                 document.getElementById("c" + district).onclick = function(){displayConData(district)};
