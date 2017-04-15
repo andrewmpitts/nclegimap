@@ -19,6 +19,7 @@ var conReps = {};
 var selectedRepDistrict = 0;
 var selectedSenDistrict = 0;
 var selectedConDistrict = 0;
+var selectedDistrict = 0;
 
 // Map dimensions
 var width = 900, height = 450;
@@ -217,6 +218,11 @@ function clearLegData() {
 function displayRepData(district) {
 
     rep = houseReps[district];
+    if (selectedRepDistrict > 0) {
+        document.getElementById('r' + selectedRepDistrict).style.fill = getPartyColor(houseReps[selectedRepDistrict].party);
+    }
+    selectedRepDistrict = district
+    document.getElementById('r' + district).style.fill = selectedColor;
     document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = "Representative";
     document.getElementById("repNameText").innerHTML = rep.fullName;
@@ -245,6 +251,11 @@ function displayRepData(district) {
 // Displays information about selected state senator
 function displaySenData(district) {
     sen = senators[district];
+    if (selectedSenDistrict > 0) {
+        document.getElementById('s' + selectedSenDistrict).style.fill = getPartyColor(senators[selectedSenDistrict].party);
+    }
+    selectedSenDistrict = district
+    document.getElementById('s' + district).style.fill = selectedColor;
     document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = "Senator";
     document.getElementById("senMapToggle").class = "mapToggle activeMapToggle";
@@ -272,6 +283,11 @@ function displaySenData(district) {
 // Displays information about selected congress member
 function displayConData(district) {
     con = conReps[district]
+    if (selectedConDistrict > 0) {
+        document.getElementById('c' + selectedConDistrict).style.fill = getPartyColor(conReps[selectedConDistrict].party);
+    }
+    selectedConDistrict = district
+    document.getElementById('c' + district).style.fill = selectedColor;
     document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = con.title;
     document.getElementById("repNameText").innerHTML = con.fullName;
