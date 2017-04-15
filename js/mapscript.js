@@ -59,7 +59,7 @@ var geoPath = d3.geo.path()
 // Map Colors
 var republicanColor = "#E70018";
 var selectedRepublicanColor = "#DB1F1E";
-var democratColor = "#145AFF";
+var democratColor = "#59b1e4";
 var selectedDemocratColor = "#";
 var independentColor = "#AAADAD";
 var selectedIndependentColor = "#";
@@ -114,9 +114,10 @@ function formatAddress(address) {
 
 // Returns the party's color (Clunky, need to revise approach)
 function getPartyColor(partyString) {
-    var republicanColor = "#DB1F1E";
+    var republicanColor = "#E31C12";
     var selectedRepublicanColor = "#DB1F1E";
-    var democratColor = "#1840DE";
+    // var democratColor = "#1840DE";
+    var democratColor = "#308BE3";
     var selectedDemocratColor = "#";
     var independentColor = "#AAADAD";
     var selectedIndependentColor = "#";
@@ -137,7 +138,7 @@ function displayRepMap() {
     clearLegData();
     displayRepData(1);
     toggleViewById("repMap");
-    document.getElementById("mapTitle").innerHTML = "NC General Assembly - House of Representatives District Map";
+    document.getElementById("mapTitle").innerHTML = "NC General Assembly - House District Map";
     document.getElementById("zipForm").style.display = "block";
     document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('rep', getZipInput())};
     document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'rep')};
@@ -536,6 +537,16 @@ function getLegislatorDataByZip(chamber, zip) {
 
 }
 
+
+// function isPointInPolgon(lat, long) {
+//     console.log(document.getElementById("r47"));
+// }
+
+
+// console.log(isPointInPolgon(35.93, -80.44));
+
+
+console.log(d3.select("#r3"));
 // Draws maps
 function initMaps() {
     drawRepMap();
