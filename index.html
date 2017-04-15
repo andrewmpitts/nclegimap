@@ -15,20 +15,21 @@
     <h4 id = "mapTitle">NC General Assembly - House District Map</h4>
 </div>
 <div id = "legimapMainContainer">
-    <div id = "titleZipHolder">
-        <div id = "navBulletContainer">
-        <button id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "displayRepMap()">House</button>
-            <!--<span class = "navBullet">&#8226</span>-->
-        <button id = "senMapToggle" class = "mapToggle" onclick = "displaySenMap()">Senate</button>
 
-        <button id ="conMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</button>
-        </div>
-        <div id = "zipForm">
-          <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip" onkeyup="getZipOnEnter(event, 'rep')" onfocus="zipFormFocused()" onblur = "zipFormUnfocused()">
-          <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())"><img id = "searchIcon" src = "icons/search/search.png"></button>
-        </div>
-    </div>
     <div class = "contentWrapper">
+        <div id = "titleZipHolder">
+            <div id = "navBulletContainer">
+                <button id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "displayRepMap()">House</button>
+                <!--<span class = "navBullet">&#8226</span>-->
+                <button id = "senMapToggle" class = "mapToggle" onclick = "displaySenMap()">Senate</button>
+
+                <button id ="conMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</button>
+            </div>
+            <div id = "zipForm">
+                <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip" onkeyup="getZipOnEnter(event, 'rep')" onfocus="zipFormFocused()" onblur = "zipFormUnfocused()">
+                <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())"><img id = "searchIcon" src = "icons/search/search.png"></button>
+            </div>
+        </div>
         <div class = "mapContainer">
             <svg id="map" width="900" height="375"></svg>
             <div class = "mapContextContainer" style = "">

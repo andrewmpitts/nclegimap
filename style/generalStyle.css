@@ -14,7 +14,7 @@ html {
     height: auto;
     /*display: inline-block;*/
     padding-top: 10px;
-    top: -15px;
+    /*top: -15px;*/
     margin: auto;
     border-bottom: 1px black solid;
     /*border-top: 1px black solid;*/
@@ -47,7 +47,7 @@ html {
 #map {
     /*border: 1px solid black;*/
     /*bottom-border: 1px black solid;*/
-    border-top: 1px black solid;
+    /*border-top: 1px black solid;*/
     border-right: 1px black solid;
 }
 
@@ -166,10 +166,11 @@ html {
 }
 
 .contentWrapper {
-    width: 100%;
+    width: 1200px;
     position: relative;
     margin: auto;
-    top: 15px;
+    /*top: 15px;*/
+    /*border-top: 1px black solid;*/
     /*background-color: #eeeeee;*/
 }
 
@@ -227,9 +228,9 @@ html {
     height: 375px;
     display: inline-block;
     float: right;
-    border-top: 1px black solid;
-    border-left: 1px black solid;
-    border-top: 1px black solid;
+    /*border-top: 1px black solid;*/
+    /*border-left: 1px black solid;*/
+    /*border-top: 1px black solid;*/
 }
 
 #titleZipHolder {
@@ -248,7 +249,7 @@ html {
     top: -39px;
     position: relative;
     margin: 0px;
-    left: 1000px;
+    /*left: 1000px;*/
     width: 250px;
     height: 30px
 }
