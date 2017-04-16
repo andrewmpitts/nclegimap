@@ -65,7 +65,9 @@ var selectedDemocratColor = "#";
 var independentColor = "#AAADAD";
 var selectedIndependentColor = "#";
 var selectedColor = "#07C230";
+var mouseOverSelectedColor = "#147A26";
 var strokeColor = "#333333";
+var mouseOverColor = "#E900E5";
 
 // Modifies legislator's photo url to the url of a smaller thumbnail photo
 function getThumbnailURL(url, house) {
@@ -216,13 +218,17 @@ function clearLegData() {
 
 //Displays information about selected state representative
 function displayRepData(district) {
-
+    // console.log(district);
     rep = houseReps[district];
     if (selectedRepDistrict > 0) {
-        document.getElementById('r' + selectedRepDistrict).style.fill = getPartyColor(houseReps[selectedRepDistrict].party);
+        d3.select("#r" + selectedRepDistrict).attr("fill", getPartyColor(houseReps[selectedRepDistrict].party));
+        d3.select("#r" + selectedRepDistrict).attr("onmouseover", 'd3.select(r' + selectedRepDistrict + ').attr("fill", "' + mouseOverColor + '")')
+            .attr("onmouseout", 'd3.select(r' + selectedRepDistrict + ').attr("fill", "' + getPartyColor(houseReps[selectedRepDistrict].party) + '")');
     }
-    selectedRepDistrict = district
-    document.getElementById('r' + district).style.fill = selectedColor;
+    selectedRepDistrict = district;
+    d3.select("#r" + district).attr("fill", selectedColor);
+    d3.select("#r" + district).attr("onmouseover", 'd3.select(r' + district + ').attr("fill", "' + mouseOverSelectedColor + '")');
+    d3.select("#r" + district).attr("onmouseout", 'd3.select(r' + district + ').attr("fill", "' + selectedColor + '")');
     document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = "Representative";
     document.getElementById("repNameText").innerHTML = rep.fullName;
@@ -252,10 +258,14 @@ function displayRepData(district) {
 function displaySenData(district) {
     sen = senators[district];
     if (selectedSenDistrict > 0) {
-        document.getElementById('s' + selectedSenDistrict).style.fill = getPartyColor(senators[selectedSenDistrict].party);
+        d3.select("#s" + selectedSenDistrict).attr("fill", getPartyColor(houseReps[selectedSenDistrict].party));
+        d3.select("#s" + selectedSenDistrict).attr("onmouseover", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + mouseOverColor + '")')
+            .attr("onmouseout", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + getPartyColor(senators[selectedSenDistrict].party) + '")');
     }
-    selectedSenDistrict = district
-    document.getElementById('s' + district).style.fill = selectedColor;
+    selectedSenDistrict = district;
+    d3.select("#s" + district).attr("fill", selectedColor);
+    d3.select("#s" + district).attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + mouseOverSelectedColor + '")');
+    d3.select("#s" + district).attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "' + selectedColor + '")');
     document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = "Senator";
     document.getElementById("senMapToggle").class = "mapToggle activeMapToggle";
@@ -284,10 +294,14 @@ function displaySenData(district) {
 function displayConData(district) {
     con = conReps[district]
     if (selectedConDistrict > 0) {
-        document.getElementById('c' + selectedConDistrict).style.fill = getPartyColor(conReps[selectedConDistrict].party);
+        d3.select("#c" + selectedConDistrict).attr("fill", getPartyColor(conReps[selectedConDistrict].party));
+        d3.select("#c" + selectedConDistrict).attr("onmouseover", 'd3.select(c' + selectedConDistrict + ').attr("fill", "' + mouseOverColor + '")')
+            .attr("onmouseout", 'd3.select(c' + selectedConDistrict + ').attr("fill", "' + getPartyColor(conReps[selectedConDistrict].party) + '")');
     }
     selectedConDistrict = district
-    document.getElementById('c' + district).style.fill = selectedColor;
+    d3.select("#c" + district).attr("fill", selectedColor);
+    d3.select("#c" + district).attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + mouseOverSelectedColor + '")');
+    d3.select("#c" + district).attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")');
     document.getElementById("repPhoto").src = "";
     document.getElementById("legTitle").innerHTML = con.title;
     document.getElementById("repNameText").innerHTML = con.fullName;
@@ -385,7 +399,7 @@ function drawRepMap() {
                         d3.select(this)
                             .attr("id", "r" + district)
                             .attr("fill", getPartyColor(houseReps[district].party))
-                            .attr("onmouseover", 'd3.select(r' + district + ').attr("fill", "' + selectedColor + '")')
+                            .attr("onmouseover", 'd3.select(r' + district + ').attr("fill", "' + mouseOverColor + '")')
                             .attr("onmouseout", 'd3.select(r' + district + ').attr("fill", "' + getPartyColor(houseReps[district].party) + '")');
                         document.getElementById("r" + district).onclick = function(){displayRepData(district)};
 
@@ -437,7 +451,7 @@ function drawSenMap() {
                         d3.select(this)
                             .attr("id", "s" + district)
                             .attr("fill", getPartyColor(senators[district].party))
-                            .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + selectedColor + '")')
+                            .attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + mouseOverColor + '")')
                             .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "' + getPartyColor(senators[district].party) + '")');
                         document.getElementById("s" + district).onclick = function(){displaySenData(district)};
 //                                        .attr("onmouseout", 'd3.select(s' + district + ').attr("fill", "#ffffff")');
@@ -482,7 +496,7 @@ function drawConMap() {
                 d3.select(this)
                     .attr("id", "c" + district)
                     .attr("fill", getPartyColor(conReps[district].party))
-                    .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + selectedColor + '")')
+                    .attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + mouseOverColor + '")')
                     .attr("onmouseout", 'd3.select(c' + district + ').attr("fill", "' + getPartyColor(conReps[district].party) + '")');
                 document.getElementById("c" + district).onclick = function(){displayConData(district)};
             })
