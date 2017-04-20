@@ -47,6 +47,68 @@ var gc = d3.select("#map")
     .attr("width", width)
     .attr("height", height);
 
+var legendColorSideSize = 15;
+var legendColorSquareX = 25;
+var legendColorSquareY = 240;
+var legendIncrement = 20;
+var legendTagX = legendColorSquareX + 20;
+var legendTagY = legendColorSquareY + 12;
+
+d3.select("svg")
+    .append("text")
+    .attr("id", "legendTagRepublican")
+    .attr("x", legendTagX)
+    .attr("y", legendTagY)
+    .attr("font-family", "Verdana")
+    .attr("font-size", 10)
+    .html("Republican");
+
+
+d3.select("svg")
+    .append("rect")
+    .attr("id", "legendColorRepublican")
+    .attr("x", legendColorSquareX)
+    .attr("y", legendColorSquareY)
+    .attr("height", legendColorSideSize)
+    .attr("width", legendColorSideSize)
+    .attr("fill", "#E70018");
+
+d3.select("svg")
+    .append("text")
+    .attr("id", "legendTagDemocrat")
+    .attr("x", legendTagX)
+    .attr("y", legendTagY + legendIncrement)
+    .attr("font-family", "Verdana")
+    .attr("font-size", 10)
+    .html("Democrat");
+
+d3.select("svg")
+    .append("rect")
+    .attr("id", "legendColorDemocrat")
+    .attr("x", legendColorSquareX)
+    .attr("y", legendColorSquareY + legendIncrement)
+    .attr("height", legendColorSideSize)
+    .attr("width", legendColorSideSize)
+    .attr("fill", "#59b1e4");
+
+d3.select("svg")
+    .append("text")
+    .attr("id", "legendTagSelected")
+    .attr("x", legendTagX)
+    .attr("y", 291)
+    .attr("font-family", "Verdana")
+    .attr("font-size", 10)
+    .html("Selected");
+
+d3.select("svg")
+    .append("rect")
+    .attr("id", "legendColorSelected")
+    .attr("x", legendColorSquareX)
+    .attr("y", legendColorSquareY + (legendIncrement * 2))
+    .attr("height", legendColorSideSize)
+    .attr("width", legendColorSideSize)
+    .attr("fill", "#07C230");
+
 // Map Project with translations to optimally display state map
 var albersProjection = d3.geo.mercator()
     .scale(5650)
