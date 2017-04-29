@@ -324,7 +324,7 @@ function displayRepData(district) {
 function displaySenData(district) {
     sen = senators[district];
     if (selectedSenDistrict > 0) {
-        d3.select("#s" + selectedSenDistrict).attr("fill", getPartyColor(houseReps[selectedSenDistrict].party));
+        d3.select("#s" + selectedSenDistrict).attr("fill", getPartyColor(senators[selectedSenDistrict].party));
         d3.select("#s" + selectedSenDistrict).attr("onmouseover", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + mouseOverColor + '")')
             .attr("onmouseout", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + getPartyColor(senators[selectedSenDistrict].party) + '")');
     }

@@ -1,0 +1,457 @@
+/*body {*/
+/*height: 800px;*/
+/*}*/
+
+html {
+    background-color: #ffffff;
+}
+
+
+
+.mapContainer {
+    position: relative;
+    width: 1203px;
+    height: auto;
+    /*display: inline-block;*/
+    padding-top: 10px;
+    /*top: -15px;*/
+    margin: auto;
+    border-bottom: 1px black solid;
+    /*border-top: 1px black solid;*/
+}
+
+#localAddressContainer {
+    /*top: 271px;*/
+    position: relative;
+    /*top: 25px;*/
+    right: 0px;
+    height: 180px;
+    width: 400px;
+    /*border-top: 1px black solid;*/
+    display: inline-block;
+    float: right;
+}
+
+#capitolAddressContainer {
+    /*top: 271px;*/
+    position: relative;
+    /*top: 25px;*/
+    right: 0px;
+    height: 180px;
+    width: 400px;
+    /*border-top: 1px black solid;*/
+    display: inline-block;
+    float: right;
+}
+
+#map {
+    /*border: 1px solid black;*/
+    /*bottom-border: 1px black solid;*/
+    /*border-top: 1px black solid;*/
+    border-right: 1px black solid;
+}
+
+.verticalLine {
+    position: relative;
+    left: 150px;
+    height: 150px;
+    width: 1px;
+    /*border-left: 1px solid black;*/
+    display: block;
+}
+
+.address {
+    position: relative;
+    display: block;
+    text-align: left;
+}
+
+.leftAddressContainer {
+    width: 275px;
+    height: 100%;
+    top: 0px;
+    position: relative;
+    /*display: inline-block;*/
+    float: right;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 1.1em;
+}
+
+.rightAddressContainer {
+    width: 275px;
+    height: 100%;
+    top: 0px;
+    position: relative;
+    /*border-left: 1px black solid;*/
+    display: inline-block;
+    float: right;
+    margin-left: 25px;
+    margin-right: 25px;
+    font-size: 1.1em;
+}
+
+.infoContainer {
+    position: relative;
+    padding: 10px;
+}
+
+.infoText {
+    width: auto;
+    max-width: 250px;
+
+}
+
+.photoContainer {
+    text-align: center
+}
+
+.photo {
+    margin: auto;
+    max-width: 200px;
+    max-height: 235px;
+}
+
+.mapNavbar {
+    width: 1200px;
+    margin: auto;
+    text-align: center;
+    height: 35px;
+    border-bottom: 2px black solid;
+    font-family: verdana;
+
+
+}
+
+.mapToggle {
+    /*border-bottom: 1px black solid;*/
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 5px;
+    top: 3px;
+    position: relative;
+    /*text-decoration: underline;*/
+    /* float: left; */
+    font-size: 1em;
+    border: none;
+    /*left: 15px;*/
+    /*margin-left: 15px;*/
+    background-color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navBullet {
+    position: relative;
+    float: left;
+    top: 6px;
+    padding-left: 5px;
+    padding-right: 5px;
+    cursor: pointer;
+}
+
+#navBulletContainer {
+    width: 220px;
+    position: relative;
+    height: 40px;
+    /* border: 1px black solid; */
+    margin: auto;
+    text-align: center;
+    top: -5px;
+}
+
+.activeMapToggle {
+    /*text-decoration: underline;*/
+    border-bottom: 2px solid black;
+}
+
+.contentWrapper {
+    width: 1200px;
+    position: relative;
+    margin: auto;
+    /*top: 15px;*/
+    /*border-top: 1px black solid;*/
+    /*background-color: #eeeeee;*/
+}
+
+#repMap {
+    display: block;
+}
+
+#senMap {
+    display: none;
+}
+
+#conMap {
+    display: none;
+}
+
+#bottomInfoContainer {
+    position: relative;
+    width: 1200px;
+    height: 350px;
+    min-height: 200px;
+    margin: auto;
+    /*overflow: auto;*/
+}
+
+#legTitle {
+    margin: auto;
+    text-align: center;
+    padding: 5px;
+
+}
+
+
+#navbarTitle {
+    float: left;
+    /*margin-left: 15px;*/
+    padding: 5px;
+    font-size: 1.2em;
+    font-family: verdana;
+
+
+}
+
+#repNameText {
+    text-align: center;
+    margin: auto;
+    padding: 5px;
+    width: 100%;
+    font-size: 1.2em;
+}
+
+.mapContextContainer {
+    left: 900px;
+    top: 0px;
+    width: 300px;
+    height: 375px;
+    display: inline-block;
+    float: right;
+    /*border-top: 1px black solid;*/
+    /*border-left: 1px black solid;*/
+    /*border-top: 1px black solid;*/
+}
+
+#titleZipHolder {
+    position: relative;
+    width: 1200px;
+    height: 30px;
+    margin: auto;
+    top: 5px;
+}
+
+#zipFormTitle {
+
+}
+
+#zipForm {
+    top: -39px;
+    position: relative;
+    margin: 0px;
+    /*left: 1000px;*/
+    width: 250px;
+    height: 30px
+}
+
+#zipFormSubmit {
+    top: 1px;
+    position: relative
+}
+
+#zipCodeInput {
+    height: 25px;
+    top: -3px;
+    position: relative
+}
+
+#searchicon {
+    max-width: 15px;
+}
+
+#mapTitle {
+    top: 8px;
+    position: relative;
+    margin: auto;
+    float: right;
+
+}
+
+#urlLi {
+    /*display: none;*/
+}
+
+#emailLi {
+    /*display: none;*/
+}
+
+/*Bottom context container*/
+#linkContainer {
+    position: relative;
+    width: 400px;
+    height: auto;
+    /*top: 15px;*/
+    display: inline-block;
+    float: left;
+}
+
+#socialMediaIconContainer {
+    position: relative;
+    width: auto;
+    height: 75px;
+    margin: auto;
+    padding-left: 35px;
+}
+
+#facebookIcon {
+    display: none;
+}
+
+#twitterIcon {
+    display: none;
+}
+
+#youtubeIcon {
+    display: none;
+}
+
+#emailIcon {
+    display: none;
+}
+
+.socialMediaIcon {
+    max-width: 48px;
+    max-height: 48px;
+    text-align: center;
+    float: left;
+    padding: 5px;
+}
+
+/*Addresses*/
+.address {
+    position: relative;
+    width: 50%;
+    height: 145px;
+    top: 0%;
+    display: inline-block;
+    float: left;
+    margin: auto;
+}
+
+
+#addressContainer {
+    width: 800px;
+    height: auto;
+    min-height: 200px;
+    top: 15px;
+    position: relative;
+    /*border-left: 1px black solid;*/
+    display: inline-block;
+    float: right;
+    /*margin-left: 25px;*/
+    /*margin-right: 25px;*/
+    font-size: 1.1em;
+    /*border-left: 1px black solid;*/
+}
+
+
+#addressHeader {
+    position: relative;
+    top: 0px;
+    height: 15px;
+    padding: 10px;
+    left: 325px;
+    width: 800px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    /*float: right;*/
+}
+
+.teleIcon {
+    position: relative;
+    max-height: 16px;
+    top: 2px;
+}
+
+/*Popout District Map*/
+/*May not use*/
+#districtPopout {
+    position: absolute;
+    display: block;
+    width: 300px;
+    height: 300px;
+    border: 1px black solid;
+}
+
+#districtText {
+    font-size: 1.1em;
+}
+
+#partyText {
+    font-size: 1.1em;
+}
+
+/*Footer*/
+#footer {
+    position: relative;
+    height: 75px;
+    width: 1200px;
+    /*background-color: bisque;*/
+    margin: auto;
+    display: block;
+}
+
+
+/*Map and About containers*/
+#legimapMainContainer {
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+/*About*/
+
+#aboutContainer {
+    width: 900px;
+    height: 900px;
+    display: none;
+    margin: auto;
+    top: 25px;
+    position: relative;
+}
+
+.aboutContentContainer {
+    border: 1px black solid;
+}
+
+#leftAboutContainer1 {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    display: inline-block;
+    /*border: 1px black solid;*/
+    float: right;
+}
+
+#leftAboutContainer2 {
+    position: relative;
+    width: 600px;
+    height: 300px;
+    display: inline-block;
+    /*border: 1px black solid;*/
+    float: right;
+}
+
+#footer {
+    height: 35px;
+}
+
+.footerElement {
+    top: 12px;
+    position: relative;
+    font-family: Helvetica;
+    font-size: .7em;
+    width: 1200px;
+    text-align: center;
+}
