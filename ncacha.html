@@ -10,7 +10,7 @@
 </head>
 <body>
 <div class = "mapNavbar">
-    <span id = "navbarTitle" onclick = "displayRepMap()">NC Legimap</span>
+    <span id = "navbarTitle"><a style = "text-decoration: none; color: black;" href = "index.html">NC Legimap</a></span>
     <!--<span id = "aboutToggle" class = "mapToggle" onclick = "displayAboutPage()">About</span>-->
     <h4 id = "mapTitle">NC Representatives - ACHA Vote (May 4, 2017)</h4>
 </div>
@@ -19,6 +19,9 @@
             <svg id="map" width="900" height="375"></svg>
             <div class = "mapContextContainer" style = "">
                 <h3 id = "legTitle"></h3>
+                <p id = "photoPlaceholder">
+                    Click on a district to see information about its legislator.
+                </p>
                 <p class="repName" id="repNameText" style=""></p>
 
                 <div class="photoContainer">

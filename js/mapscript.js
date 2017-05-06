@@ -284,6 +284,7 @@ function clearLegData() {
 
 //Displays information about selected state representative
 function displayRepData(district) {
+    document.getElementById("addressHeader").style.display = "block";
     // console.log(district);
     rep = houseReps[district];
     if (selectedRepDistrict > 0) {

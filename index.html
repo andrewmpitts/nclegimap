@@ -11,12 +11,13 @@
 <body>
 <div class = "mapNavbar">
     <span id = "navbarTitle" onclick = "displayRepMap()">NC Legimap</span>
-    <!--<span id = "aboutToggle" class = "mapToggle" onclick = "displayAboutPage()">About</span>-->
-    <h4 id = "mapTitle">NC General Assembly - House District Map</h4>
+    <span id = "otherMapsLink" class = "navbarElement"><a class = navbarLink href = "ncacha.html">ACHA House Vote Map</a></span>
+
 </div>
 <div id = "legimapMainContainer">
     <div class = "contentWrapper">
         <div id = "titleZipHolder">
+            <h4 id = "mapTitle">NC General Assembly - House District Map</h4>
             <div id = "navBulletContainer">
                 <button id = "repMapToggle" class = "mapToggle activeMapToggle" onclick = "displayRepMap()">House</button>
 
@@ -24,10 +25,12 @@
 
                 <button id ="conMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</button>
             </div>
+
             <div id = "zipForm">
                 <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip" onkeyup="getZipOnEnter(event, 'rep')" onfocus="zipFormFocused()" onblur = "zipFormUnfocused()">
                 <button id = "zipFormSubmit" type="button" onclick="getLegislatorByZip('rep', getZipInput())"><img id = "searchIcon" src = "icons/search/search.png"></button>
             </div>
+
         </div>
         <div class = "mapContainer">
             <svg id="map" width="900" height="375"></svg>

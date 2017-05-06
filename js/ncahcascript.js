@@ -224,6 +224,9 @@ function clearLegData() {
 
 // Displays information about selected congress member
 function displayAchaData(district) {
+
+    document.getElementById("addressHeader").style.display = "block";
+    document.getElementById("photoPlaceholder").style.display = "none";
     con = conReps[district]
     if (selectedConDistrict > 0) {
         d3.select("#c" + selectedConDistrict).attr("fill", getVoteColor(achaRepVotes[selectedConDistrict]));

@@ -209,8 +209,26 @@ html {
     padding: 5px;
     font-size: 1.2em;
     font-family: verdana;
+}
 
+#photoPlaceholder {
+    margin: auto;
+    text-align: center;
+    font-size: 1.5em;
+    top: 35%;
+    position: relative;
+    display: block;
+}
 
+.navbarElement {
+    float: right;
+    padding: 5px;
+    position: relative;
+}
+
+.navbarLink {
+    text-decoration: none;
+    color: black;
 }
 
 #repNameText {
@@ -270,7 +288,7 @@ html {
 }
 
 #mapTitle {
-    top: 8px;
+    /*top: 8px;*/
     position: relative;
     margin: auto;
     float: right;
@@ -366,6 +384,7 @@ html {
     margin-bottom: 0px;
     text-align: center;
     /*float: right;*/
+    display: none;
 }
 
 .teleIcon {
