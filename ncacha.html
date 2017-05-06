@@ -1,0 +1,70 @@
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>NC ACHA Votes</title>
+    <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="representatives/ncCongressReps.js" charset="utf-8"></script>
+    <script src="ncsgeo/zips.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="style/newStyle.css">
+</head>
+<body>
+<div class = "mapNavbar">
+    <span id = "navbarTitle" onclick = "displayRepMap()">NC Legimap</span>
+    <!--<span id = "aboutToggle" class = "mapToggle" onclick = "displayAboutPage()">About</span>-->
+    <h4 id = "mapTitle">NC Representatives - ACHA Vote (May 4, 2017)</h4>
+</div>
+<div id = "legimapMainContainer">
+        <div class = "mapContainer">
+            <svg id="map" width="900" height="375"></svg>
+            <div class = "mapContextContainer" style = "">
+                <h3 id = "legTitle"></h3>
+                <p class="repName" id="repNameText" style=""></p>
+
+                <div class="photoContainer">
+                    <img id = "repPhoto" class = "photo">
+                    <br>
+                    <span id="districtText" class="infoText"></span>
+                    <span><a id = "partyText"></a></span>
+                </div>
+                <div class="infoContainer"></div>
+            </div>
+        </div>
+        <div id = "bottomInfoContainer">
+            <h3 id = "addressHeader">Addresses</h3>
+            <div id = "addressContainer">
+
+            </div>
+
+            <div id = "linkContainer">
+                <ul>
+                    <p id = "urlLi"><a id = "nclegURLText"></a></p>
+                </ul>
+                <div id = "socialMediaIconContainer">
+                    <a id = "facebookLink" href = "">
+                        <img id = "facebookIcon" class = "socialMediaIcon" src = "icons/facebook/facebookIcon.png">
+                    </a>
+                    <a id = "twitterLink" href = "">
+                        <img id = "twitterIcon" class = "socialMediaIcon" src = "icons/twitter/roundedSquareIcon/twitterIcon.png">
+                    </a>
+                    <a id = "youtubeLink" href = "">
+                        <img id = "youtubeIcon" class = "socialMediaIcon" src = "icons/youtube/128px/youtubeIcon.png">
+                    </a>
+                    <a id = "emailLink" href = "">
+                        <img id = "emailIcon" class = "socialMediaIcon" src = "icons/email/email.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<footer id = "footer">
+    <p class = "footerElement" id = "apitts">Legimap by Andrew Pitts - <a class = "footerLink" href = "http://apitts.com">apitts.com</a></p>
+</footer>
+</body>
+<!--Phone, fax, and search icon used under SIL Open Front license from Dave Gandy http://fontawesome.io/-->
+<!--<script src="js/mapscript.js" charset="utf-8"></script>-->
+<script src="js/ncahcascript.js" charset="utf-8"></script>
+</html>
