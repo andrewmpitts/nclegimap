@@ -7,8 +7,8 @@ var isZipFocused = false;
 
 
 // Used URLs for AJAX calls
-var ncSenateURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=upper";
-var ncRepURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=lower";
+var ncSenateURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=upper&apikey=8d3e69f9-cb61-4a2c-910a-6a602e57d86a";
+var ncRepURL = "https://openstates.org/api/v1/legislators/?state=nc&chamber=lower&apikey=8d3e69f9-cb61-4a2c-910a-6a602e57d86a";
 
 // List of legislator objects
 var houseReps = {};
