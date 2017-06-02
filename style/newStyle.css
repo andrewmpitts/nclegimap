@@ -274,7 +274,8 @@ html {
     margin: 0px;
     /*left: 1000px;*/
     width: 250px;
-    height: 30px
+    height: 30px;
+    display: none;
 }
 
 #zipFormSubmit {

@@ -208,9 +208,9 @@ function displayRepMap() {
     // displayRepData(1);
     toggleViewById("repMap");
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - House District Map";
-    document.getElementById("zipForm").style.display = "block";
-    document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('rep', getZipInput())};
-    document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'rep')};
+    // document.getElementById("zipForm").style.display = "block";
+    // document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('rep', getZipInput())};
+    // document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'rep')};
     activateToggleButton("repMapToggle");
 }
 
@@ -221,9 +221,9 @@ function displaySenMap() {
     // displaySenData(1);
     toggleViewById("senMap");
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
-    document.getElementById("zipForm").style.display = "block";
-    document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('sen', getZipInput());};
-    document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'sen')};
+    // document.getElementById("zipForm").style.display = "block";
+    // document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('sen', getZipInput());};
+    // document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'sen')};
     activateToggleButton("senMapToggle");
 }
 
@@ -234,9 +234,9 @@ function displayConMap() {
     // displayConData(1);
     toggleViewById("conMap");
     document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
-    document.getElementById("zipForm").style.display = "none";
-    document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('con', getZipInput());};
-    document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'con')};
+    // document.getElementById("zipForm").style.display = "none";
+    // document.getElementById("zipFormSubmit").onclick = function() {getLegislatorByZip('con', getZipInput());};
+    // document.getElementById("zipCodeInput").onkeyup = function() {getZipOnEnter(event, 'con')};
     activateToggleButton("conMapToggle");
 }
 
