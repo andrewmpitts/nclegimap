@@ -19,7 +19,6 @@ var conReps = {};
 var selectedRepDistrict = 0;
 var selectedSenDistrict = 0;
 var selectedConDistrict = 0;
-var selectedDistrict = 0;
 
 // Map dimensions
 var width = 900, height = 450;
@@ -274,6 +273,7 @@ function toggleViewById(id) {
 
 //Clears all displayed legislator info
 function clearLegData() {
+    deselectDistricts();
     document.getElementById("repPhoto").style.display = "none";
     document.getElementById("addressHeader").innerHTML = "";
     document.getElementById("legTitle").innerHTML = "";
@@ -284,20 +284,38 @@ function clearLegData() {
     document.getElementById("nclegURLText").href = "";
     document.getElementById("repPhoto").src = "";
     document.getElementById("addressContainer").innerHTML = "";
+    document.getElementById("socialMediaIconContainer").style.display = "none";
+    document.getElementById("deselect").style.display = "none";
 }
 
-//Displays information about selected state representative
-function displayRepData(district) {
-    document.getElementById("repPhoto").style.display = "block";
-    document.getElementById("photoPlaceholder").style.display = "none";
-    document.getElementById("addressHeader").style.display = "block";
-    // console.log(district);
-    rep = houseReps[district];
+function deselectDistricts() {
     if (selectedRepDistrict > 0) {
         d3.select("#r" + selectedRepDistrict).attr("fill", getPartyColor(houseReps[selectedRepDistrict].party));
         d3.select("#r" + selectedRepDistrict).attr("onmouseover", 'd3.select(r' + selectedRepDistrict + ').attr("fill", "' + mouseOverColor + '")')
             .attr("onmouseout", 'd3.select(r' + selectedRepDistrict + ').attr("fill", "' + getPartyColor(houseReps[selectedRepDistrict].party) + '")');
     }
+    if (selectedSenDistrict > 0) {
+        d3.select("#s" + selectedSenDistrict).attr("fill", getPartyColor(senators[selectedSenDistrict].party));
+        d3.select("#s" + selectedSenDistrict).attr("onmouseover", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + mouseOverColor + '")')
+            .attr("onmouseout", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + getPartyColor(senators[selectedSenDistrict].party) + '")');
+    }
+    if (selectedConDistrict > 0) {
+        d3.select("#c" + selectedConDistrict).attr("fill", getPartyColor(conReps[selectedConDistrict].party));
+        d3.select("#c" + selectedConDistrict).attr("onmouseover", 'd3.select(c' + selectedConDistrict + ').attr("fill", "' + mouseOverColor + '")')
+            .attr("onmouseout", 'd3.select(c' + selectedConDistrict + ').attr("fill", "' + getPartyColor(conReps[selectedConDistrict].party) + '")');
+    }
+}
+
+//Displays information about selected state representative
+function displayRepData(district) {
+    document.getElementById("deselect").style.display = "block";
+    document.getElementById("socialMediaIconContainer").style.display = "block";
+    document.getElementById("repPhoto").style.display = "block";
+    document.getElementById("photoPlaceholder").style.display = "none";
+    document.getElementById("addressHeader").style.display = "block";
+    // console.log(district);
+    rep = houseReps[district];
+    deselectDistricts();
     selectedRepDistrict = district;
     d3.select("#r" + district).attr("fill", selectedColor);
     d3.select("#r" + district).attr("onmouseover", 'd3.select(r' + district + ').attr("fill", "' + mouseOverSelectedColor + '")');
@@ -329,14 +347,12 @@ function displayRepData(district) {
 
 // Displays information about selected state senator
 function displaySenData(district) {
+    document.getElementById("deselect").style.display = "block";
+    document.getElementById("socialMediaIconContainer").style.display = "block";
     document.getElementById("repPhoto").style.display = "block";
     document.getElementById("photoPlaceholder").style.display = "none";
     sen = senators[district];
-    if (selectedSenDistrict > 0) {
-        d3.select("#s" + selectedSenDistrict).attr("fill", getPartyColor(senators[selectedSenDistrict].party));
-        d3.select("#s" + selectedSenDistrict).attr("onmouseover", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + mouseOverColor + '")')
-            .attr("onmouseout", 'd3.select(s' + selectedSenDistrict + ').attr("fill", "' + getPartyColor(senators[selectedSenDistrict].party) + '")');
-    }
+    deselectDistricts();
     selectedSenDistrict = district;
     d3.select("#s" + district).attr("fill", selectedColor);
     d3.select("#s" + district).attr("onmouseover", 'd3.select(s' + district + ').attr("fill", "' + mouseOverSelectedColor + '")');
@@ -365,16 +381,16 @@ function displaySenData(district) {
     populateIconList(sen);
 }
 
+
+
 // Displays information about selected congress member
 function displayConData(district) {
+    document.getElementById("deselect").style.display = "block";
+    document.getElementById("socialMediaIconContainer").style.display = "block";
     document.getElementById("repPhoto").style.display = "block";
     document.getElementById("photoPlaceholder").style.display = "none";
     con = conReps[district]
-    if (selectedConDistrict > 0) {
-        d3.select("#c" + selectedConDistrict).attr("fill", getPartyColor(conReps[selectedConDistrict].party));
-        d3.select("#c" + selectedConDistrict).attr("onmouseover", 'd3.select(c' + selectedConDistrict + ').attr("fill", "' + mouseOverColor + '")')
-            .attr("onmouseout", 'd3.select(c' + selectedConDistrict + ').attr("fill", "' + getPartyColor(conReps[selectedConDistrict].party) + '")');
-    }
+    deselectDistricts();
     selectedConDistrict = district
     d3.select("#c" + district).attr("fill", selectedColor);
     d3.select("#c" + district).attr("onmouseover", 'd3.select(c' + district + ').attr("fill", "' + mouseOverSelectedColor + '")');
