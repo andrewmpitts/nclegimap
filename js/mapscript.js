@@ -205,7 +205,8 @@ function getPartyColor(partyString) {
 //Displays house district map
 function displayRepMap() {
     clearLegData();
-    displayRepData(1);
+    document.getElementById("photoPlaceholder").style.display = "block";
+    // displayRepData(1);
     toggleViewById("repMap");
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - House District Map";
     document.getElementById("zipForm").style.display = "block";
@@ -217,7 +218,8 @@ function displayRepMap() {
 // Displays senate district map
 function displaySenMap() {
     clearLegData();
-    displaySenData(1);
+    document.getElementById("photoPlaceholder").style.display = "block";
+    // displaySenData(1);
     toggleViewById("senMap");
     document.getElementById("mapTitle").innerHTML = "NC General Assembly - Senate Map";
     document.getElementById("zipForm").style.display = "block";
@@ -229,7 +231,8 @@ function displaySenMap() {
 // Displays congressional district map
 function displayConMap() {
     clearLegData();
-    displayConData(1);
+    document.getElementById("photoPlaceholder").style.display = "block";
+    // displayConData(1);
     toggleViewById("conMap");
     document.getElementById("mapTitle").innerHTML = "NC Congressional Districts Map";
     document.getElementById("zipForm").style.display = "none";
@@ -271,6 +274,7 @@ function toggleViewById(id) {
 
 //Clears all displayed legislator info
 function clearLegData() {
+    document.getElementById("repPhoto").style.display = "none";
     document.getElementById("addressHeader").innerHTML = "";
     document.getElementById("legTitle").innerHTML = "";
     document.getElementById("repNameText").innerHTML = "";
@@ -284,6 +288,8 @@ function clearLegData() {
 
 //Displays information about selected state representative
 function displayRepData(district) {
+    document.getElementById("repPhoto").style.display = "block";
+    document.getElementById("photoPlaceholder").style.display = "none";
     document.getElementById("addressHeader").style.display = "block";
     // console.log(district);
     rep = houseReps[district];
@@ -323,6 +329,8 @@ function displayRepData(district) {
 
 // Displays information about selected state senator
 function displaySenData(district) {
+    document.getElementById("repPhoto").style.display = "block";
+    document.getElementById("photoPlaceholder").style.display = "none";
     sen = senators[district];
     if (selectedSenDistrict > 0) {
         d3.select("#s" + selectedSenDistrict).attr("fill", getPartyColor(senators[selectedSenDistrict].party));
@@ -359,6 +367,8 @@ function displaySenData(district) {
 
 // Displays information about selected congress member
 function displayConData(district) {
+    document.getElementById("repPhoto").style.display = "block";
+    document.getElementById("photoPlaceholder").style.display = "none";
     con = conReps[district]
     if (selectedConDistrict > 0) {
         d3.select("#c" + selectedConDistrict).attr("fill", getPartyColor(conReps[selectedConDistrict].party));
@@ -451,32 +461,6 @@ function drawRepMap() {
             "youtube": ""
         };
     });
-
-    // var xhttp = new XMLHttpRequest();
-    // xhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         var repJSON = JSON.parse(this.responseText);
-    //         repJSON.forEach(function(rep){
-    //             houseReps[rep.district] = {
-    //                 "party": rep.party,
-    //                 "fullName": rep.full_name,
-    //                 "id": rep.leg_id,
-    //                 "level": rep.level,
-    //                 "offices": rep.offices,
-    //                 "photoURL": rep.photo_url,
-    //                 "ncLegURL": rep.url,
-    //                 "email": rep.email,
-    //                 "chamber": rep.chamber,
-    //                 "active": rep.active,
-    //                 "district": rep.district,
-    //                 "nimspCandID": rep.nimsp_candidate_id,
-    //                 "nimspID": rep.nimsp_id,
-    //                 "facebook": "",
-    //                 "twitter": "",
-    //                 "youtube": ""
-    //             };
-    //
-    //         });
     d3.json("ncsgeo/ncrepdistrictsmin.json", function (json) {
         gr.selectAll("path")
             .data(json.features)
@@ -494,7 +478,7 @@ function drawRepMap() {
 
             })
             .attr("d", geoPath);
-        displayRepData(1);
+        // displayRepData(1);
         drawLegend();
     });
 }
@@ -531,7 +515,6 @@ function drawSenMap() {
             .attr("stroke", strokeColor)
             .each(function(d, i) {
                 var district = d.properties.District;
-                // console.log(d.properties.District)
                 d3.select(this)
                     .attr("id", "s" + district)
                     .attr("fill", getPartyColor(senators[district].party))
