@@ -44,6 +44,7 @@
 
                 <button id ="conMapToggle" class = "mapToggle" onclick = "displayConMap()">Congress</button>
             </div>
+            <button id = "deselect" onclick = "clearLegData()" style = "">Deselect District</button>
 
             <div id = "zipForm">
                 <input type="text" name="zip" id = "zipCodeInput" placeholder="Lookup by zip" onkeyup="getZipOnEnter(event, 'rep')" onfocus="zipFormFocused()" onblur = "zipFormUnfocused()">
@@ -64,7 +65,7 @@
                     <br>
                     <span id="districtText" class="infoText"></span>
                     <span><a id = "partyText"></a></span>
-                    <button id = "deselect" onclick = "clearLegData()" style = "">Deselect District</button>
+
                 </div>
                 <div class="infoContainer"></div>
             </div>

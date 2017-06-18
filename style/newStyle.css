@@ -484,7 +484,8 @@ html {
 
 #deselect {
     position: relative;
-    right: 150px;
-    top: -15px;
+    left: 750px;
+    top: 325px;
+    z-index: 3;
     display: none;
 }
